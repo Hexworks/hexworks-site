@@ -1,0 +1,14 @@
+about_page_url: "/"
+pages:
+
+- title: "About"
+  url: "/"
+
+- title: "Posts"
+  url: "/posts.html"
+
+- title: "GitHub"
+  url: "https://github.com/hexworks"
+
+- title: "Contact"
+  url: "mailto:info@hexworks.org"

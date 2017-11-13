@@ -1,0 +1,18 @@
+title: Hexworks
+email: info@hexworks.org
+description: Hexworks is friendly bunch of developers and artists who focus on providing open source for (but not only) game developers.
+baseurl: ""
+url: "http://hexworks.org"
+twitter_username: hexworks
+github_username:  hexworks
+incremental: true
+
+markdown: kramdown
+
+defaults:
+  -
+    scope:
+      path: ""
+    values:
+      layout: "default"
+      author: "Adam Arold"
