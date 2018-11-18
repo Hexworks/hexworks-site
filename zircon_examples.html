@@ -1,0 +1,10 @@
+---
+layout: default
+permalink: /zircon/examples/
+category: zircon
+subcategory: examples
+---
+
+{% assign entries = site.documents | where: 'collection', 'zircon_examples' | sort: 'date' | reverse %}
+
+{% include entry_list.html entries=entries %}

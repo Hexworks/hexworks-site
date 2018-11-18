@@ -1,0 +1,10 @@
+---
+layout: default
+permalink: /zircon/docs/
+category: zircon
+subcategory: docs
+---
+
+{% assign entries = site.documents | where: 'collection', 'zircon_docs' | sort: 'date' | reverse %}
+
+{% include entry_list.html entries=entries %}

@@ -1,11 +1,8 @@
 ---
 layout: default
+permalink: /
+category: posts
+subcategory: all
 ---
-<div id="intro">
-    <header>
-        <h1>Hexworks</h1>
-    </header>
-    <p>
-       Hexworks is friendly bunch of developers and artists who focus on providing open source for (but not only) game developers.
-    </p>
-</div>
+{% assign entries = site.documents | where: 'category', 'posts' | sort: 'date' | reverse %}
+{% include entry_list.html entries=entries %}

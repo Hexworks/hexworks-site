@@ -1,14 +1,30 @@
-about_page_url: "/"
-pages:
-
-- title: "About"
-  url: "/"
-
-- title: "Posts"
-  url: "/posts.html"
-
-- title: "GitHub"
-  url: "https://github.com/hexworks"
-
-- title: "Contact"
+posts_page_url: "/"
+contact:
+  title: "CONTACT"
+  id: "contact"
   url: "mailto:info@hexworks.org"
+about:
+  title: "ABOUT"
+  id: "about"
+  url: "/about/"
+categories:
+- title: "POSTS"
+  id: "posts"
+  url: "/posts/"
+- title: "ZIRCON"
+  id: "zircon"
+  url: "/projects/zircon/"
+- title: "PROJECTS"
+  id: "projects"
+  url: "/projects/"
+- title: "TAGS"
+  id: "tags"
+  url: "/tags/"
+external:
+- title: "GitHub"
+  id: "github"
+  url: "https://github.com/Hexworks"
+- title: "Twitter"
+  id: "twitter"
+  url: "https://twitter.com/addamsson"
+

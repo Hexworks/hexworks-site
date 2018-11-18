@@ -1,0 +1,8 @@
+---
+layout: default
+permalink: /projects/
+category: projects
+---
+{% assign entries = site.documents | where: 'collection', page.category | sort: 'date' | reverse %}
+
+{% include entry_list.html entries=entries %}
