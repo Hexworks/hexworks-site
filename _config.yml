@@ -1,8 +1,8 @@
-title: AppCraft
-email: info@appcraft.hu
+title: Hexworks
+email: info@hexworks.org
 description: >
-  AppCraft end to end. Minden, ami alkalmazásfejlesztés.
-url: "http://appcraft.hu"
+  Hexworks is a friendly bunch of developers and artists who focus on providing open source tools for (but not only) game developers.
+url: "http://hexworks.org"
 
 # Where things are
 source:          .
@@ -13,11 +13,7 @@ layouts_dir:     _layouts
 data_dir:        _data
 includes_dir:    _includes
 debug: false
-keywords: ["programozás", "web", "tanácsadás", "hirek", "Kotlin", "Java", "fejlesztés"]
-algolia:
-  application_id: '142FY0Z6K2'
-  index_name: appcraft-site
-  search_only_api_key: c2711810206b49f41be205da6dc1c80d
+keywords: ["roguelikes", "open source", "kotlin", "java", "programming", "development", "gaming", "game development", "indie games"]
 collections:
   blog:
     output: true
