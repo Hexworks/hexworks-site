@@ -8,7 +8,7 @@ category: zircon
 with_all: false
 ---
 
-<img src="https://cdn.discordapp.com/attachments/205245036084985857/481213000540225550/full_example.gif" />
+![zircon full example](/assets/img/zircon_full_example.gif "Zircon Full Example")
 
 ## Getting Started
 
@@ -49,7 +49,7 @@ Before we start there are some guidelines which can help you if you are stuck:
   (`org.hexworks.zircon.api`), and look for classes which end with `*Resources`. There are a bunch of
   built-in tilesets for example which you can choose from but you can also load your own.
   The rule of thumb is that if you need something external there is probably a `*Resources` class
-  for it (like the [CP437TilesetResources]).
+  for it (like the [BuiltInCP437TilesetResource]).
 - You can use *anything* you can find in the [API][api] package, they are part of the public API, and safe to use. The
   [internal][internal] package however is considered private to *Zircon* so don't depend on anything in it because
   it can change any time.
@@ -110,7 +110,7 @@ Now let's see how we can specify how a [TileGrid] is created. We'll use the [App
 
 ```java
 import org.hexworks.zircon.api.AppConfigs;
-import org.hexworks.zircon.api.CP437TilesetResources;
+import org.hexworks.zircon.api.BuiltInCP437TilesetResource;
 import org.hexworks.zircon.api.Sizes;
 import org.hexworks.zircon.api.SwingApplications;
 import org.hexworks.zircon.api.application.Application;
@@ -122,7 +122,7 @@ public class CreatingAnApplication {
         Application application = SwingApplications.startApplication(
                 AppConfigs.newConfig()
                         .withSize(Sizes.create(30, 20))
-                        .withDefaultTileset(CP437TilesetResources.rexPaint16x16())
+                        .withDefaultTileset(BuiltInCP437TilesetResource.rexPaint16x16())
                         .withClipboardAvailable(true)
                         .build());
     }
@@ -133,7 +133,7 @@ Adding and formatting [Tile]s is very simple:
 
 ```java
 import org.hexworks.zircon.api.AppConfigs;
-import org.hexworks.zircon.api.CP437TilesetResources;
+import org.hexworks.zircon.api.BuiltInCP437TilesetResource;
 import org.hexworks.zircon.api.Positions;
 import org.hexworks.zircon.api.Sizes;
 import org.hexworks.zircon.api.SwingApplications;
@@ -148,7 +148,7 @@ public class CreatingAnApplication {
         TileGrid tileGrid = SwingApplications.startTileGrid(
                 AppConfigs.newConfig()
                         .withSize(Sizes.create(10, 10))
-                        .withDefaultTileset(CP437TilesetResources.rexPaint16x16())
+                        .withDefaultTileset(BuiltInCP437TilesetResource.rexPaint16x16())
                         .build());
 
         tileGrid.setTileAt(
@@ -233,7 +233,7 @@ public class CreatingAScreen {
         TileGrid tileGrid = SwingApplications.startTileGrid(
                 AppConfigs.newConfig()
                         .withSize(Sizes.create(20, 8))
-                        .withDefaultTileset(CP437TilesetResources.wanderlust16x16())
+                        .withDefaultTileset(BuiltInCP437TilesetResource.wanderlust16x16())
                         .build());
 
         final Screen screen = Screens.createScreenFor(tileGrid);
@@ -313,7 +313,7 @@ public class UsingComponents {
         final TileGrid tileGrid = SwingApplications.startTileGrid(
                 AppConfigs.newConfig()
                         .withSize(Sizes.create(34, 18))
-                        .withDefaultTileset(CP437TilesetResources.aduDhabi16x16())
+                        .withDefaultTileset(BuiltInCP437TilesetResource.aduDhabi16x16())
                         .build());
         final Screen screen = Screens.createScreenFor(tileGrid);
 
@@ -441,36 +441,6 @@ Animations are a beta feature. More info [here][animations].
 If you just want to peruse the Zircon API just navigate [here][api].
 Everything which is intended to be the public API is there.
 
-## Road map
-If you want to see a new feature feel free to [create a new Issue](https://github.com/Hexworks/zircon/issues/new)
-or discuss it with us on [discord][discord].
-Here are some features which are either under way or planned:
-
-- libGDX support
-- Layouts for `Component`s with resizing support
-- Next to `ColorTheme`s we'll introduce `ComponentTheme`s as well (custom look and feel for your components)
-- Floating and modal `Component`s
-
-## License
-Zircon is made available under the [MIT License](http://www.opensource.org/licenses/mit-license.php).
-
-## Credits
-Zircon is created and maintained by Adam Arold, Milan Boleradszki and Gergely Lukacsy
-
-*We're open to suggestions, feel free to message us on [Discord][discord] or open an issue.*
-*Pull requests are also welcome!*
-
-Zircon is powered by:
-
-<a href="https://www.jetbrains.com/idea/">
-    <img src="https://github.com/Hexworks/zircon/blob/master/images/idea_logo.png" width="40" height="40" />
-</a>
-<a href="https://kotlinlang.org/">
-    <img src="https://github.com/Hexworks/zircon/blob/master/images/kotlin_logo.png" width="40" height="40" />
-</a>
-<a href="https://www.yourkit.com/java/profiler/">
-    <img src="https://github.com/Hexworks/zircon/blob/master/images/yklogo.png" width="168" height="40" />
-</a>
 
 [circleci]:https://circleci.com/gh/Hexworks/zircon
 [circleci img]:https://circleci.com/gh/Hexworks/zircon/tree/master.svg?style=shield
@@ -487,14 +457,14 @@ Zircon is powered by:
 [screen-primer]:https://github.com/Hexworks/zircon/wiki/A-primer-on-Screens
 [text-images]:https://github.com/Hexworks/zircon/wiki/How-to-work-with-TileGraphics
 
-[discord]:https://discord.gg/hbzytQJ
+[discord]:https://discordapp.com/invite/PE3qFmF
 [examples]:https://github.com/Hexworks/zircon/tree/master/zircon.examples/src/main
-[api]:https://github.com/Hexworks/zircon/tree/master/zircon.core/src/main/kotlin/org/hexworks/zircon/api
-[internal]:https://github.com/Hexworks/zircon/tree/master/zircon.core/src/main/kotlin/org/hexworks/zircon/internal
+[api]:https://github.com/Hexworks/zircon/tree/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/api
+[internal]:https://github.com/Hexworks/zircon/tree/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/internal
 
 
 
-[examples]:https://github.com/Hexworks/zircon/tree/master/zircon.examples/src/main
+[examples]:https://github.com/Hexworks/zircon.examples/tree/master/zircon.jvm.examples/src/main
 [resource-handling]:https://github.com/Hexworks/zircon/wiki/Resource-Handling
 [design-philosophy]:https://github.com/Hexworks/zircon/wiki/The-design-philosophy-behind-Zircon
 [color-themes]:https://github.com/Hexworks/zircon/wiki/Working-with-ColorThemes
@@ -505,43 +475,43 @@ Zircon is powered by:
 [animations]:https://github.com/Hexworks/zircon/wiki/Animation-support
 [behaviors]:https://github.com/Hexworks/zircon/wiki/Behaviors
 
-[Animation]:https://github.com/Hexworks/zircon/blob/master/zircon.core/src/main/kotlin/org/hexworks/zircon/api/animation/Animation.kt
-[AnimationHandler]:https://github.com/Hexworks/zircon/blob/master/zircon.core/src/main/kotlin/org/hexworks/zircon/api/animation/AnimationHandler.kt
-[AppConfigs]:https://github.com/Hexworks/zircon/blob/master/zircon.jvm/src/main/kotlin/org/hexworks/zircon/api/AppConfigs.kt
-[Application]:https://github.com/Hexworks/zircon/blob/master/zircon.core/src/main/kotlin/org/hexworks/zircon/api/application/Application.kt
-[ANSITileColor]:https://github.com/Hexworks/zircon/blob/master/zircon.core/src/main/kotlin/org/hexworks/zircon/api/color/ANSITileColor.kt
-[Boundable]:https://github.com/Hexworks/zircon/blob/master/zircon.core/src/main/kotlin/org/hexworks/zircon/api/behavior/Boundable.kt
-[Button]:https://github.com/Hexworks/zircon/blob/master/zircon.core/src/main/kotlin/org/hexworks/zircon/api/component/Button.kt
-[ColorTheme]:https://github.com/Hexworks/zircon/blob/master/zircon.core/src/main/kotlin/org/hexworks/zircon/api/component/ColorTheme.kt
-[Clearable]:https://github.com/Hexworks/zircon/blob/master/zircon.core/src/main/kotlin/org/hexworks/zircon/api/behavior/Clearable.kt
-[Component]:https://github.com/Hexworks/zircon/blob/master/zircon.core/src/main/kotlin/org/hexworks/zircon/api/component/Component.kt
-[Container]:https://github.com/Hexworks/zircon/blob/master/zircon.core/src/main/kotlin/org/hexworks/zircon/api/component/Container.kt
-[CP437TilesetResources]:https://github.com/Hexworks/zircon/blob/master/zircon.jvm/src/main/kotlin/org/hexworks/zircon/api/CP437TilesetResources.kt
-[Drawable]:https://github.com/Hexworks/zircon/blob/master/zircon.core/src/main/kotlin/org/hexworks/zircon/api/behavior/Drawable.kt
-[DrawSurface]:https://github.com/Hexworks/zircon/blob/master/zircon.core/src/main/kotlin/org/hexworks/zircon/api/behavior/DrawSurface.kt
-[Input]:https://github.com/Hexworks/zircon/blob/master/zircon.core/src/main/kotlin/org/hexworks/zircon/input/Input.kt
-[InputEmitter]:https://github.com/Hexworks/zircon/blob/master/zircon.core/src/main/kotlin/org/hexworks/zircon/api/behavior/InputEmitter.kt
-[Layerable]:https://github.com/Hexworks/zircon/blob/master/zircon.core/src/main/kotlin/org/hexworks/zircon/api/behavior/Layerable.kt
-[Layer]:https://github.com/Hexworks/zircon/blob/master/zircon.core/src/main/kotlin/org/hexworks/zircon/api/graphics/Layer.kt
-[Layers]:https://github.com/Hexworks/zircon/blob/master/zircon.jvm/src/main/kotlin/org/hexworks/zircon/api/Layers.kt
-[Modifier]:https://github.com/Hexworks/zircon/blob/master/zircon.core/src/main/kotlin/org/hexworks/zircon/api/modifier/Modifier.kt
-[Modifiers]:https://github.com/Hexworks/zircon/blob/master/zircon.jvm/src/main/kotlin/org/hexworks/zircon/api/Modifiers.kt
-[Panel]:https://github.com/Hexworks/zircon/blob/master/zircon.core/src/main/kotlin/org/hexworks/zircon/api/component/Panel.kt
-[Position]:https://github.com/Hexworks/zircon/blob/master/zircon.core/src/main/kotlin/org/hexworks/zircon/api/data/Position.kt
-[Renderer]:https://github.com/Hexworks/zircon/blob/master/zircon.core/src/main/kotlin/org/hexworks/zircon/internal/renderer/Renderer.kt
-[Screen]:https://github.com/Hexworks/zircon/blob/master/zircon.core/src/main/kotlin/org/hexworks/zircon/api/screen/Screen.kt
-[Shape]:https://github.com/Hexworks/zircon/blob/master/zircon.core/src/main/kotlin/org/hexworks/zircon/api/shape/Shape.kt
-[ShapeFactory]:https://github.com/Hexworks/zircon/blob/master/zircon.core/src/main/kotlin/org/hexworks/zircon/api/shape/ShapeFactory.kt
-[Size]:https://github.com/Hexworks/zircon/blob/master/zircon.core/src/main/kotlin/org/hexworks/zircon/api/data/Size.kt
-[Styleable]:https://github.com/Hexworks/zircon/blob/master/zircon.core/src/main/kotlin/org/hexworks/zircon/api/behavior/Styleable.kt
-[StyleSet]:https://github.com/Hexworks/zircon/blob/master/zircon.core/src/main/kotlin/org/hexworks/zircon/api/graphics/StyleSet.kt  
+[Animation]:https://github.com/Hexworks/zircon/blob/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/api/animation/Animation.kt
+[AnimationHandler]:https://github.com/Hexworks/zircon/blob/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/api/animation/AnimationHandler.kt
+[AppConfigs]:https://github.com/Hexworks/zircon/blob/master/zircon.core/jvm/src/main/kotlin/org/hexworks/zircon/api/AppConfigs.kt
+[Application]:https://github.com/Hexworks/zircon/blob/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/api/application/Application.kt
+[ANSITileColor]:https://github.com/Hexworks/zircon/blob/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/api/color/ANSITileColor.kt
+[Boundable]:https://github.com/Hexworks/zircon/blob/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/api/behavior/Boundable.kt
+[Button]:https://github.com/Hexworks/zircon/blob/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/api/component/Button.kt
+[ColorTheme]:https://github.com/Hexworks/zircon/blob/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/api/component/ColorTheme.kt
+[Clearable]:https://github.com/Hexworks/zircon/blob/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/api/behavior/Clearable.kt
+[Component]:https://github.com/Hexworks/zircon/blob/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/api/component/Component.kt
+[Container]:https://github.com/Hexworks/zircon/blob/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/api/component/Container.kt
+[BuiltInCP437TilesetResource]:https://github.com/Hexworks/zircon/blob/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/api/resource/BuiltInCP437TilesetResource.kt
+[Drawable]:https://github.com/Hexworks/zircon/blob/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/api/behavior/Drawable.kt
+[DrawSurface]:https://github.com/Hexworks/zircon/blob/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/api/behavior/DrawSurface.kt
+[Input]:https://github.com/Hexworks/zircon/blob/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/input/Input.kt
+[InputEmitter]:https://github.com/Hexworks/zircon/blob/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/api/behavior/InputEmitter.kt
+[Layerable]:https://github.com/Hexworks/zircon/blob/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/api/behavior/Layerable.kt
+[Layer]:https://github.com/Hexworks/zircon/blob/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/api/graphics/Layer.kt
+[Layers]:https://github.com/Hexworks/zircon/blob/master/zircon.core/jvm/src/main/kotlin/org/hexworks/zircon/api/Layers.kt
+[Modifier]:https://github.com/Hexworks/zircon/blob/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/api/modifier/Modifier.kt
+[Modifiers]:https://github.com/Hexworks/zircon/blob/master/zircon.core/jvm/src/main/kotlin/org/hexworks/zircon/api/Modifiers.kt
+[Panel]:https://github.com/Hexworks/zircon/blob/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/api/component/Panel.kt
+[Position]:https://github.com/Hexworks/zircon/blob/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/api/data/Position.kt
+[Renderer]:https://github.com/Hexworks/zircon/blob/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/internal/renderer/Renderer.kt
+[Screen]:https://github.com/Hexworks/zircon/blob/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/api/screen/Screen.kt
+[Shape]:https://github.com/Hexworks/zircon/blob/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/api/shape/Shape.kt
+[ShapeFactory]:https://github.com/Hexworks/zircon/blob/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/api/shape/ShapeFactory.kt
+[Size]:https://github.com/Hexworks/zircon/blob/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/api/data/Size.kt
+[Styleable]:https://github.com/Hexworks/zircon/blob/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/api/behavior/Styleable.kt
+[StyleSet]:https://github.com/Hexworks/zircon/blob/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/api/graphics/StyleSet.kt  
 [SwingApplications]:https://github.com/Hexworks/zircon/blob/master/zircon.jvm.swing/src/main/kotlin/org/hexworks/zircon/api/SwingApplications.kt
-[TileColor]:https://github.com/Hexworks/zircon/blob/master/zircon.core/src/main/kotlin/org/hexworks/zircon/api/color/TileColor.kt
-[TileColors]:https://github.com/Hexworks/zircon/blob/master/zircon.jvm/src/main/kotlin/org/hexworks/zircon/api/TileColors.kt
-[Tile]:https://github.com/Hexworks/zircon/blob/master/zircon.core/src/main/kotlin/org/hexworks/zircon/api/data/Tile.kt
-[TileGraphics]:https://github.com/Hexworks/zircon/blob/master/zircon.core/src/main/kotlin/org/hexworks/zircon/api/graphics/TileGraphics.kt
-[TileGrid]:https://github.com/Hexworks/zircon/blob/master/zircon.core/src/main/kotlin/org/hexworks/zircon/api/grid/TileGrid.kt
-[TileBuilder]:https://github.com/Hexworks/zircon/blob/master/zircon.core/src/main/kotlin/org/hexworks/zircon/api/builder/data/TileBuilder.kt
-[TilesetOverride]:https://github.com/Hexworks/zircon/blob/master/zircon.core/src/main/kotlin/org/hexworks/zircon/api/behavior/TilesetOverride.kt
-[TypingSupport]:https://github.com/Hexworks/zircon/blob/master/zircon.core/src/main/kotlin/org/hexworks/zircon/api/behavior/TypingSupport.kt
+[TileColor]:https://github.com/Hexworks/zircon/blob/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/api/color/TileColor.kt
+[TileColors]:https://github.com/Hexworks/zircon/blob/master/zircon.core/jvm/src/main/kotlin/org/hexworks/zircon/api/TileColors.kt
+[Tile]:https://github.com/Hexworks/zircon/blob/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/api/data/Tile.kt
+[TileGraphics]:https://github.com/Hexworks/zircon/blob/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/api/graphics/TileGraphics.kt
+[TileGrid]:https://github.com/Hexworks/zircon/blob/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/api/grid/TileGrid.kt
+[TileBuilder]:https://github.com/Hexworks/zircon/blob/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/api/builder/data/TileBuilder.kt
+[TilesetOverride]:https://github.com/Hexworks/zircon/blob/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/api/behavior/TilesetOverride.kt
+[TypingSupport]:https://github.com/Hexworks/zircon/blob/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/api/behavior/TypingSupport.kt
 

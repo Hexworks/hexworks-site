@@ -25,7 +25,7 @@ $header-bottom-spacing: 0.2em;
 $section-spacing: 2em;
 $page-spacing: 4em;
 $inline-spacing: 1em;
-$tag-spacing: 0.5em;
+$element-spacing: 0.5em;
 
 // headers
 $h1-font-size: 1.8em;
@@ -130,10 +130,32 @@ blockquote {
   border-left: 0.2em solid $secondary-color;
 }
 
-code {
+
+//////////////////////
+// code
+//////////////////////
+
+.page code {
   font-style: italic;
+  background-color: $page-color;
   color: $secondary-color;
+  font: $code-font;
 }
+
+pre.highlight code {
+  font-family: $code-font;
+  font-style: normal;
+  font-size: .7em;
+}
+
+
+div.highlighter-rouge {
+  padding: $inline-spacing;
+  background-color: $page-color;
+  border: 1px solid #dddddd;
+  overflow: hidden;
+}
+
 
 blockquote li {
   list-style-type: circle;
@@ -245,7 +267,7 @@ nav {
   p {
     font-family: $default-font;
     line-height: 1.8em;
-    padding: 0.8em 0;
+    padding: $element-spacing 0;
   }
 
   #post-meta {
@@ -272,6 +294,20 @@ nav {
   li {
     display: list-item;
     padding-bottom: $logical-separator-spacing;
+  }
+
+  a {
+    color: $accent-color;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    object-fit: scale-down;
   }
 }
 
@@ -435,14 +471,14 @@ nav {
 
 .author-link {
 
-  margin: tag-spacing 0 $tag-spacing 0;
+  margin: $element-spacing 0 $element-spacing 0;
   height: 2em;
   line-height: 2em;
 
   a {
-    padding: 0 $tag-spacing;
+    padding: 0 $element-spacing;
     position: absolute;
-    right: $tag-spacing;
+    right: $element-spacing;
     font-family: $accent-font;
     font-weight: bold;
     color: $primary-color;
@@ -487,7 +523,7 @@ nav {
         a {
           line-height: 1em;
           background-color: $accent-color;
-          padding: 0 $tag-spacing;
+          padding: 0 $element-spacing;
           color: $primary-color;
         }
         margin-bottom: $inline-spacing;
@@ -628,3 +664,5 @@ footer {
 @import "media";
 //noinspection CssUnknownTarget
 @import "gist";
+
+@import url(solarized-light.css);
