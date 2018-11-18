@@ -275,14 +275,15 @@ nav {
   }
 }
 
+//////////////////////
 // entries
+//////////////////////
 
 .entries {
   position: relative;
 }
 
 .entry-list {
-
   margin: 0 auto;
   width: 100%;
   display: flex;
@@ -297,10 +298,6 @@ nav {
 
 .entry-card:nth-child(odd) {
   margin: 0 2% 2% 0;
-}
-
-.entry-title {
-  margin-left: 4em !important;
 }
 
 .entry-card {
@@ -345,7 +342,7 @@ nav {
 }
 
 .entry-title {
-  margin-left: 2.5em;
+  // margin-left: 4em;
   position: relative;
   top: -6px;
   height: 2.6em;

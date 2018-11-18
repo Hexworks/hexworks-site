@@ -36,7 +36,6 @@ collections:
   projects:
     output: true
     permalink: "projects/:name/"
-    category: "projects"
     display: "Projects"
   zircon_examples:
     output: true
@@ -155,8 +154,8 @@ defaults:
       layout: "zircon_example_details"
       regenerate: true
       taggable: true
-      category: "projects"
-      subcategory: "zircon"
+      category: zircon
+      subcategory: examples
   - scope:
       path: ""
       type: "zircon_docs"
@@ -164,8 +163,8 @@ defaults:
       layout: "zircon_docs_details"
       regenerate: true
       taggable: true
-      category: "projects"
-      subcategory: "zircon"
+      category: zircon
+      subcategory: docs
   - scope:
       path: ""
       type: "tags"

@@ -4,12 +4,14 @@
 {% if count > 1 %}
 <nav class="category-nav">
     <ul class="nav-list">
-        <li>
-            <a class="{% if page.subcategory == 'all' %}active{% endif %}"
-               href="{{ site.baseurl }}/{{include.category}}/">
-                All
-            </a>
-        </li>
+        {% if page.collection != 'projects' and page.category != 'zircon' %}
+            <li>
+                <a class="{% if page.subcategory == 'all' %}active{% endif %}"
+                   href="{{ site.baseurl }}/{{include.category}}/">
+                    All
+                </a>
+            </li>
+        {% endif %}
         {% for item in entries %}
         <li>
             <a class="{% if page.subcategory == item.subcategory %}active{% endif %}

@@ -7,6 +7,9 @@ subcategory: all
 <div class="page content tag-details">
     <h1 class="post-title" itemprop="name headline">{{ page.name }}</h1>
     <p>{{page.description}}</p>
+    <div>
+        {{content}}
+    </div>
 </div>
 <div class="content entries">
     {% assign entries = site.documents | where: 'taggable', 'true' | sort: 'date' | reverse %}
