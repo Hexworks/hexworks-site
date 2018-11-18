@@ -251,7 +251,7 @@ nav {
   padding: $section-spacing $page-spacing;
 
   img {
-    width: 80%;
+    width: 100%;
     object-fit: scale-down;
     display: block;
     margin: 0 auto;
@@ -302,12 +302,6 @@ nav {
 
   a:hover {
     text-decoration: underline;
-  }
-
-  img {
-    display: block;
-    width: 100%;
-    object-fit: scale-down;
   }
 }
 
