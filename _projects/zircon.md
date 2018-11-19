@@ -1,9 +1,9 @@
 ---
-excerpt: zircon excerpt.
-title: Zircon - A user-friendly Text GUI & Tile Engine
-tags: [zircon, oss, roguelikes]
+excerpt: "Zircon is a user-friendly Text GUI & Tile Engine"
+title: Zircon - A user-friendly Tile Engine & Text GUI
+tags: [zircon, open-source, roguelikes]
 author: hexworks
-short_title: Zircon tile engine
+short_title: Zircon Tile Engine & Text GUI
 category: zircon
 with_all: false
 ---
