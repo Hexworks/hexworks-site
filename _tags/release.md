@@ -1,5 +1,5 @@
 ---
 slug: release
 name: Release
-description: Releases for our projects.
+description: Here you will find release notes of our projects.
 ---

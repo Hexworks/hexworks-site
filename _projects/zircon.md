@@ -31,7 +31,7 @@ compile 'org.hexworks.zircon:zircon.jvm.swing:2018.5.0-RELEASE'
 ```
 
 Want to use a `PREVIEW` version instead?
- Check [this Wiki page](https://github.com/Hexworks/zircon/wiki/Release-process-and-versioning-scheme#snapshot-releases)
+ Check [this Wiki page](https://github.com/Hexworks/zircon/wiki/Release-process-and-versioning-scheme#snapshot-releases).
 
 ### Some rules of thumb
 
@@ -53,7 +53,7 @@ Before we start there are some guidelines which can help you if you are stuck:
 - You can use *anything* you can find in the [API][api] package, they are part of the public API, and safe to use. The
   [internal][internal] package however is considered private to *Zircon* so don't depend on anything in it because
   it can change any time.
-- Some topics are explained in depth on the [Wiki](https://github.com/Hexworks/zircon/wiki)
+- Some topics are explained in depth on the [Wiki](https://github.com/Hexworks/zircon/wiki).
 - If you want to see some example code look [here][examples].  
 - If all else fails read the javadoc. API classes are well documented.
 - If you have any problems which are not answered here feel free to ask us at the [Hexworks Discord server][discord]. 
@@ -82,7 +82,7 @@ public class CreatingAnApplication {
 
 Running this snippet will result in this screen:
 
-![](https://cdn.discordapp.com/attachments/363771631727804416/477466202982055939/CreatingAnApplication.png)
+![Creating an application](/assets/img/creating_an_application.png)
 
 Not very useful, is it? So what happens here? An [Application] is just an object which has a [Renderer]
 for rendering [Tile]s on your screen), and a [TileGrid], which is the main interface which you will use to
@@ -181,7 +181,7 @@ public class CreatingAnApplication {
 
 Running the above code will result in something like this:
 
-![](https://cdn.discordapp.com/attachments/363771631727804416/477469640205926401/CreatingATileGrid.png)
+![Creating a TileGrid](/assets/img/creating_a_tile_grid.png)
 
 As you can see there is a helper for every class which you might want to use. Here we used `Positions.create`
 to create a [Position], `Sizes.create` for creating [Size]s and the [TileBuilder] to create tiles.
@@ -200,7 +200,7 @@ In addition to colors and characters you can also use [Modifier]s in your [Tile]
 
 > A lot of fancy stuff can be done with [Modifier]s, like this:
 >  
-> ![](https://cdn.discordapp.com/attachments/363771631727804416/477470683513880576/modifiers.gif)
+> ![Modifiers](/assets/img/modifiers.gif)
 > 
 > If interested check out the code examples [here][examples].
 
@@ -258,7 +258,7 @@ public class CreatingAScreen {
 
 and we've got a nice ocean:
 
-![](https://cdn.discordapp.com/attachments/363771631727804416/477475680594952223/CreatingAScreen.png)
+![Ocean](/assets/img/ocean.png)
 
 What happens here is that we:
 
@@ -376,19 +376,19 @@ public class UsingComponents {
 
 And the result will look like this:
 
-![](https://cdn.discordapp.com/attachments/363771631727804416/363813193488924673/image.png)
+![Simple components](/assets/img/simple_components.png)
 
 You can check out more examples [here][examples]. Here are some
 screenshots of them:
 
 #### Tileset example:
-![](https://cdn.discordapp.com/attachments/277739394641690625/348400285879894018/image.png)
+![Tileset example](/assets/img/tileset_example.png)
 
 #### Animations:
-![](https://cdn.discordapp.com/attachments/277739394641690625/360086607380086807/GIF.gif)
+![Animations](/assets/img/animations.gif)
 
 #### Components:
-![](https://cdn.discordapp.com/attachments/335444788167966720/361297190863241218/GIF.gif)
+![Components full](/assets/img/components_full.gif)
 
 ## Additional features
 
@@ -442,18 +442,6 @@ If you just want to peruse the Zircon API just navigate [here][api].
 Everything which is intended to be the public API is there.
 
 
-[circleci]:https://circleci.com/gh/Hexworks/zircon
-[circleci img]:https://circleci.com/gh/Hexworks/zircon/tree/master.svg?style=shield
-
-[codecov]:https://codecov.io/github/Hexworks/zircon?branch=master
-[codecov img]:https://codecov.io/github/Hexworks/zircon/coverage.svg?branch=master
-
-[license]:https://github.com/Hexworks/zircon/blob/master/LICENSE
-[license img]:https://img.shields.io/badge/License-MIT-green.svg
-
-[maven]:https://search.maven.org/search?q=g:org.hexworks.zircon
-[maven img]:https://maven-badges.herokuapp.com/maven-central/org.hexworks.zircon/zircon.jvm.swing/badge.svg
-
 [screen-primer]:https://github.com/Hexworks/zircon/wiki/A-primer-on-Screens
 [text-images]:https://github.com/Hexworks/zircon/wiki/How-to-work-with-TileGraphics
 
@@ -461,8 +449,6 @@ Everything which is intended to be the public API is there.
 [examples]:https://github.com/Hexworks/zircon/tree/master/zircon.examples/src/main
 [api]:https://github.com/Hexworks/zircon/tree/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/api
 [internal]:https://github.com/Hexworks/zircon/tree/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/internal
-
-
 
 [examples]:https://github.com/Hexworks/zircon.examples/tree/master/zircon.jvm.examples/src/main
 [resource-handling]:https://github.com/Hexworks/zircon/wiki/Resource-Handling
@@ -488,8 +474,8 @@ Everything which is intended to be the public API is there.
 [Container]:https://github.com/Hexworks/zircon/blob/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/api/component/Container.kt
 [BuiltInCP437TilesetResource]:https://github.com/Hexworks/zircon/blob/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/api/resource/BuiltInCP437TilesetResource.kt
 [Drawable]:https://github.com/Hexworks/zircon/blob/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/api/behavior/Drawable.kt
-[DrawSurface]:https://github.com/Hexworks/zircon/blob/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/api/behavior/DrawSurface.kt
-[Input]:https://github.com/Hexworks/zircon/blob/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/input/Input.kt
+[DrawSurface]:https://github.com/Hexworks/zircon/blob/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/api/graphics/DrawSurface.kt
+[Input]:https://github.com/Hexworks/zircon/blob/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/api/input/Input.kt
 [InputEmitter]:https://github.com/Hexworks/zircon/blob/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/api/behavior/InputEmitter.kt
 [Layerable]:https://github.com/Hexworks/zircon/blob/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/api/behavior/Layerable.kt
 [Layer]:https://github.com/Hexworks/zircon/blob/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/api/graphics/Layer.kt
@@ -502,6 +488,7 @@ Everything which is intended to be the public API is there.
 [Screen]:https://github.com/Hexworks/zircon/blob/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/api/screen/Screen.kt
 [Shape]:https://github.com/Hexworks/zircon/blob/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/api/shape/Shape.kt
 [ShapeFactory]:https://github.com/Hexworks/zircon/blob/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/api/shape/ShapeFactory.kt
+[ShutdownHook]:https://github.com/Hexworks/zircon/blob/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/api/behavior/ShutdownHook.kt
 [Size]:https://github.com/Hexworks/zircon/blob/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/api/data/Size.kt
 [Styleable]:https://github.com/Hexworks/zircon/blob/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/api/behavior/Styleable.kt
 [StyleSet]:https://github.com/Hexworks/zircon/blob/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/api/graphics/StyleSet.kt  
@@ -514,4 +501,3 @@ Everything which is intended to be the public API is there.
 [TileBuilder]:https://github.com/Hexworks/zircon/blob/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/api/builder/data/TileBuilder.kt
 [TilesetOverride]:https://github.com/Hexworks/zircon/blob/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/api/behavior/TilesetOverride.kt
 [TypingSupport]:https://github.com/Hexworks/zircon/blob/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/api/behavior/TypingSupport.kt
-

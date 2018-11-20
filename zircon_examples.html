@@ -5,6 +5,25 @@ category: zircon
 subcategory: examples
 ---
 
+<div class="page content tag-details">
+    <h1 class="post-title" itemprop="name headline">Zircon Examples</h1>
+    <p>
+        Here you will find examples which you can copy and paste to your IDE to see how specific features of Zircon work.
+    </p>
+    <p>
+        They are also part of the <em><a href="https://github.com/Hexworks/zircon.examples/tree/master/zircon.jvm.examples/src/main">
+        zircon.examples</a></em> project so you can check that out from GitHub and start coding right away.
+    </p>
+    <p>
+        Another option is to use one of the <em>skeleton</em> projects which you can clone from GitHub.
+        They are designed to get you started with Zircon.
+    </p>
+    <p>
+        The <em>Java</em> skeleton project can be found <a href="https://github.com/Hexworks/zircon.skeleton.java">here</a>.
+        For <em>Kotlin</em> you can use <a href="https://github.com/Hexworks/zircon.skeleton.kotlin">this</a> skeleton.
+    </p>
+</div>
+
 {% assign entries = site.documents | where: 'collection', 'zircon_examples' | sort: 'date' | reverse %}
 
 {% include entry_list.html entries=entries %}

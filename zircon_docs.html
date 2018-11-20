@@ -5,6 +5,13 @@ category: zircon
 subcategory: docs
 ---
 
+<div class="page content tag-details">
+    <h1 class="post-title" itemprop="name headline">Zircon Documentation</h1>
+    <p>
+        Welcome to the Zircon documentation! You can pick a topic from the cards below.
+    </p>
+</div>
+
 {% assign entries = site.documents | where: 'collection', 'zircon_docs' | sort: 'date' | reverse %}
 
 {% include entry_list.html entries=entries %}

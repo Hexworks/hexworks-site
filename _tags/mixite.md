@@ -1,5 +1,5 @@
 ---
 slug: mixite
 name: Mixite
-description: A multiplatform hexagonal grid library.
+description: Mixite is a multiplatform Hexagonal Grid Library.
 ---

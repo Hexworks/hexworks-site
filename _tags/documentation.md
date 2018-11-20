@@ -1,5 +1,5 @@
 ---
 slug: documentation
 name: Documentation
-description: All documentation pages
+description: All documentation pages.
 ---

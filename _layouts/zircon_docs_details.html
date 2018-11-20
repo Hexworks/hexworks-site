@@ -2,7 +2,7 @@
 layout: default
 regenerate: true
 ---
-<article id="post" class="content"  itemscope itemtype="http://schema.org/BlogPosting">
+<article class="content page"  itemscope itemtype="http://schema.org/BlogPosting">
     <header class="post-header">
         {% if page.tags %}
         {% include tag_list.html tags = page.tags %}
@@ -18,7 +18,7 @@ regenerate: true
             <span itemprop="author"
                   itemscope
                   itemtype="http://schema.org/Person">
-                <span itemprop="name">{{ page.author }}</span>
+                <span itemprop="name"><a href="/authors/{{ page.author }}">{{ page.author }}</a></span>
             </span>
             {% endif %}
         </div>
@@ -28,4 +28,3 @@ regenerate: true
     </div>
     {% include page_nav.html %}
 </article>
-

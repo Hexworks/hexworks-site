@@ -42,12 +42,14 @@ collections:
     permalink: "zircon/examples/:name"
     category: "zircon"
     subcategory: "examples"
+    docs: true
     display: "Examples"
   zircon_docs:
     output: true
     permalink: "zircon/docs/:name"
     category: "zircon"
     subcategory: "docs"
+    docs: true
     display: "Documentation"
   tags:
     output: true
@@ -155,6 +157,7 @@ defaults:
       regenerate: true
       taggable: true
       category: zircon
+      docs: true
       subcategory: examples
   - scope:
       path: ""
@@ -164,6 +167,7 @@ defaults:
       regenerate: true
       taggable: true
       category: zircon
+      docs: true
       subcategory: docs
   - scope:
       path: ""
