@@ -2,7 +2,7 @@
 excerpt: "Some old issues closed: TextArea now works as intended, plus some usability upgrades."
 title: "Weekly update: Zircon"
 tags: [zircon, project-update, project-update-zircon]
-author: addamsson
+author: hexworks
 short_title: "Weekly update: Zircon"
 ---
 

@@ -2,7 +2,7 @@
 excerpt: Our agenda was release preparation and API streamlining this week!
 title: "Weekly update: Zircon"
 tags: [zircon, project-update, project-update-zircon]
-author: addamsson
+author: hexworks
 short_title: "Weekly update: Zircon"
 ---
 

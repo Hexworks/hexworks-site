@@ -2,7 +2,7 @@
 excerpt: "A new Zircon version is released: 2018.5.0-RELEASE"
 title: "New Zircon Release: 2018.5.0-RELEASE"
 tags: [github, zircon, project-update, project-update-zircon, release, release-zircon]
-author: addamsson
+author: hexworks
 short_title: "New Zircon Release: 2018.5.0-RELEASE"
 ---
 

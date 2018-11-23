@@ -2,7 +2,7 @@
 excerpt: "Roadmap for the next release with announcing some new things."
 title: "Weekly update: Zircon"
 tags: [zircon, project-update, project-update-zircon]
-author: addamsson
+author: hexworks
 short_title: "Weekly update: Zircon"
 ---
 

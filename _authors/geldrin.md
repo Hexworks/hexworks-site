@@ -2,9 +2,9 @@
 name: Geldrin
 author: geldrin
 facebook: 
-github: 
+github: https://github.com/geldrin
 twitter: 
 visible: true
 ---
 
-Geldrin?
+Geldrin.

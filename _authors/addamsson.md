@@ -1,7 +1,6 @@
 ---
-name: Adam Arold
+name: Addamsson
 author: addamsson
-facebook: https://www.facebook.com/rephaim
 github: https://github.com/adam-arold
 twitter: https://twitter.com/addamsson
 visible: true

@@ -2,9 +2,9 @@
 name: Milo
 author: milo
 facebook: 
-github: 
+github: https://github.com/milonoir
 twitter: 
 visible: true
 ---
 
-Geldrin?
+Milo.

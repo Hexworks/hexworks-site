@@ -2,7 +2,7 @@
 excerpt: This week was spent devising how component wrapping should be done. We also made some upgrades to how TileGraphics works.
 title: "Weekly update: Zircon"
 tags: [zircon, project-update, project-update-zircon]
-author: addamsson
+author: hexworks
 short_title: "Weekly update: Zircon"
 ---
 

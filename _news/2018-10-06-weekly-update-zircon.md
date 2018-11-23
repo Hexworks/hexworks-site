@@ -2,7 +2,7 @@
 excerpt: Release preparation with some Modifier upgrading. Thanks for Coldwarrl for helping us out!
 title: "Weekly update: Zircon"
 tags: [zircon, project-update, project-update-zircon]
-author: addamsson
+author: hexworks
 short_title: "Weekly update: Zircon"
 ---
 

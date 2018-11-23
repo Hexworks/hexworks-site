@@ -2,7 +2,7 @@
 excerpt: "Hexameter has been refactored into a Kotlin multiplatform project."
 title: "Project Update: Hexameter is now known as Mixite"
 tags: [mixite, project-update, project-update-mixite]
-author: addamsson
+author: hexworks
 short_title: "Project Update: Hexameter is now known as Mixite"
 ---
 

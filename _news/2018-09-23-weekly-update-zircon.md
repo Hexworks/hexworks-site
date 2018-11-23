@@ -2,7 +2,7 @@
 excerpt: This week was mostly spent with the Component system upgrades. We also had some fun with lightweight animations.
 title: "Weekly update: Zircon"
 tags: [zircon, project-update, project-update-zircon]
-author: addamsson
+author: hexworks
 short_title: "Weekly update: Zircon"
 ---
 

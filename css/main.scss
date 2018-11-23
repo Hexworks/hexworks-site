@@ -247,7 +247,6 @@ nav {
 
 // TODO
 
-
 //////////////////////
 // posts
 //////////////////////
@@ -406,88 +405,86 @@ nav {
 ///////////////
 
 .author-card {
-
-}
-
-.author-img {
-  position: absolute;
-  width: 4em;
-  height: 4em;
-  background: #ffffaa;
-  overflow: hidden;
-  border-radius: 50%;
-
-  img {
+  .author-img {
+    position: absolute;
     width: 4em;
     height: 4em;
-    object-fit: scale-down;
-  }
-}
-
-.author-name {
-  margin: 0 0 .75em 5em;
-  position: relative;
-  font-family: $accent-font;
-
-  span {
-    display: inline-block;
-    vertical-align: middle;
-    line-height: normal;
-  }
-}
-
-.author-social {
-  margin-left: 5em;
-  position: relative;
-
-  a {
-    display: inline-block;
-    width: 1.6em;
-    height: 1.6em;
-  }
-
-  a:hover {
-    background-color: $page-color;
+    background: $secondary-accent-color;
+    overflow: hidden;
     border-radius: 50%;
+
+    img {
+      width: 4em;
+      height: 4em;
+      object-fit: scale-down;
+    }
   }
 
-  img {
-    display: block;
-    margin: 0.4em;
-    width: 0.8em;
-    height: 0.8em;
-  }
-}
-
-.author-intro {
-  margin-top: 3em;
-  color: $background-text-color;
-  font-size: $unimportant-text-size;
-}
-
-.author-handle {
-  color: $background-text-color;
-  font-size: $unimportant-text-size;
-  margin-left: $inline-spacing;
-}
-
-.author-link {
-
-  margin: $element-spacing 0 $element-spacing 0;
-  height: 2em;
-  line-height: 2em;
-
-  a {
-    padding: 0 $element-spacing;
-    position: absolute;
-    right: $element-spacing;
+  .author-name {
+    margin: 0 0 .75em 5em;
+    position: relative;
     font-family: $accent-font;
-    font-weight: bold;
-    color: $primary-color;
+
+    span {
+      display: inline-block;
+      vertical-align: middle;
+      line-height: normal;
+    }
   }
 
-  a:hover {
-    background: $primary-accent-color;
+  .author-social {
+    margin-left: 5em;
+    position: relative;
+
+    a {
+      display: inline-block;
+      width: 1.6em;
+      height: 1.6em;
+    }
+
+    a:hover {
+      background-color: $page-color;
+      border-radius: 50%;
+    }
+
+    img {
+      display: block;
+      margin: 0.4em;
+      width: 0.8em;
+      height: 0.8em;
+    }
+  }
+
+  .author-intro {
+    margin-top: 3em;
+    color: $background-text-color;
+    font-size: $unimportant-text-size;
+  }
+
+  .author-handle {
+    color: $background-text-color;
+    font-size: $unimportant-text-size;
+    margin-left: $inline-spacing;
+  }
+
+  .author-link {
+
+    margin: $element-spacing 0 $element-spacing 0;
+    height: 2em;
+    line-height: 2em;
+
+    a {
+      padding: 0 $element-spacing;
+      position: absolute;
+      right: $element-spacing;
+      font-family: $accent-font;
+      font-weight: bold;
+      color: $primary-color;
+    }
+
+    a:hover {
+      background: $primary-accent-color;
+    }
   }
 }
 
