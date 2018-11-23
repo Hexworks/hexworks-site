@@ -18,12 +18,13 @@ Both the [TileGrid] and the [Screen] interfaces implement [Layerable] so you can
 or remove one by its reference (like when you use a `Set`):
 
 ```java
+import org.hexworks.zircon.api.AppConfigs;
+import org.hexworks.zircon.api.DrawSurfaces;
 import org.hexworks.zircon.api.Layers;
 import org.hexworks.zircon.api.Positions;
 import org.hexworks.zircon.api.Sizes;
 import org.hexworks.zircon.api.SwingApplications;
 import org.hexworks.zircon.api.TileColors;
-import org.hexworks.zircon.api.DrawSurfaces;
 import org.hexworks.zircon.api.Tiles;
 import org.hexworks.zircon.api.color.ANSITileColor;
 import org.hexworks.zircon.api.graphics.Layer;
@@ -33,7 +34,9 @@ public class UsingLayers {
 
     public static void main(String[] args) {
 
-        TileGrid tileGrid = SwingApplications.startTileGrid();
+        TileGrid tileGrid = SwingApplications.startTileGrid(AppConfigs.newConfig()
+                        .withSize(Sizes.create(20, 20))
+                        .build());
 
         Layer layer0 = Layers.newBuilder()
                 .withTileGraphics(DrawSurfaces.tileGraphicsBuilder()
@@ -65,11 +68,15 @@ public class UsingLayers {
 }
 ```
 
+After running this code you'll see this on your screen:
+
+![How Layers Work](/assets/img/how-layers-work.png)
+
 > Note that in the above example all objects are created by using the corresponding helper class:
 > [Layers], [DrawSurfaces] and [Tiles]. This is a common pattern in Zircon and you should
 > use `these Builder`s for creating all Zircon objects. Read about [The design philosophy behind Zircon][design-philosophy] for more info.
 
-## How Layers work
+## Layer mechanics
 
 When drawing either a [TileGrid] or a [Screen], [Layer]s are drawn on the screen from bottom to top. You can
 also see layering as adding a 3rd dimension (depth, or z axis) to a two dimensional surface.

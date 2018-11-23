@@ -38,7 +38,7 @@ public class CreatingAScreen {
 ```
 
 You can interact with a [Screen] in the same way as you would use a [TileGrid]. All the drawing operations work
-as expected:
+as expected. Running the following snippet:
 
 ```java
 import org.hexworks.zircon.api.*;
@@ -76,6 +76,10 @@ public class CreatingAScreen {
     }
 }
 ```
+
+will result in this nice ocean:
+
+![Waves](/assets/img/primer-on-screens-waves.png)
 
 ## Differences between Screens and TileGrids
 
@@ -142,6 +146,10 @@ public class SwitchingScreens {
     }
 }
 ```
+
+And it looks like this in action:
+
+![Switching Screens](/assets/img/switching_screens.gif)
 
 ## Components
 

@@ -71,6 +71,12 @@ public class CreatingTileGraphicsFromShapes {
 }
 ```
 
+The result of running this code snippet should look like this:
+
+![Creating Tile Graphics From Shapes](/assets/img/creating-a-tile-graphics-from-shapes.png)
+
+> Note that the above example uses the [Shapes] helper class. You can read more about shapes [here][drawing-shapes].
+
 ## How TileGraphics works
 
 As you can see in the above example the easiest way to create a[TileGraphics] is to use the [DrawSurfaces] helper.

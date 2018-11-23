@@ -38,6 +38,7 @@ $h2-line-height: 1.3em;
 $h3-line-height: 1.3em;
 $h4-line-height: 1.1em;
 
+// paletton: http://paletton.com/#uid=44S0u0kw0w0jyC+oRxVy4oIDfjr
 // colors
 $page-color: #e9eae4;
 $post-background-color: #fff;
@@ -45,7 +46,8 @@ $background-text-color: #9298a4;
 
 $primary-color: #341139;
 $secondary-color: #3C3251;
-$accent-color: #A8D46F;
+$primary-accent-color: #A8D46F;
+$secondary-accent-color: #839700;
 
 // general rules
 * {
@@ -123,7 +125,7 @@ blockquote, .info-box {
 }
 
 blockquote {
-  border-left: 0.2em solid $accent-color;
+  border-left: 0.2em solid $primary-accent-color;
 }
 
 .series {
@@ -189,7 +191,7 @@ nav {
   }
 
   .active {
-    color: $accent-color
+    color: $primary-accent-color
   }
 
   a {
@@ -303,7 +305,7 @@ nav {
   }
 
   a {
-    color: $accent-color;
+    color: $secondary-accent-color;
   }
 
   a:hover {
@@ -349,7 +351,7 @@ nav {
   border-radius: 3px;
 
   &:hover {
-    border-top: 2px solid $accent-color;
+    border-top: 2px solid $primary-accent-color;
     transition: border-top .2s ease;
   }
 
@@ -359,7 +361,7 @@ nav {
 }
 
 .card-highlight {
-  background: $accent-color;
+  background: $primary-accent-color;
   color: $primary-color;
 
   .tag-link {
@@ -485,7 +487,7 @@ nav {
   }
 
   a:hover {
-    background: $accent-color;
+    background: $primary-accent-color;
   }
 }
 
@@ -522,7 +524,7 @@ nav {
       .tag-name {
         a {
           line-height: 1em;
-          background-color: $accent-color;
+          background-color: $primary-accent-color;
           padding: 0 $element-spacing;
           color: $primary-color;
         }
@@ -535,7 +537,7 @@ nav {
       }
 
       &:hover {
-        border-top: 2px solid $accent-color;
+        border-top: 2px solid $primary-accent-color;
         transition: border-top .2s ease;
       }
     }
@@ -576,7 +578,7 @@ nav {
   }
 
   a:hover {
-    color: $accent-color;
+    color: $primary-accent-color;
     text-decoration: underline;
   }
 }
@@ -631,7 +633,7 @@ footer {
       color: $secondary-color;
     }
     a:hover {
-      color: $accent-color;
+      color: $primary-accent-color;
     }
   }
 
