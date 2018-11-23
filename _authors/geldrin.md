@@ -7,4 +7,5 @@ twitter:
 visible: true
 ---
 
-Geldrin.
+Pixel artist and roguelike enthusiast. When not fiddling around with pixels he often
+commandeers dwarves in Dwarf Fortress.

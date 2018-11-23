@@ -7,4 +7,4 @@ twitter:
 visible: true
 ---
 
-Milo.
+Multiplayer programming wizard and sound engineer also responsible for the Microcline Art Studio.
