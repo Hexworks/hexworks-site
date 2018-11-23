@@ -379,7 +379,7 @@ nav {
 }
 
 .entry-title {
-  // margin-left: 4em;
+  margin-left: 4em;
   position: relative;
   top: -6px;
   height: 2.6em;
@@ -398,6 +398,12 @@ nav {
 
 .entry-icon {
   position: absolute;
+}
+
+.zircon_docs-icon {
+  width: 50px;
+  height: 50px;
+  background: url("../assets/icons/zircon_docs-icon.png") no-repeat;
 }
 
 ///////////////
