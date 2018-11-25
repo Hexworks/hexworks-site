@@ -5,6 +5,7 @@ tags: [zircon, open-source, roguelikes]
 author: hexworks
 short_title: Zircon Tile Engine & Text GUI
 category: zircon
+subcategory: zircon
 with_all: false
 ---
 

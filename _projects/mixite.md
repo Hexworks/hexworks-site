@@ -4,7 +4,6 @@ title: "Mixite: a Hexagonal Grid Library"
 tags: [mixite, open-source]
 author: addamsson
 short_title: Mixite Hexagonal Grid Library
-category: mixite
 ---
 
 Mixite is a hexagonal grid library. The motivation behind it is to have an optimized, simple and usable library for drawing

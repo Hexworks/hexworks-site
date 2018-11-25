@@ -1,9 +1,9 @@
 ---
 name: Milo
-author: milo
+author: milonoir
 facebook: 
 github: https://github.com/milonoir
-twitter: 
+twitter: milonoir
 visible: true
 ---
 

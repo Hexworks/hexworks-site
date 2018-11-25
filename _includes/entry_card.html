@@ -1,9 +1,18 @@
 <div class="entry-card {{ entry.collection }}-card diffusedshadow
             {% if entry.highlighted %}card-highlight{% endif %}" data-date="{{ entry.date | date: '%Y%m%d' }}">
-    <p class="entry-icon {{ entry.collection }}-icon"></p>
-    <p class="entry-title">
-        <a href="{{ entry.url | prepend:site.baseurl }}">{{ entry.short_title }}</a>
-    </p>
+    {% if entry.category and entry.subcategory %}
+        <p class="entry-icon">
+            <img src="/assets/icons/{{ entry.category }}_{{ entry.subcategory }}_icon.png" />
+        </p>
+        <p class="entry-title with-icon">
+            <a href="{{ entry.url | prepend:site.baseurl }}">{{ entry.short_title }}</a>
+        </p>
+    {% else %}
+        <p class="entry-title">
+            <a href="{{ entry.url | prepend:site.baseurl }}">{{ entry.short_title }}</a>
+        </p>
+    {% endif %}
+
     <p class="entry-meta">
         <span class="entry-date">{{ entry.date | date: "%Y. %m. %d." }}</span>
     </p>
