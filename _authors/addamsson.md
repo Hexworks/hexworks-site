@@ -1,8 +1,8 @@
 ---
 name: Addamsson
 author: addamsson
-github: https://github.com/adam-arold
-twitter: https://twitter.com/addamsson
+github: adam-arold
+twitter: addamsson
 visible: true
 ---
 
