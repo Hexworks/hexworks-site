@@ -1,10 +1,9 @@
 ---
 name: Milo
 author: milonoir
-facebook: 
-github: https://github.com/milonoir
+github: milonoir
 twitter: milonoir
 visible: true
 ---
 
-Multiplayer programming wizard and sound engineer also responsible for the Microcline Art Studio.
+Multiplayer programming wizard and audio engineer also responsible for the Microcline Art Studio.
