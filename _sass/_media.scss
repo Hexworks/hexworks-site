@@ -1,4 +1,12 @@
 @media (max-width: 500px) {
+  .main-logo {
+    display: none !important;
+  }
+
+  .external-nav {
+    display: none !important;
+  }
+
   .entries {
 
     .entry-list {
