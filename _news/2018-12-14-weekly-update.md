@@ -1,5 +1,5 @@
 ---
-excerpt: "Caves of Zircon now has inventories, items, wandering creatures and more! We also have a contributor who is working on a libGDX implementation!"
+excerpt: "Preliminary LibGDX renderer implementation for Zircon is ready! Also there are some new fetures in Caves of Zircon."
 title: "Weekly update"
 tags: [zircon, caves-of-zircon, project-update, project-update-zircon, project-update-coz]
 author: hexworks
