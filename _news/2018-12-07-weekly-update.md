@@ -1,9 +1,9 @@
 ---
 excerpt: "Caves of Zircon now has inventories, items, wandering creatures and more! We also have a contributor who is working on a libGDX implementation!"
-title: "Weekly update"
+title: "Weekly update: Zircon & Caves of Zircon"
 tags: [zircon, caves-of-zircon, project-update, project-update-zircon, project-update-coz]
 author: hexworks
-short_title: "Weekly update"
+short_title: "Weekly update: Zircon & Caves of Zircon"
 ---
 
 This week:

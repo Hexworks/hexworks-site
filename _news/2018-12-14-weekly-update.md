@@ -1,9 +1,9 @@
 ---
 excerpt: "Preliminary LibGDX renderer implementation for Zircon is ready! Also there are some new fetures in Caves of Zircon."
-title: "Weekly update"
+title: "Weekly update: Zircon & Caves of Zircon"
 tags: [zircon, caves-of-zircon, project-update, project-update-zircon, project-update-coz]
 author: hexworks
-short_title: "Weekly update"
+short_title: "Weekly update: Zircon & Caves of Zircon"
 ---
 
 This week was pretty exciting!

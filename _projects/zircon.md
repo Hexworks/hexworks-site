@@ -1,9 +1,9 @@
 ---
-excerpt: "Zircon is a user-friendly Text GUI & Tile Engine"
-title: Zircon - A user-friendly Tile Engine & Text GUI
+excerpt: "Zircon is an extensible, multiplatform and user-friendly tile engine."
+title: Zircon - an extensible, multiplatform and user-friendly tile engine.
 tags: [zircon, open-source, roguelikes]
 author: hexworks
-short_title: Zircon Tile Engine & Text GUI
+short_title: Zircon Tile Engine
 category: zircon
 subcategory: zircon
 with_all: false
