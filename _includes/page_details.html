@@ -1,4 +1,4 @@
-<article class="content page"  itemscope itemtype="http://schema.org/BlogPosting">
+<article class="content page" itemscope itemtype="http://schema.org/BlogPosting">
     <header class="post-header">
         {% if page.tags %}
         {% include tag_list.html tags = page.tags %}
@@ -25,7 +25,7 @@
     </header>
     <div id="post-body" itemprop="articleBody">
         {% if page.series %}
-            {% assign seriesdata = site[coll] | where: "series", page.series %}
+            {% assign seriesdata = site[page.collection] | where: "series", page.series %}
             {% include series_nav.html seriesdata = seriesdata %}
         {% endif %}
         {{ content }}

@@ -9,34 +9,32 @@ We released the next version of Zircon this week!
 
 For **Caves of Zircon**:
 
-- Now you can [level up](https://cdn.discordapp.com/attachments/509142267735310338/525811202551447553/coz_xp.gif) in the game!
-- The keyboard controls were also improved so now it is not only possible but convenient to use as well
-  
+The first version of the project is now released! We've moved the ECS(ish) library to its
+own project: [Amethyst](https://github.com/Hexworks/amethyst). This is in BETA right now,
+but it will be production ready soon. If Ashley was simple than this is super-simple, it only
+has like 10 classes right now but it gets the job done.
+
+In the game itself the Player was nerfed a bit, and the monsters were buffed. The inventory
+and the equipment screens were separated. [This](https://cdn.discordapp.com/attachments/509142267735310338/528338992249438239/unknown.png)
+is how the equipment screen looks now and [this](https://cdn.discordapp.com/attachments/509142267735310338/528339267651502099/unknown.png)
+is the new Inventory screen.
+
+The goals were also re-aligned, so now the goal is to find the exit and gather as much Zircons
+as possible along the way while keeping yourself alive against the onslaught of bats, zombies, and hunger.
+
+[This](https://cdn.discordapp.com/attachments/206169610284826626/528302967514988545/coz_gameplay.gif) is a speed run which I did. I lowered the levels to 2 because the gifs were getting
+too big. :)
+
 For **Zircon**:
 
-- We fixed an elusive bug which caused focus to be lost when a `Component` was deleted from the screen which currently had focus.
-  This happens for example when you loot some items from creatures in Caves of Zircon. I spent some time with this but now it is
-  working.
-- Zircon now supports data binding! [This](https://cdn.discordapp.com/attachments/363754040103796737/525042125151141939/data_binding_with_labels.gif)
-  is an example of binding the value of a label to another one, a `Header` and several buttons. What's not visible here is that with data binding you
-  can also create complex bindings like binding to numbers:
-```
-val someNumber = createPropertyFrom(1)
-Components.button().build().textProperty.bind(someNumber) {
-    it.toString()
-}
-```
+There were some minor upgrades and fixes this week:
 
-or creating combined bindings like in this example:
-
-```
-val firstName = Components.label().build()
-val lastName = Components.label().build()
-
-val combined = firstName.textProperty.concat(" ").concat(lastName.textProperty)
-
-val fullName = Components.label().build()
-fullName.textProperty.bind(combined)
-```
-- There were also some minor bugfixes reported by @Coldwarrl and others. Thanks!
+- @Ender_L upgraded the LibGDX renderer this week, so the black borders are gone from the
+  viewport. Asset loading was also upgraded, now it uses an Asset Manager
+- Now the `text` of the `ToggleButton` is mutable. It uses data binding behind the scenes
+  but now you can conveniently do `toggleButton.text = "foo"` instead of using the
+  `Property` abstraction
+- `Button`s now can be enabled / disabled
+- Now options can be removed from the `RadioButtonGroup`
+- Now there is a method in `Position3D` to determine whether the position is unknown (`isUnknown`)
 
