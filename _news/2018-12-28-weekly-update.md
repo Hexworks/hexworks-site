@@ -1,11 +1,11 @@
 ---
-excerpt: "This week was about release preparation, adding data binding and bug hunting."
+excerpt: "We released the Christmas Release this week, and also the first version of Caves of Zircon"
 title: "Weekly update: Zircon & Caves of Zircon"
 tags: [zircon, caves-of-zircon, project-update, project-update-zircon, project-update-coz]
 author: hexworks
 short_title: "Weekly update: Zircon & Caves of Zircon"
 ---
-This week was spent mostly with finalizing the next release: there are only 2 tasks left!
+We released the next version of Zircon this week!
 
 For **Caves of Zircon**:
 

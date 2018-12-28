@@ -1,6 +1,6 @@
 ---
 excerpt: "A new Zircon version is released: 2018.12.25-XMAS"
-title: "New Zircon Release: 2018.5.0-RELEASE"
+title: "New Zircon Release: 2018.12.25-XMAS"
 tags: [github, zircon, project-update, project-update-zircon, release, release-zircon]
 author: hexworks
 short_title: "New Zircon Release: 2018.12.25-XMAS"
