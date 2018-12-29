@@ -1,9 +1,9 @@
 ---
 excerpt: This article is the start of a tutorial series which will teach you how to write a roguelike game.
-title: "How To Make a Roguelike"
+title: "How To Make a Roguelike #1"
 tags: [zircon, caves-of-zircon, roguelikes, kotlin]
 author: addamsson
-short_title: "How To Make a Roguelike"
+short_title: "How To Make a Roguelike #1"
 series: coz
 ---
 

@@ -1,9 +1,9 @@
 ---
 excerpt: This article explains how to set up the tutorial project on your computer and get started with it.
-title: "How To Make a Roguelike: Project Setup"
+title: "How To Make a Roguelike: #2 Project Setup"
 tags: [zircon, caves-of-zircon, roguelikes, kotlin]
 author: addamsson
-short_title: "How To Make a Roguelike: Project Setup"
+short_title: "How To Make a Roguelike: #2 Project Setup"
 series: coz
 ---
 
