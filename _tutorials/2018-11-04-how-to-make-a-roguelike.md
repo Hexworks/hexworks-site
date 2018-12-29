@@ -79,7 +79,7 @@ To top it all off, you can use *any* Java library, since Kotlin gives you seamle
 > I've written about this topic on my blog [here](http://the-cogitator.com/2017/05/19/kotlin-is-the-new-java.html).
   Take a look if you are interested.
 
-## Game Library
+## Game Libraries
 
 For this game we're gonna use [Zircon](https://github.com/Hexworks/zircon), which is a Tile engine,
 the [Amethyst](https://github.com/Hexworks/amethyst) Entity Attribute System and some useful features
@@ -88,6 +88,14 @@ form the [Cobalt](https://github.com/Hexworks/cobalt) library, like data binding
 > Note that I've chosen these libraries because I'm familiar with them and I also think that they are
   the best fit for the problem at hand. Disclaimer: I work on those libraries so I might be biased
   but you'll see if they work out for you or not.
+  
+## Other things we need
+
+For this tutorial we're gonna need some basic [Git](https://git-scm.com/) and [Gradle](https://gradle.org/)
+knowledge. I'll explain these on the way so you needn't worry about them for now.
+
+As for our development environment I highly recommend the [Intellij IDEA Community Edition](https://www.jetbrains.com/idea/download).
+It is not only *free* but it is the best Kotlin ide you can get.
   
 Now that we are all set, let's start coding! In the next article we'll set up our project
 and start working on our game right away!
