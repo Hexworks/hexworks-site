@@ -1,9 +1,9 @@
 ---
 excerpt: This article explains how to set up the tutorial project on your computer and get started with it.
-title: "How To Make a Roguelike: #2 Project Setup"
+title: "How To Make a Roguelike: #1 Project Setup"
 tags: [zircon, caves-of-zircon, roguelikes, kotlin]
 author: addamsson
-short_title: "How To Make a Roguelike: #2 Project Setup"
+short_title: "How To Make a Roguelike: #1 Project Setup"
 series: coz
 ---
 
@@ -28,6 +28,10 @@ and fight zombies, kobolds and other mythical creatures along the way.
 
 This game is a classic roguelike. This means that you only have one life, the creatures are
 ruthless, and if you'll even have to look out for food, since you can starve to death!
+
+The game will look like this when we're done:
+
+![Caves of Zircon gameplay](/assets/img/coz_gameplay.gif)
 
 ## Checking out the project
 
