@@ -27,13 +27,13 @@ The game is about an adventurer, who descends into the **Caves of Zircon** to ga
 and fight zombies, kobolds and other mythical creatures along the way.
 
 This game is a classic roguelike. This means that you only have one life, the creatures are
-ruthless, and if you'll even have to look out for food, since you can starve to death!
+ruthless, and you'll even have to look out for food, since you can starve to death!
 
 The game will look like this when we're done:
 
 ![Caves of Zircon gameplay](/assets/img/coz_gameplay.gif)
 
-## Checking out the project
+## Checking the project out
 
 To get started, let's check out the code from Git. Navigate to an empty folder and perform
 this command:
@@ -54,6 +54,8 @@ So let's reset our project to see the initial project setup by running this comm
 ```bash
 git reset --hard PROJECT_SETUP
 ```
+
+> Note that you can see all the milestones of this project by running `git tag` in the command line.
 
 ### Using Gradle
 

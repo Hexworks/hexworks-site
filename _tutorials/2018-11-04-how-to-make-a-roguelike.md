@@ -31,7 +31,7 @@ This tutorial series is therefore about writing *your own roguelike game* from s
 ## Language and library choices
 
 For this tutorial we'll use the [Kotlin](https://kotlinlang.org/) programming language.
-Why not use "C++, Java or Python?" you might ask. The reason is that
+"Why not use C++, Java or Python?" you might ask. The reason is that
 
 - Low-level languages like C++ make it much harder to focus on writing actual game mechanics
   and you quickly get bogged down with memory management, complex language features and such.
