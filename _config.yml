@@ -79,7 +79,6 @@ unpublished: false
 # Plugins
 whitelist: []
 plugins:
-  - jekyll-gist
 
 # Conversion
 markdown:    kramdown
