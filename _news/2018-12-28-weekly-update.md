@@ -4,6 +4,7 @@ title: "Weekly update: Zircon & Caves of Zircon"
 tags: [zircon, caves-of-zircon, project-update, project-update-zircon, project-update-coz]
 author: hexworks
 short_title: "Weekly update: Zircon & Caves of Zircon"
+comments: true
 ---
 We released the next version of Zircon this week! More about it [here](https://hexworks.org/posts/news/2018/12/25/new-zircon-release-2018.12.25-XMAS.html).
 

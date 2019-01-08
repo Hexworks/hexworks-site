@@ -4,6 +4,7 @@ title: "New Zircon Release: 2018.5.0-RELEASE"
 tags: [github, zircon, project-update, project-update-zircon, release, release-zircon]
 author: hexworks
 short_title: "New Zircon Release: 2018.5.0-RELEASE"
+comments: true
 ---
 
 ## Highlights of this release

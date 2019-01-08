@@ -4,6 +4,7 @@ title: "Project Update: Hexameter is now known as Mixite"
 tags: [mixite, project-update, project-update-mixite]
 author: hexworks
 short_title: "Project Update: Hexameter is now known as Mixite"
+comments: true
 ---
 
 Hexameter, which was an old Java project of ours was retrofitted to be a Kotlin multiplatform project and now it is called [Mixite](https://github.com/Hexworks/mixite).

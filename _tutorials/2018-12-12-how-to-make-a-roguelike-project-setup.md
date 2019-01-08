@@ -5,6 +5,7 @@ tags: [zircon, caves-of-zircon, roguelikes, kotlin]
 author: addamsson
 short_title: "How To Make a Roguelike: #1 Project Setup"
 series: coz
+comments: true
 ---
 
 > Now that you are decided to write your own roguelike, the first thing to do is to

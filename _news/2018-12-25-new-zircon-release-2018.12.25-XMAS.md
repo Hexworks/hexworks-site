@@ -4,6 +4,7 @@ title: "New Zircon Release: 2018.12.25-XMAS"
 tags: [github, zircon, project-update, project-update-zircon, release, release-zircon]
 author: hexworks
 short_title: "New Zircon Release: 2018.12.25-XMAS"
+comments: true
 ---
 
 > Zircon is an extensible, multiplatform and user-friendly tile engine.

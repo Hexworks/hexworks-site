@@ -5,6 +5,7 @@ tags: [zircon, caves-of-zircon, roguelikes, kotlin]
 author: addamsson
 short_title: "How To Make a Roguelike: #2 Views, Screens, Inputs"
 series: coz
+comments: true
 ---
 
 > Having a skeleton project is nice, but we should start doing some actual work on our project.
@@ -39,6 +40,11 @@ fun main(args: Array<String>) {
 }
 ```
 
+> Note that Zircon uses the [Builder Pattern](https://en.wikipedia.org/wiki/Builder_pattern) heavily. What you see
+above with the `Components.header()` call is the creation of one. With *builders* it is customary to use
+[Method Chaining](https://en.wikipedia.org/wiki/Method_chaining) where each function call on a builder will
+return the builder itself so you can call another method on it.
+
 What happens here is we
 
 1. Create a new `Application` and start rendering a `TileGrid`. A `TileGrid` is just a 2D grid which contains
@@ -64,7 +70,8 @@ of the [Model-View-Controller](https://en.wikipedia.org/wiki/Model%E2%80%93view%
 
 Let's start using them by replacing our skeleton code with a `StartView`:
 
-> I suggest putting all our `View`s in a single package, to keep it organized: `view`.
+> I suggest putting all our `View`s in a single package, to keep it organized: `view`. In Kotlin all classes, interfaces and
+objects go to their own file just as you would do it with Java. So if you come from the Python world keep this in mind.
 
 ```kotlin
 import org.hexworks.zircon.api.ColorThemes

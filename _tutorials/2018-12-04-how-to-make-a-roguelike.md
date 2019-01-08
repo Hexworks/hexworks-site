@@ -5,6 +5,7 @@ tags: [zircon, caves-of-zircon, roguelikes, kotlin]
 author: addamsson
 short_title: "How To Make a Roguelike"
 series: coz
+comments: true
 ---
 
 > This tutorial series is loosely based on [Trystan's Awesome Roguelike Tutorial](http://trystans.blogspot.com/2016/01/roguelike-tutorial-00-table-of-contents.html).

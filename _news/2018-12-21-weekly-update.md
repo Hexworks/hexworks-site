@@ -4,6 +4,7 @@ title: "Weekly update: Zircon & Caves of Zircon"
 tags: [zircon, caves-of-zircon, project-update, project-update-zircon, project-update-coz]
 author: hexworks
 short_title: "Weekly update: Zircon & Caves of Zircon"
+comments: true
 ---
 This week was spent mostly with finalizing the next release: there are only 2 tasks left!
 

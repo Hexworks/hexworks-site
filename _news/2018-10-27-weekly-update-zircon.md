@@ -4,6 +4,7 @@ title: "Weekly update: Zircon"
 tags: [zircon, project-update, project-update-zircon]
 author: hexworks
 short_title: "Weekly update: Zircon"
+comments: true
 ---
 
 This week we have planned the roadmap for the next release. It can be found [here](https://github.com/Hexworks/zircon/milestone/10).

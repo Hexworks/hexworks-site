@@ -4,6 +4,7 @@ title: "Weekly update: Zircon"
 tags: [zircon, project-update, project-update-zircon]
 author: hexworks
 short_title: "Weekly update: Zircon"
+comments: true
 ---
 
 This week was mainly spent with preparing for the next major release:
