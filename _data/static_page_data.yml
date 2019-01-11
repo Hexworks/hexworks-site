@@ -3,10 +3,6 @@ contact:
   title: "CONTACT"
   id: "contact"
   url: "mailto:info@hexworks.org"
-about:
-  title: "ABOUT"
-  id: "about"
-  url: "/about/"
 categories:
 - title: "POSTS"
   id: "posts"

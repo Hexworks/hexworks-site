@@ -1,5 +1,5 @@
 ---
-excerpt: "Had progress with Cobalt and integrated it with Zircon. Now the EventBus is no longer part of Zircon"
+excerpt: "Had progress with Cobalt and integrated it with Zircon. Now the EventBus is no longer part of Zircon."
 title: "Weekly update: Zircon"
 tags: [zircon, project-update, project-update-zircon]
 author: hexworks

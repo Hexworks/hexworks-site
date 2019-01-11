@@ -133,6 +133,33 @@ blockquote {
 }
 
 //////////////////////
+// homepage
+//////////////////////
+
+.members-cards {
+  .member-card {
+    float: left;
+    width: 30%;
+    list-style-type: none;
+    padding-right: 3%
+  }
+
+  h3 {
+    text-align: center;
+  }
+}
+
+.patron-button {
+  display: block;
+  margin: $section-spacing auto;
+  width: 10em;
+
+  img {
+    width: 10em;
+  }
+}
+
+//////////////////////
 // code
 //////////////////////
 
@@ -520,6 +547,7 @@ nav {
           padding: 0 $element-spacing;
           color: $primary-color;
         }
+
         margin-bottom: $inline-spacing;
       }
 
@@ -621,9 +649,11 @@ footer {
       list-style: none;
       display: inline-block;
     }
+
     a {
       color: $secondary-color;
     }
+
     a:hover {
       color: $primary-accent-color;
     }

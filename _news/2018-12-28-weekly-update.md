@@ -1,5 +1,5 @@
 ---
-excerpt: "We released the Christmas Release this week, and also the first version of Caves of Zircon"
+excerpt: "We released the Christmas Release this week, and also the first version of Caves of Zircon."
 title: "Weekly update: Zircon & Caves of Zircon"
 tags: [zircon, caves-of-zircon, project-update, project-update-zircon, project-update-coz]
 author: hexworks

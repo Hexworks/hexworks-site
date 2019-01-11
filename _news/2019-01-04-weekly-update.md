@@ -1,5 +1,5 @@
 ---
-excerpt: "New tutorial articles are out for Caves of Zircon, and View support was added to Zircon"
+excerpt: "New tutorial articles are out for Caves of Zircon, and View support was added to Zircon."
 title: "Weekly update: Zircon & Caves of Zircon"
 tags: [zircon, caves-of-zircon, project-update, project-update-zircon, project-update-coz]
 author: hexworks

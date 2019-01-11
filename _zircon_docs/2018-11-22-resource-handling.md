@@ -145,5 +145,4 @@ There is also a complete example which you can try out [here](https://github.com
 Animations come with their own file format (`.zap` = Zircon Animation Package). Animations are a beta feature and you can read more about them [here](https://github.com/Hexworks/zircon/wiki/Animation-support).
 
 
-
 {% include zircon_links.md %}

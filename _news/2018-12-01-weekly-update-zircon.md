@@ -1,5 +1,5 @@
 ---
-excerpt: "We're now nearly halfway through with Caves of Zircon! We also added some minor improvements to Zircon"
+excerpt: "We're now nearly halfway through with Caves of Zircon! We also added some minor improvements to Zircon."
 title: "Weekly update: Zircon"
 tags: [zircon, project-update, project-update-zircon]
 author: hexworks
