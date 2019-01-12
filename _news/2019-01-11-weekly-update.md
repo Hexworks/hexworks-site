@@ -16,7 +16,7 @@ In the next we'll explore input handling and add a simple ECS(ish) library to th
 
 For **Caves of Zircon**:
 
-- We finalized the **Zircon splash screen**! Take a look [here](https://cdn.discordapp.com/attachments/509142267735310338/532089835054301184/coz_splash.gif)
+- We finalized the **Zircon splash screen**! Take a look [here](https://cdn.discordapp.com/attachments/509142267735310338/532089835054301184/coz_splash.gif).
   We had [several versions](https://cdn.discordapp.com/attachments/509142267735310338/531962820523327488/unknown.png)
   [previously](https://cdn.discordapp.com/attachments/509142267735310338/531950637567574018/unknown.png)
   and we kept this in the end. It was also added to the game. These gifs are actual game
