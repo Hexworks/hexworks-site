@@ -1,5 +1,5 @@
 ---
-excerpt: Zircon has a lot of built-in things in place but sometimes you want to use external resources like tilesets, rex paint files and such. This page explains how to work with these resources.
+excerpt: Zircon has a lot of built-in things in place but sometimes you want to use external resources. This page explains how to work with them.
 title: Resource Handling
 tags: [zircon, documentation, zircon-documentation, resources]
 author: hexworks

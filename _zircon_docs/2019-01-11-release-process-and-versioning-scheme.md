@@ -1,9 +1,9 @@
 ---
-excerpt: Zircon has a lot of built-in things in place but sometimes you want to use external resources like tilesets, rex paint files and such. This page explains how to work with these resources.
-title: Resource Handling
-tags: [zircon, documentation, zircon-documentation, resources]
+excerpt: Zircon follows a versioning scheme which is reminiscent to JetBrains' versioning strategy but with a twist.
+title: Release Process and Versioning Scheme
+tags: [zircon, documentation, zircon-documentation]
 author: hexworks
-short_title: Resource Handling
+short_title: Release Process and Versioning Scheme
 ---
 
 ## Versioning
