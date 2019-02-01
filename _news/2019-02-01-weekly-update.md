@@ -24,6 +24,11 @@ There were also some minor changes:
 - [#186](https://github.com/Hexworks/zircon/issues/186) There was a small bug in the `TextArea` as well which caused an
   exception when [Del] was pressed in certain situations.
   
+**Caves of Zircon Tutorial**
+
+With the new input handling in place we'll create a release next week for Zircon and we can continue with the tutorial!
+Keep tuned for the next article soon!  
+  
 **Amethyst**
 
 Ever since Caves of Zircon was released people have been perusing the source code and the ECS(ish) lib which we've started
