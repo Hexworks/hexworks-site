@@ -22,7 +22,10 @@ Thanks for /r/coldwarrl for the contribution!
 There is also a new feature which was mentioned by some folks on Discord: **debugging help**. Zircon now comes with a
 logger which is set up for the project (both for Swing and LibGDX). What's more useful is that we've started adding
 proper and insightful `debug` statements throughout the codebase which you can enable by editing the logger config
-in `logback.xml`. It looks like this:
+in `logback.xml`. The most important part is that you can enable only those parts which you are interested in so you
+won't get an undecypherable mess. The config looks like this:
+
+> This file goes to `/src/main/resources`
 
 ```xml
 <configuration>
@@ -61,7 +64,7 @@ them just enable debug logging and you'll see what happens, no additional setup 
 ```
 
 These changes will be added to the skeleton projects as well for ease of use. The input handling documentation page
-was also updated with the recent changes. Take a look at it [here](a).
+was also updated with the recent changes. Take a look at it [here](https://hexworks.org/zircon/docs/2018-11-21-input-handling).
 
 There were also some upgrades:
 

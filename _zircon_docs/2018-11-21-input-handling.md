@@ -11,7 +11,7 @@ key presses and mouse clicks. For this purpose Zircon has [UIEvent]. There are m
 [MouseEvent], [KeyboardEvent] and [ComponentEvent].
 
 It doesn't matter if you use Swing or LibGDX, or any other GUI library, because Zircon adapts all framework
-specific input handling int its own representation.
+specific input handling into its own representation.
 
 We can then listen to these [UIEvent]s by using any class which implements [UIEventSource] and/or [ComponentEventSource].
 When you run a Zircon application it takes care of listening to the platform specific events (Swing, LibGDX, etc) so you
@@ -20,12 +20,12 @@ only need to subscribe to the Zircon [UIEvent]s in your code.
 All [TileGrid]s and [Screen]s implement [UIEventSource] so you can listen to [MouseEvent]s and [KeyboardEvent]s on them.
 [ComponentEvent]s are only emitted by [Component]s.
 
+## Usage
+
 The following example demonstrates how to listen to all of the above event types:
 
 > Note that when you subscribe to [ComponentEvent]s on a [Component] you will only receive [ComponentEvent] events which
 were sent to that specific component.
-
-## Usage
 
 ```java
 import org.hexworks.zircon.api.*;
@@ -136,7 +136,7 @@ This is event propagation in a nutshell. Why is this useful? You can implement t
 event propagation for example by attaching an event listener to a `Panel` and listening to key presses. This way
 whenever something is focused within that `Panel` you'll receive [KeyboardEvent]s.
 
-## Controlling Event Flow
+## Controlling the Event Flow
 
 As you can see in the code example above you have to return an [UIEventResponse] from an event listener. This is important
 for Zircon to be able to tell whether you handled the event or not and in what way. These are the possible options
@@ -169,6 +169,6 @@ object UIEventResponses {
 - [StopPropagation] will not only prevent default actions but stops propagation altogether so the event won't reach
   any other listener.
   Return this object if you acted on an event and you don't want any other listeners to have the chance of
-  handling it.  
+  handling it.
   
 {% include zircon_links.md %}
