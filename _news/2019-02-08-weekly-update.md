@@ -1,5 +1,5 @@
 ---
-excerpt: "This week input handling was refactored to the new model, and now it supports event bubbling and capturing!"
+excerpt: "Input handling upgrades, and component events have arrived!"
 title: "Weekly update: Zircon & Caves of Zircon"
 tags: [zircon, caves-of-zircon, project-update, project-update-zircon, project-update-coz]
 author: hexworks
