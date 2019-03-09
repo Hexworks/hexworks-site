@@ -26,8 +26,8 @@ version=2019.0.1-PREVIEW
 kotlin_version=1.3.21
 
 cobalt_version=2018.1.1-PREVIEW
-amethyst_version=2019.0.2-PREVIEW
-zircon_version=2019.0.13-PREVIEW
+amethyst_version=2019.0.4-PREVIEW
+zircon_version=2019.0.14-PREVIEW
 ```
 
 In order for this to work we'll need to change some of our views which had buttons on them: `StartView`,
@@ -208,7 +208,23 @@ interface Engine<T : Context> {
 
 We'll take a look at how this works in practice below, so prepare your keyboard!
 
-## Enhancing our World
+## Enhancing our Game
+
+So far our `Game` object was relatively simple. It only took a `World` as a parameter in its constructor
+and we had a handy factory method for this:
+
+```kotlin
+class Game(val world: World) {
+
+    companion object {
+
+        fun create(worldSize: Size3D = GameConfig.WORLD_SIZE,
+                   visibleSize: Size3D = GameConfig.WORLD_SIZE) = Game(WorldBuilder(worldSize)
+                .makeCaves()
+                .build(visibleSize))
+    }
+}
+```
 
 
 
