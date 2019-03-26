@@ -1,21 +1,13 @@
 ---
-<<<<<<< HEAD
-excerpt: Now that we have a Player in our game let's learn how to move him around!
-title: "How To Make a Roguelike: #5 Exploring the Cave""
-=======
 excerpt: "Now that we have a Player in our game let's learn how to move him around!"
 title: "How To Make a Roguelike: #5 Exploring the Cave"
->>>>>>> progress
 tags: [zircon, caves-of-zircon, roguelikes, kotlin]
 author: addamsson
 short_title: "How To Make a Roguelike: #5 Exploring the Cave"
 series: coz
 comments: true
-<<<<<<< HEAD
-=======
 published: false
 future: false
->>>>>>> progress
 ---
 
 > In the previous article we introduced [Amethyst](https://github.com/Hexworks/amethyst) which
@@ -157,7 +149,6 @@ data class MoveTo(override val context: GameContext,
 All `Command`s have 2 mandatory parameters: `context` and `source`. We only add `position` here
 which holds the position where we want to move the player. As this class indicates, the `Movable`
 `System` will be oblivious to inputs and other things, it only cares about **moving** an `Entity`.
-<<<<<<< HEAD
 
 The class which knows about all `Entity` objects is the `World`, so let's add the logic of moving
 one to it:
@@ -236,10 +227,6 @@ useful for implementing complex interactions between entities like the one descr
 1. A `Facet` accepts any `GameCommand` so we have to make sure that we only handle `MoveTo`. For this *Amethyst*
    supplies the `responseWhenCommandIs` function. What this function does is that it checks whether the `Class`
    we give to it is the same as the `command`. If `true`, our block is executed, if `false` `Pass` is returned instead.
-=======
-It looks like this:
-
->>>>>>> progress
 
 
 
