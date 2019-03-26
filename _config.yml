@@ -59,6 +59,10 @@ collections:
     output: true
     permalink: "/authors/:name/"
     category: "authors"
+  series:
+    output: true
+    permalink: "/series/:name/"
+    category: "series"
 
 
 # Handling Reading
@@ -140,6 +144,14 @@ defaults:
       taggable: true
       category: "posts"
       subcategory: "tutorials"
+  - scope:
+      path: ""
+      type: "series"
+    values:
+      layout: "series_details"
+      regenerate: true
+      taggable: true
+      category: "series"
   - scope:
       path: ""
       type: "projects"
