@@ -851,7 +851,7 @@ did is the [plumbing for our porcelain](https://git-scm.com/book/en/v2/Git-Inter
 ## Conclusion
 
 **Well done!** Now we have a Player and we've also laid the groundwork to add even more things to
-our game easily. In the follow up article we'll add player movement and also some
+our game easily. In the follow up articles we'll add player movement and also some
 player actions, like digging into our game!
 
 Until then go forth and *kode on*!
