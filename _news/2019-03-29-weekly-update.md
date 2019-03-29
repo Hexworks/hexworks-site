@@ -8,7 +8,7 @@ comments: true
 ---
 
 The previous week was pretty much party week for us with Geldrin (Milo was on parental leave for a while, but
-now he is also back) so we did not do anything useful. I do received a gift from Geldrin though. Take a look
+now he is also back) so we did not do anything useful. I did receive a gift from Geldrin though. Take a look
 [here](https://media.discordapp.net/attachments/363753832003665922/561292843214176277/56213720_568315750343546_8468264035429646336_n.png?width=349&height=635).
 Guess what *my favorite game is*! This was made by him!
 
