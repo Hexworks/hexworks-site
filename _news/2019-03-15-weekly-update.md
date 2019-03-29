@@ -7,7 +7,6 @@ short_title: "Weekly update: Zircon & Caves of Zircon"
 comments: true
 ---
 
-
 This week **we finished the [next article](https://hexworks.org/posts/tutorials/2019/02/13/how-to-make-a-roguelike-the-player.html)**
 in the [tutorial series](https://hexworks.org/posts/tutorials/)!
 
