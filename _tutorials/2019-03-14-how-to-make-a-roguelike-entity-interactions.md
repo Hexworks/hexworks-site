@@ -1,5 +1,5 @@
 ---
-excerpt: "While walking through walls is fun, it is not a good game mechanics. Let's improve on that with Entity Interactions!"
+excerpt: "While walking through walls is fun, it is not a good game mechanism. Let's improve on that with Entity Interactions!"
 title: "How To Make a Roguelike: #6 Entity Interactions"
 tags: [zircon, caves-of-zircon, roguelikes, kotlin]
 author: addamsson
