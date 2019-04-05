@@ -23,13 +23,12 @@ Our `GameBlock` already supports adding entities to it, so let's upgrade it a bi
 with an initial `Entity`:
 
 ```kotlin
+// add this to the GameBlock class
+companion object {
 
-    // add this to the GameBlock class
-    companion object {
-
-        fun createWith(entity: GameEntity<EntityType>) = GameBlock(
-                        currentEntities = mutableListOf(entity))
-    }
+    fun createWith(entity: GameEntity<EntityType>) = GameBlock(
+                    currentEntities = mutableListOf(entity))
+}
 ```
 
 > A quick refresher: [companion object](https://proandroiddev.com/a-true-companion-exploring-kotlins-companion-objects-dbd864c0f7f5)s
@@ -46,7 +45,6 @@ the scoped object is returned. This is very useful for initializing objects afte
 Now if we want a *wall* `Entity` we need to create a type for it first:
 
 ```kotlin
-
 // put this in EntityTypes.kt
 object Wall : BaseEntityType(
         name = "wall")
@@ -129,7 +127,6 @@ This will no longer work because the `defaultTile` of a `GameBlock` is now alway
 to use `isEmptyFloor` instead:
 
 ```kotlin
-
 // change this in WorldBuilder#smooth
 
 if (block.isEmptyFloor) {
