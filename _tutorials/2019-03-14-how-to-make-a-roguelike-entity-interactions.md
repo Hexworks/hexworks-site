@@ -136,7 +136,7 @@ if (block.isEmptyFloor) {
 
 > Wait, what happened to our `defaultTile`? Well, the thing is that when we demolish a wall we want to see the default
 tile in its place which is a floor in our case. Previously we did not have the ability to do this, but now we're
-going to implement it now.
+going to implement it.
 
 If we run the program now there won't be any visible changes to gameplay. The reason is that although we added
 the `BlockOccupier` flag to our game it is not used by anything...yet. Let's take a look at how can we go about
