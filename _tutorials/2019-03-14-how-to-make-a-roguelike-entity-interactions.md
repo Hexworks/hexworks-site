@@ -36,12 +36,6 @@ are singleton `object`s which are added to a regular class. They work in a simil
 call functions and access properties on them by using their parent class. Here we can invoke `create` in the following
 way: `GameBlock.create()`. 
 
-Here we add a static factory method which takes a `GameEntity` as a parameter. `also` here is a
-[scoping function](https://kotlinlang.org/docs/reference/scope-functions.html).
-You can read more about them [here](https://kotlinlang.org/docs/reference/scope-functions.html). The TL;DR is that
-`also` creates a scope where we can invoke functions on the scoped object (the new `GameBlock` here) and after that
-the scoped object is returned. This is very useful for initializing objects after creation as you can see here.
-
 Now if we want a *wall* `Entity` we need to create a type for it first:
 
 ```kotlin

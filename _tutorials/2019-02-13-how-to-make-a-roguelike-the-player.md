@@ -831,6 +831,24 @@ class GameBuilder(val worldSize: Size3D) { // 1
 }
 ```
 
+> Hey, what's this `also` thingy? `also` here is a [scoping function](https://kotlinlang.org/docs/reference/scope-functions.html).
+You can read more about them [here](https://kotlinlang.org/docs/reference/scope-functions.html). The TL;DR is that
+`also` creates a scope where we can invoke functions on the scoped object (the new `GameBlock` here) and after that
+the scoped object is returned. This is very useful for initializing objects after creation as you can see here.
+
+Here we:
+
+1. Take the size of the `World` as a parameter
+2. We define the **visible** size which is our viewport of the world
+3. We build our `World` here as part of the `Game`
+4. `prepareWorld` can be called with method chaining here, since `also` will return the `GameBuilder` object
+5. We create the *player* entity here since we're going to pass it as a parameter to other objects
+6. We immediately add the *player* to the `World` which takes an `offset` and a `size` as a parameter
+7. `offset` determines the position where the search for empty positions will start. Here we specify that
+   the top level will be searched starting at (0, 0)
+8. And we also determine that we should search only the throughout the viewport. This ensures that the *player*
+   will be visible on the screen when we start the game
+
 We also need to modify the constructor of our `PlayView` to not create a `Game`, but use our builder instead:
 
 ```kotlin
