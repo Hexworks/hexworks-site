@@ -7,26 +7,21 @@
 [Docs](https://hexworks.org/zircon/docs/) | 
 [Board](https://github.com/Hexworks/zircon/projects/2)
 
-This week we were trying to catch up. There are some folks who are working on 7DRL, so we also provided
-support on Discord. I'm curious to see the games produced this week! /u/coldwarrl also had progress
-with his Cold War roguelike, [here](https://cdn.discordapp.com/attachments/363771631727804416/528500340962623489/unknown.png)
-are [some shots](https://cdn.discordapp.com/attachments/363771631727804416/545987133949607956/unknown.png) from the actual game!
+**Zircon & Caves of Zircon Tutorial**
 
-**Zircon**
+This week was about [Stationary Monsters](https://hexworks.org/posts/tutorials/2019/03/21/how-to-make-a-roguelike-stationary-monsters.html)
+in *Caves of Zircon*. The article is ready and you can read it on [the site](https://hexworks.org/posts/tutorials/2019/03/21/how-to-make-a-roguelike-stationary-monsters.html).
 
-Nothing special happened this week, as we were primarily supporting people with 7DRL. The docs got improved as
-a result and some very valid questions were asked which were not explained before in the docs. For example we
-clarified that components are stateful and not reusable on multiple places in the same UI.
-
-**Caves of Zircon Tutorial**
-
-We had progress with the next article. This one introduces [Amethyst](https://github.com/Hexworks/amethyst) to
-this project so I've spent a lot of time getting the wording right so it is easy to understand. The article is
-coming either this weekend, or the start of the next one.
+There was also a fix in [article #4](https://hexworks.org/posts/tutorials/2019/02/13/how-to-make-a-roguelike-the-player.html) where
+we had a block of code which was not explained. Thanks to @RantingBob for pointing that out!
 
 **Amethyst**
 
-The project now has a [logo](https://cdn.discordapp.com/attachments/198450067445776384/549518167785996289/amethyst_logo_PREVIEW_shine_darkbg.png),
-an [icon](https://cdn.discordapp.com/attachments/198450067445776384/549518736571498496/amethyst_logo_apha_4x.png) and a
-[README page](https://github.com/Hexworks/amethyst) which explains how Amethyst works. We're going to improve this
-in the near future. 
+We also had some great talks about how [Amethyst](https://github.com/Hexworks/amethyst) works and should work so we've begun to
+formulate some new additions to the library which are about interactions between entities.
+
+There is also a new feature, now you can supply a parameter to the constructor of all `System`s for *mandatory `Attribute`s*.
+This will help greatly to ensure the correctness of the code for games using *Amethyst*.
+
+Another addition which is in the works is a `Channel` through which the `Engine` can stream all *errors* so the user of the library
+can respond to erroneous situations which were not caught at compile time.
