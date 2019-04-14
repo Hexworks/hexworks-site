@@ -365,6 +365,8 @@ Now we just have to start listening to `GameLogEvent` in our `PlayView` to make 
 
 ```kotlin
 import org.hexworks.zircon.internal.Zircon
+import org.hexworks.cobalt.events.api.subscribe
+import org.hexworks.cavesofzircon.events.GameLogEvent
 
 screen.addComponent(logArea)
 
