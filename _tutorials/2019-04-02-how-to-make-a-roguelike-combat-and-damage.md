@@ -398,7 +398,7 @@ and generic type parameters to our advantage. We also started using *Zircon's* e
 greatly simplify how we interact with the UI to display messages!
 
 In the next article we're going to create some stairs we can use to climb further down to the lower levels
-of our *dungeon*! We'll also learn how to easily display our previously created *combat stats* on the UI.
+of our *dungeon*!
 
 Until then go forth and *kode on*!
  
