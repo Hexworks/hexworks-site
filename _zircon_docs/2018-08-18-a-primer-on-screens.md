@@ -94,7 +94,7 @@ There is a base layer which is modified when you use operations like `setTileAt`
 implicitly modify these layers and the [Screen] is refreshed automatically. This also means that [Component]s
 are basically specialized [Layer]s.
 
-As with [TileGrid]s [Screen]s support adding and removing [Layer]s. Read the [relevant Wiki page][layers] to learn more.
+As with [TileGrid]s [Screen]s support adding and removing [Layer]s. Read the [relevant documentation page][how-layers-work] to learn more.
 
 > When you display a [Screen] the component layers are swapped. This is handled internally and you needn't worry about it.
 
@@ -154,7 +154,7 @@ And it looks like this in action:
 ## Components
 
 The component system gives you easy-to-use [Component]s like [Button]s and [Panel]s.
-You can read about how they work [here][components].
+You can read about how they work [here][the-component-system].
 
 ## Caveats
 

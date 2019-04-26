@@ -11,7 +11,7 @@ short_title: How to Work With TileGraphics
 A [TileGraphics] is a two dimensional in-memory image composed of [Tile]s. When you create one it is
 held in memory but you can `draw` a [TileGraphics] onto any [DrawSurface] (like a [TileGrid], a [Screen] or another [TileGraphics]).
 
-> You can also create [Layer]s from [TileGraphics] objects. Click [here][layers] to see how [Layer]s work.
+> You can also create [Layer]s from [TileGraphics] objects. Click [here][how-layers-work] to see how [Layer]s work.
 
 ## Usage
 
@@ -85,7 +85,7 @@ Every [TileGraphics] must have a `Size` but it has no [Position].
 When you `draw` a [TileGraphics] on a [DrawSurface] the original image will stay the same and only the [DrawSurface]
 will change which means that `draw` is a copy operation. After `draw`ing a [TileGraphics] you won't be able to tell
 about a [Tile] that it belongs to your image. If you need this kind of information look at how
-[layers][layers] work.
+[how-layers-work][how-layers-work] work.
 
 You can draw [TileGraphics] objects onto each other (as you can see in the example above). Keep in mind that there is a special
 empty [Tile] which is accessible from the [Tiles] class like this: `Tiles.empty()`.

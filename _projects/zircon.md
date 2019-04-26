@@ -56,7 +56,7 @@ dependencies {
 ```
 
 Want to use a `PREVIEW` version instead?
- Check [this Wiki page](https://github.com/Hexworks/zircon/wiki/Release-process-and-versioning-scheme#snapshot-releases).
+ Check [this documentation page](https://github.com/Hexworks/zircon/wiki/Release-process-and-versioning-scheme#snapshot-releases).
 
 ### Some rules of thumb
 
@@ -78,7 +78,7 @@ Before we start there are some guidelines which can help you if you are stuck:
 - You can use *anything* you can find in the [API][api] package, they are part of the public API, and safe to use. The
   [internal][internal] package however is considered private to *Zircon* so don't depend on anything in it because
   it can change any time.
-- Some topics are explained in depth on the [Wiki](https://github.com/Hexworks/zircon/wiki).
+- Some topics are explained in depth on the [documentation](https://github.com/Hexworks/zircon/wiki).
 - If you want to see some example code look [here][examples].  
 - If all else fails read the javadoc. API classes are well documented.
 - If you have any problems which are not answered here feel free to ask us at the [Hexworks Discord server][discord]. 
@@ -295,7 +295,7 @@ What happens here is that we:
 For more explanation about these jump to the [Zircon Crash Course](https://github.com/Hexworks/zircon/wiki/A-Zircon-Crash-Course).
 
 > You can do so much more with [Screen]s. If interested then check out [A primer on Screens][screen-primer]
-on the Wiki! 
+on the documentation! 
 
 ### Components
 
@@ -424,19 +424,19 @@ in either the source code or the [documentation][zircon-docs]:
 Both the [TileGrid] and the [Screen] interfaces implement [Layerable] which means that you can add [Layer]s
 on top of them. Every [Layerable] can have an arbitrary amount of [Layer]s. [Layer]s are like [TileGraphics]
 and you can also have transparency in them which can be used to create fancy effects. [Component]s are also
-[Layer]s themselves. For more details check the [layers][layers] Wiki page.
+[Layer]s themselves. For more details check the [how-layers-work][how-layers-work] documentation page.
 
 > Note that when creating `Layer`s you can set their `offset` from the builder but after attaching it to a
  `TileGrid` or `Screen` you can change its position by calling `moveTo` with a new `Position`.
 
 ### Input handling
 Both the [TileGrid] and the [Screen] interfaces implement [InputEmitter] which means that they re-emit all inputs
-from your users (key strokes and mouse actions) and you can listen on them. There is a [Wiki page][inputs]
+from your users (key strokes and mouse actions) and you can listen on them. There is a [doc page][input-handling]
 with more info.
 
 ### Shape and box drawing
 You can draw [Shape]s like rectangles and triangles by using one of the [ShapeFactory] implementations.
-Check the corresponding [Wiki page][shapes] for more info.
+Check the corresponding [documentation page][shapes] for more info.
 
 ### Fonts and tilesets
 Zircon comes with a bunch of built-in fonts tilesets. These come in 2 flavors:
@@ -445,7 +445,7 @@ Zircon comes with a bunch of built-in fonts tilesets. These come in 2 flavors:
 - True Type Fonts
 - and Graphic tilesets *(Usage info [here](https://github.com/Hexworks/zircon/wiki/Resource-Handling#graphic-tilesets))*
 
-Read more about them in the [resource handling Wiki page][resource-handling] if you want to know more
+Read more about them in the [resource handling documentation page][resource-handling] if you want to know more
 or if you want to use your own tilesets and fonts.
 
 Zircon also comes with **its own tileset format (`ztf`: Zircon Tileset Format)** which is **very easy to use**. 

@@ -116,7 +116,7 @@ interface TileGraphic : Clearable, Boundable, DrawSurface, Drawable, Styleable, 
 This is much more complex than our simple [DrawSurface] interface, so what's going on? First, [TileGraphics]
 implements a lot of interfaces: `Clearable, DrawSurface, Drawable, Styleable`.
 
-> The interfaces mentioned above are called *behaviors*. You can read more about them on [this][behaviors] page.
+> The interfaces mentioned above are called *behaviors*. You can find more of them in [this package](https://github.com/Hexworks/zircon/tree/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/api/behavior).
 
 Zircon has interfaces for each behavior which is reused in other Zircon components, so here they perform the
 following jobs:
@@ -225,7 +225,7 @@ Again, we have a very simple `interface` and a bunch of *behavior*s which make a
 - [InputEmitter] emits all the inputs which were received from the underlying GUI framework as Zircon [Input] events.
   This means that you don't have to know how input handling works in Swing or LibGDX, Zircon takes care of this for you.
 - [Layerable] lets you put multiple layers on your screen. With this you can have overlays, effects, and that kind of
-  stuff. Layering is explained in depth in its own chapter [here][layers].
+  stuff. Layering is explained in depth in its own chapter [here][how-layers-work].
 - [ShutdownHook] gives you the ability to listen to a shutdown event. (eg: when the user closes the screen) This is
   abstracted away from the actual underlying system (like Swing or LibGDX).
 - [Styleable] lets you get and set a [StyleSet] for this grid.
@@ -353,14 +353,14 @@ interface Screen : TileGrid, ComponentContainer {
 
 Pretty straightforward.
 
-> If you are interested in how components work then [this][components] Wiki page can help you.
+> If you are interested in how components work then [this][the-component-system] documentation page can help you.
 
 ## Conclusion
 
 This concludes the Zircon crash course. If you feel that you want a better understanding of some of these concepts
-take a look around the Wiki.
+take a look around the documentation.
 
-> If you want to read more about the design philosophy behind Zircon check [this][design-philosophy] page on Wiki!
+> If you want to read more about the design philosophy behind Zircon check [this][design-philosophy] page on documentation!
 > 
 > If you are a practical person and you understand things from examples check out the [code examples][examples].
 

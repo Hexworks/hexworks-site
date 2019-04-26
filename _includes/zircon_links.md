@@ -3,18 +3,19 @@
 [java-skeleton]:https://github.com/Hexworks/zircon.skeleton.java
 [kotlin-skeleton]:https://github.com/Hexworks/zircon.skeleton.kotlin
 
-[crash-course]:{{ site.baseurl }}{% link _zircon_docs/2018-07-18-a-zircon-crash-course.md %}
-[screen-primer]:{{ site.baseurl }}{% link _zircon_docs/2018-08-18-a-primer-on-screens.md %}
-[text-images]:{{ site.baseurl }}{% link _zircon_docs/2018-11-19-how-to-work-with-tile-graphics.md %}
-[resource-handling]:https://github.com/Hexworks/zircon/wiki/Resource-Handling
-[design-philosophy]:{{ site.baseurl }}{% link _zircon_docs/2018-11-20-the-design-philosophy-behind-zircon.md %}
-[color-themes]:https://github.com/Hexworks/zircon/wiki/Working-with-ColorThemes
-[layers]:{{ site.baseurl }}{% link _zircon_docs/2018-11-21-how-layers-work.md %}
-[inputs]:{{ site.baseurl }}{% link _zircon_docs/2018-11-21-input-handling.md %}
-[components]:https://github.com/Hexworks/zircon/wiki/The-component-system
-[drawing-shapes]:{{ site.baseurl }}{% link _zircon_docs/2018-11-21-shapes.md %}
-[animations]:https://github.com/Hexworks/zircon/wiki/Animation-support
-[behaviors]:https://github.com/Hexworks/zircon/wiki/Behaviors
+[release-process]:{{ site.baseurl }}/zircon/docs/2019-01-11-release-process-and-versioning-scheme
+[crash-course]:{{ site.baseurl }}/zircon/docs/2018-07-18-a-zircon-crash-course
+[screen-primer]:{{ site.baseurl }}/zircon/docs/2018-08-18-a-primer-on-screens
+[tile-graphics]:{{ site.baseurl }}/zircon/docs/2018-11-19-how-to-work-with-tile-graphics
+[resource-handling]:{{ site.baseurl }}/zircon/docs/2018-11-22-resource-handling
+[design-philosophy]:{{ site.baseurl }}/zircon/docs/2018-11-20-the-design-philosophy-behind-zircon
+[color-themes]:{{ site.baseurl }}/zircon/docs/2018-11-20-working-with-color-themes
+[how-layers-work]:{{ site.baseurl }}/zircon/docs/2018-11-21-how-layers-work
+[input-handling]:{{ site.baseurl }}/zircon/docs/2018-11-21-input-handling
+[the-component-system]:{{ site.baseurl }}/zircon/docs/2018-11-15-the-component-system
+[drawing-shapes]:{{ site.baseurl }}/zircon/docs/2018-11-21-shapes
+[logging]:{{ site.baseurl }}/zircon/docs/2019-03-27-logging
+[animations]:{{ site.baseurl }}/zircon/docs/2019-04-26-animation-support
 [zircon-docs]:{{ site.baseurl }}/zircon/docs/
 
 
