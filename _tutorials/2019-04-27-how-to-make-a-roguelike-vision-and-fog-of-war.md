@@ -48,6 +48,7 @@ Let's augment `EntityFactory` with these:
 ```kotlin
 // new imports
 import org.hexworks.cavesofzircon.attributes.flags.VisionBlocker
+import org.hexworks.cavesofzircon.attributes.Vision
 
 fun newWall() = newGameEntityOfType(Wall) {
     attributes(
