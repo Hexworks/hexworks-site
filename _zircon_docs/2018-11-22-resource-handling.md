@@ -53,7 +53,7 @@ CP437TilesetResource.loadCP437Tileset(16, 16, stream);
 
 ### Graphic tilesets
 
-[Graphic tilesets](https://github.com/Hexworks/zircon/blob/master/zircon.jvm/src/main/kotlin/org/codetome/zircon/api/resource/GraphicTilesetResource.kt) are a bit more complex and they come with their own format (currently a `.zip` file containing your tile files and some metadata). Check how the `NETHACK` tileset example looks like [here](https://github.com/Hexworks/zircon/tree/master/src/main/resources/graphic_tilesets).
+[Graphic tilesets](https://github.com/Hexworks/zircon/blob/master/zircon.jvm/src/main/kotlin/org/codetome/zircon/api/resource/GraphicTilesetResource.kt) are a bit more complex and they come with their own format (currently a `.zip` file containing your tile files and some metadata). Check how the `NETHACK` tileset example looks like [here](https://github.com/Hexworks/zircon/tree/master/zircon.core/common/src/main/resources/graphic_tilesets).
 
 You can use the built-in `NETHACK` tileset like this:
 
@@ -118,7 +118,7 @@ If there is still *more than one option* to choose from Zircon will use the `Met
 
 ## REXPaint files
 
-You can load REXPaint files (`.xp`) by using [RexPaintResource](https://github.com/Hexworks/zircon/blob/master/zircon.jvm/src/main/kotlin/org/codetome/zircon/api/resource/REXPaintResource.kt).
+You can load REXPaint files (`.xp`) by using [RexPaintResource](https://github.com/Hexworks/zircon/blob/master/zircon.core/jvm/src/main/kotlin/org/hexworks/zircon/api/resource/REXPaintResource.kt).
 
 Any REXPaint file is supported (even layered ones). You can load your file by calling `REXPaintResource.loadREXFile` like this:
 
@@ -134,7 +134,7 @@ List<Layer> layers = rex.toLayerList();
 
 Read more about `Layer`s [here](https://github.com/Hexworks/zircon/wiki/How-Layers-work).
 
-There is also a complete example which you can try out [here](https://github.com/Hexworks/zircon/blob/master/zircon.swing/src/test/java/org/codetome/zircon/examples/RexLoaderExample.java).
+There is also a complete example which you can try out [here](https://github.com/Hexworks/zircon/blob/master/zircon.jvm.examples/src/main/java/org/hexworks/zircon/examples/RexLoaderExample.java).
 
 ## Color Themes
 
