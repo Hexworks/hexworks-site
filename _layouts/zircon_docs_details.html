@@ -2,7 +2,7 @@
 layout: default
 regenerate: true
 ---
-<article class="content page"  itemscope itemtype="http://schema.org/BlogPosting">
+<article class="content page" itemscope itemtype="http://schema.org/BlogPosting">
     <header class="post-header">
         {% if page.tags %}
         {% include tag_list.html tags = page.tags %}
@@ -20,4 +20,5 @@ regenerate: true
         {{ content }}
     </div>
     {% include page_nav.html %}
+    {% include discord.html %}
 </article>

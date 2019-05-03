@@ -29,6 +29,7 @@
             {% include series_nav.html seriesdata = seriesdata %}
         {% endif %}
         {{ content }}
+        {% include discord.html %}
     </div>
     {% include page_nav.html %}
     {% if page.comments %}
