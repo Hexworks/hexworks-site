@@ -29,12 +29,12 @@ from Maven:
     <dependency>
         <groupId>org.hexworks.zircon</groupId>
         <artifactId>zircon.core-jvm</artifactId>
-        <version>2018.12.25-XMAS</version>
+        <version>2019.1.0-PREVIEW</version>
     </dependency>
     <dependency>
         <groupId>org.hexworks.zircon</groupId>
         <artifactId>zircon.jvm.swing</artifactId>
-        <version>2018.12.25-XMAS</version>
+        <version>2019.1.0-PREVIEW</version>
     </dependency>
 </dependencies>
 
@@ -50,13 +50,13 @@ allprojects {
 }
 
 dependencies {
-    implementation 'org.hexworks.zircon:zircon.core-jvm:2018.12.25-XMAS'
-    implementation 'org.hexworks.zircon:zircon.jvm.swing:2018.12.25-XMAS'
+    implementation 'org.hexworks.zircon:zircon.core-jvm:2019.1.0-PREVIEW'
+    implementation 'org.hexworks.zircon:zircon.jvm.swing:2019.1.0-PREVIEW'
 }
 ```
 
 Want to use a `PREVIEW` version instead?
- Check [this documentation page](https://github.com/Hexworks/zircon/wiki/Release-process-and-versioning-scheme#snapshot-releases).
+ Check [this documentation page](/zircon/docs/2019-01-11-release-process-and-versioning-scheme).
 
 ### Some rules of thumb
 
@@ -74,11 +74,11 @@ Before we start there are some guidelines which can help you if you are stuck:
   (`org.hexworks.zircon.api`), and look for classes which end with `*Resources`. There are a bunch of
   built-in tilesets for example which you can choose from but you can also load your own.
   The rule of thumb is that if you need something external there is probably a `*Resources` class
-  for it (like the [BuiltInCP437TilesetResource]).
+  for it (like the [CP437TilesetResources]).
 - You can use *anything* you can find in the [API][api] package, they are part of the public API, and safe to use. The
   [internal][internal] package however is considered private to *Zircon* so don't depend on anything in it because
   it can change any time.
-- Some topics are explained in depth on the [documentation](https://github.com/Hexworks/zircon/wiki).
+- Some topics are explained in depth on the [documentation](/zircon/docs).
 - If you want to see some example code look [here][examples].  
 - If all else fails read the javadoc. API classes are well documented.
 - If you have any problems which are not answered here feel free to ask us at the [Hexworks Discord server][discord]. 
@@ -135,7 +135,7 @@ Now let's see how we can specify how a [TileGrid] is created. We'll use the [App
 
 ```java
 import org.hexworks.zircon.api.AppConfigs;
-import org.hexworks.zircon.api.BuiltInCP437TilesetResource;
+import org.hexworks.zircon.api.CP437TilesetResources;
 import org.hexworks.zircon.api.Sizes;
 import org.hexworks.zircon.api.SwingApplications;
 import org.hexworks.zircon.api.application.Application;
@@ -147,22 +147,18 @@ public class CreatingAnApplication {
         Application application = SwingApplications.startApplication(
                 AppConfigs.newConfig()
                         .withSize(Sizes.create(30, 20))
-                        .withDefaultTileset(BuiltInCP437TilesetResource.rexPaint16x16())
+                        .withDefaultTileset(CP437TilesetResources.rexPaint16x16())
                         .withClipboardAvailable(true)
                         .build());
     }
 }
+
 ```
 
 Adding and formatting [Tile]s is very simple:
 
 ```java
-import org.hexworks.zircon.api.AppConfigs;
-import org.hexworks.zircon.api.BuiltInCP437TilesetResource;
-import org.hexworks.zircon.api.Positions;
-import org.hexworks.zircon.api.Sizes;
-import org.hexworks.zircon.api.SwingApplications;
-import org.hexworks.zircon.api.Tiles;
+import org.hexworks.zircon.api.*;
 import org.hexworks.zircon.api.color.ANSITileColor;
 import org.hexworks.zircon.api.grid.TileGrid;
 
@@ -173,7 +169,7 @@ public class CreatingAnApplication {
         TileGrid tileGrid = SwingApplications.startTileGrid(
                 AppConfigs.newConfig()
                         .withSize(Sizes.create(10, 10))
-                        .withDefaultTileset(BuiltInCP437TilesetResource.rexPaint16x16())
+                        .withDefaultTileset(CP437TilesetResources.rexPaint16x16())
                         .build());
 
         tileGrid.setTileAt(
@@ -201,7 +197,6 @@ public class CreatingAnApplication {
                         .build());
     }
 }
-
 ```      
 
 Running the above code will result in something like this:
@@ -224,7 +219,7 @@ and a background color (like in the example above).
 In addition to colors and characters you can also use [Modifier]s in your [Tile]s.
 
 > A lot of fancy stuff can be done with [Modifier]s, like this:
->  
+>  helper for this:
 > ![Modifiers](/assets/img/modifiers.gif)
 > 
 > If interested check out the code examples [here][examples].
@@ -258,7 +253,7 @@ public class CreatingAScreen {
         TileGrid tileGrid = SwingApplications.startTileGrid(
                 AppConfigs.newConfig()
                         .withSize(Sizes.create(20, 8))
-                        .withDefaultTileset(BuiltInCP437TilesetResource.wanderlust16x16())
+                        .withDefaultTileset(CP437TilesetResources.wanderlust16x16())
                         .build());
 
         final Screen screen = Screens.createScreenFor(tileGrid);
@@ -279,6 +274,7 @@ public class CreatingAScreen {
         screen.display();
     }
 }
+
 ```
 
 and we've got a nice ocean:
@@ -292,7 +288,7 @@ What happens here is that we:
 - Create a [TileGraphics] with the colors added and fill it with `~`s
 - Draw the graphic onto the [Screen]
 
-For more explanation about these jump to the [Zircon Crash Course](https://github.com/Hexworks/zircon/wiki/A-Zircon-Crash-Course).
+For more explanation about these jump to the [Zircon Crash Course][crash-course].
 
 > You can do so much more with [Screen]s. If interested then check out [A primer on Screens][screen-primer]
 on the documentation! 
@@ -323,13 +319,24 @@ These components are rather simple and you can expect them to work in a way you 
 Let's look at an example (notes about how it works are in the comments):
 
 ```java
-import org.hexworks.zircon.api.*;
+import org.hexworks.zircon.api.AppConfigs;
+import org.hexworks.zircon.api.CP437TilesetResources;
+import org.hexworks.zircon.api.ColorThemes;
+import org.hexworks.zircon.api.Components;
+import org.hexworks.zircon.api.LibgdxApplications;
+import org.hexworks.zircon.api.Positions;
+import org.hexworks.zircon.api.Screens;
+import org.hexworks.zircon.api.Sizes;
+import org.hexworks.zircon.api.SwingApplications;
+import org.hexworks.zircon.api.UIEventResponses;
 import org.hexworks.zircon.api.component.Button;
 import org.hexworks.zircon.api.component.CheckBox;
 import org.hexworks.zircon.api.component.Header;
 import org.hexworks.zircon.api.component.Panel;
 import org.hexworks.zircon.api.grid.TileGrid;
 import org.hexworks.zircon.api.screen.Screen;
+
+import static org.hexworks.zircon.api.uievent.ComponentEventType.ACTIVATED;
 
 public class UsingComponents {
 
@@ -338,7 +345,7 @@ public class UsingComponents {
         final TileGrid tileGrid = SwingApplications.startTileGrid(
                 AppConfigs.newConfig()
                         .withSize(Sizes.create(34, 18))
-                        .withDefaultTileset(BuiltInCP437TilesetResource.aduDhabi16x16())
+                        .withDefaultTileset(CP437TilesetResources.aduDhabi16x16())
                         .build());
         final Screen screen = Screens.createScreenFor(tileGrid);
 
@@ -389,9 +396,15 @@ public class UsingComponents {
         screen.applyColorTheme(ColorThemes.monokaiBlue());
 
         // this is how you can define interactions with a component
-        left.onMouseReleased((mouseAction -> screen.applyColorTheme(ColorThemes.monokaiGreen())));
+        left.onComponentEvent(ACTIVATED, (event) -> {
+            screen.applyColorTheme(ColorThemes.monokaiGreen());
+            return UIEventResponses.processed();
+        });
 
-        right.onMouseReleased((mouseAction -> screen.applyColorTheme(ColorThemes.monokaiViolet())));
+        right.onComponentEvent(ACTIVATED, (event) -> {
+            screen.applyColorTheme(ColorThemes.monokaiViolet());
+            return UIEventResponses.processed();
+        });
 
         // in order to see the changes you need to display your screen.
         screen.display();
@@ -430,30 +443,30 @@ and you can also have transparency in them which can be used to create fancy eff
  `TileGrid` or `Screen` you can change its position by calling `moveTo` with a new `Position`.
 
 ### Input handling
-Both the [TileGrid] and the [Screen] interfaces implement [InputEmitter] which means that they re-emit all inputs
+Both the [TileGrid] and the [Screen] interfaces implement [UIEventSource] which means that they re-emit all inputs
 from your users (key strokes and mouse actions) and you can listen on them. There is a [doc page][input-handling]
 with more info.
 
 ### Shape and box drawing
 You can draw [Shape]s like rectangles and triangles by using one of the [ShapeFactory] implementations.
-Check the corresponding [documentation page][shapes] for more info.
+Check the corresponding [documentation page][drawing-shapes] for more info.
 
 ### Fonts and tilesets
 Zircon comes with a bunch of built-in fonts tilesets. These come in 2 flavors:
 
-- CP437 tilesets *(More on using them [here](https://github.com/Hexworks/zircon/wiki/Resource-Handling#cp437-tilesets))*
+- CP437 tilesets *(More on using them [here][resource-handling#cp437-tilesets])*
 - True Type Fonts
-- and Graphic tilesets *(Usage info [here](https://github.com/Hexworks/zircon/wiki/Resource-Handling#graphic-tilesets))*
+- and Graphic tilesets *(Usage info [here][resource-handling#graphical-tilesets])*
 
 Read more about them in the [resource handling documentation page][resource-handling] if you want to know more
 or if you want to use your own tilesets and fonts.
 
 Zircon also comes with **its own tileset format (`ztf`: Zircon Tileset Format)** which is **very easy to use**. 
-It is detailed [here](https://github.com/Hexworks/zircon/wiki/Resource-Handling#graphic-tilesets).
+It is detailed [here][resource-handling#graphical-tilesets].
 
 ### REXPaint file loading
 REXPaint files (`.xp`) can be loaded into Zircon `Layer`s. Read about this feature
- [here](https://github.com/Hexworks/zircon/wiki/Resource-Handling#rexpaint-files).
+ [here][resource-handling#rexpaint-files].
 
 ### Color themes
 Zircon comes with a bunch of built-in color themes which you can apply to your components.

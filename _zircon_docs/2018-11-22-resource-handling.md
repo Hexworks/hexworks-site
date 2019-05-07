@@ -51,7 +51,7 @@ Loading your own `TilesetResource` is also simple, you just have to provide a `w
 CP437TilesetResource.loadCP437Tileset(16, 16, stream);
 ```
 
-### Graphic tilesets
+### Graphical tilesets
 
 [Graphic tilesets](https://github.com/Hexworks/zircon/blob/master/zircon.jvm/src/main/kotlin/org/codetome/zircon/api/resource/GraphicTilesetResource.kt) are a bit more complex and they come with their own format (currently a `.zip` file containing your tile files and some metadata). Check how the `NETHACK` tileset example looks like [here](https://github.com/Hexworks/zircon/tree/master/zircon.core/common/src/main/resources/graphic_tilesets).
 
