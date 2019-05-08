@@ -77,7 +77,7 @@ run on the JVM, in the browser, and on native platforms as a binary.
 
 To top it all off, you can use *any* Java library, since Kotlin gives you seamless interoperability.
 
-> I've written about this topic on my blog [here](http://the-cogitator.com/2017/05/19/kotlin-is-the-new-java.html).
+> I've written about this topic on my blog [here](http://the-cogitator.com/posts/blog/2017/05/19/kotlin-is-the-new-java.html).
   Take a look if you are interested.
 
 ## Game Libraries
