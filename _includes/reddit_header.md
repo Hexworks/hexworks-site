@@ -9,19 +9,28 @@
 
 **Zircon & Caves of Zircon Tutorial**
 
-This week was about [Stationary Monsters](https://hexworks.org/posts/tutorials/2019/03/21/how-to-make-a-roguelike-stationary-monsters.html)
-in *Caves of Zircon*. The article is ready and you can read it on [the site](https://hexworks.org/posts/tutorials/2019/03/21/how-to-make-a-roguelike-stationary-monsters.html).
+This week was about [Wandering Monsters](https://hexworks.org/posts/tutorials/2019/05/07/how-to-make-a-roguelike-wandering-monsters.html)
+in *Caves of Zircon*. The article is ready and you can read it on [the site](https://hexworks.org/posts/tutorials/2019/05/07/how-to-make-a-roguelike-wandering-monsters.html).
 
-There was also a fix in [article #4](https://hexworks.org/posts/tutorials/2019/02/13/how-to-make-a-roguelike-the-player.html) where
-we had a block of code which was not explained. Thanks to @RantingBob for pointing that out!
+We also did some minor upgrades on the site which improve readability on mobile devices.
 
-**Amethyst**
+This is also a great moment for us because we now have **more than 100 people on our [Discord Server](https://discordapp.com/invite/PE3qFmF)!**
 
-We also had some great talks about how [Amethyst](https://github.com/Hexworks/amethyst) works and should work so we've begun to
-formulate some new additions to the library which are about interactions between entities.
+**Zircon**
 
-There is also a new feature, now you can supply a parameter to the constructor of all `System`s for *mandatory `Attribute`s*.
-This will help greatly to ensure the correctness of the code for games using *Amethyst*.
+Some of the old examples got a retrofit, so now all examples work on the site properly.
 
-Another addition which is in the works is a `Channel` through which the `Engine` can stream all *errors* so the user of the library
-can respond to erroneous situations which were not caught at compile time.
+We finally started working on the `HBox` and the `VBox` *component* which are just *containers* which automatically
+aligns their items left to right (horizontally) or top to bottom (vertically). It looks like [this](https://cdn.discordapp.com/attachments/363754040103796737/576844557619167273/hbox.gif).
+It also has automatic reordering if a *component* is removed from the middle. We took the idea from TornadoFX where
+this two components are enough to cover 95% of the layout use cases!
+
+Apart from this we also added some new ways to load *graphical tilesets* so now it is possible to bundle your game
+into a jar and put all your *graphical* tilesets in it and use it with Zircon.
+
+We upgraded the data binding in *Cobalt* a bit which means that *Zircon* also received the upgrades so
+now `bind` and `unbind` works properly as you can see in [this](https://cdn.discordapp.com/attachments/363754040103796737/575041169734762498/bindings.gif)
+example and now the whole thing is also much more easier to use. The databinding code necessary for
+[this](https://cdn.discordapp.com/attachments/363754040103796737/575044598187950151/bindings.gif) example
+to work is just this: `checkBox.enabledProperty.updateFrom(selectedProperty.not())` or if you want to use
+operators this: `checkBox.enabledProperty.updateFrom(!selectedProperty)`.
