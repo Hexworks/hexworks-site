@@ -6,8 +6,6 @@ author: addamsson
 short_title: "How To Make a Roguelike: #12 Items and Inventory"
 series: coz
 comments: true
-published: false
-future: false
 ---
 
 > We have almost everything for our game. We can explore the cave, fight with monsters, traverse levels, but
@@ -15,9 +13,12 @@ there is an important piece which is missing: **items**. In this session we'll a
 *inventory* into our game.
 
 > For this article we need to update our Maven dependencies for the libraries we use:
+> Overwrite these in gradle.properties
 >
->
->
+> cobalt_version=2019.1.0-PREVIEW
+> amethyst_version=2019.1.0-PREVIEW
+> zircon_version=2019.1.0-PREVIEW
+
 
 ## Between a Rock and a Hard Place
 
@@ -65,6 +66,8 @@ val GameEntity<Item>.iconTile: GraphicalTile
 And we can also add a `typealias` for `GameEntity<Item>` to our `TypeAliases.kt` file:
 
 ```kotlin
+import org.hexworks.cavesofzircon.attributes.types.Item
+
 typealias GameItem = GameEntity<Item>
 ```
 
@@ -211,21 +214,24 @@ package org.hexworks.cavesofzircon.attributes.types
 
 import org.hexworks.amethyst.api.entity.EntityType
 import org.hexworks.cavesofzircon.attributes.Inventory
-import org.hexworks.cavesofzircon.extensions.GameEntity
 import org.hexworks.cavesofzircon.extensions.GameItem
+import org.hexworks.cavesofzircon.extensions.GameItemHolder
 
 interface ItemHolder : EntityType
 
-fun GameEntity<ItemHolder>.addItem(item: GameItem) = inventory.addItem(item)
+fun GameItemHolder.addItem(item: GameItem) = inventory.addItem(item)
 
-val GameEntity<ItemHolder>.inventory: Inventory
+fun GameItemHolder.removeItem(item: GameItem) = inventory.removeItem(item)
+
+val GameItemHolder.inventory: Inventory
     get() = findAttribute(Inventory::class).get()
-
 ```
 
 add a convenient `typealias` for `GameEntity<ItemHolder>` to `TypeAliases.kt`:
 
 ```kotlin
+import org.hexworks.cavesofzircon.attributes.types.ItemHolder
+
 typealias GameItemHolder = GameEntity<ItemHolder>
 ```
 
@@ -275,7 +281,6 @@ import org.hexworks.zircon.api.data.impl.Position3D
 data class PickItemUp(override val context: GameContext,
                       override val source: GameItemHolder,                  // 1
                       val position: Position3D) : GameCommand<ItemHolder>
-
 ```
 
 Here:
@@ -288,6 +293,11 @@ Now that we have a `Command` for picking items up we just need to add the approp
 we need to add a helper function to our `EntityExtensions.kt` which we can use to filter the entities for a given type:
 
 ```kotlin
+// new imports
+import org.hexworks.amethyst.api.entity.Entity
+import org.hexworks.amethyst.api.entity.EntityType
+import kotlin.reflect.full.isSuperclassOf
+
 inline fun <reified T : EntityType> Iterable<AnyGameEntity>.filterType(): List<Entity<T, GameContext>> {
     return filter { T::class.isSuperclassOf(it.type::class) }.toList() as List<Entity<T, GameContext>>
 }
@@ -354,31 +364,31 @@ Now that we have the `Command` and the `Behavior` ready we just need to add the 
 // new import
 import org.hexworks.cavesofzircon.commands.PickItemUp
 
-    override fun update(entity: GameEntity<out EntityType>, context: GameContext): Boolean {
-        val (_, _, uiEvent, player) = context
-        val currentPos = player.position
-        if (uiEvent is KeyboardEvent) {
-            when (uiEvent.code) {
-                KeyCode.KEY_W -> player.moveTo(currentPos.withRelativeY(-1), context)
-                KeyCode.KEY_A -> player.moveTo(currentPos.withRelativeX(-1), context)
-                KeyCode.KEY_S -> player.moveTo(currentPos.withRelativeY(1), context)
-                KeyCode.KEY_D -> player.moveTo(currentPos.withRelativeX(1), context)
-                KeyCode.KEY_R -> player.moveUp(context)
-                KeyCode.KEY_F -> player.moveDown(context)
-                KeyCode.KEY_P -> player.pickItemUp(currentPos, context)     // 1
-                else -> {
-                    logger.debug("UI Event ($uiEvent) does not have a corresponding command, it is ignored.")
-                }
+override fun update(entity: GameEntity<out EntityType>, context: GameContext): Boolean {
+    val (_, _, uiEvent, player) = context
+    val currentPos = player.position
+    if (uiEvent is KeyboardEvent) {
+        when (uiEvent.code) {
+            KeyCode.KEY_W -> player.moveTo(currentPos.withRelativeY(-1), context)
+            KeyCode.KEY_A -> player.moveTo(currentPos.withRelativeX(-1), context)
+            KeyCode.KEY_S -> player.moveTo(currentPos.withRelativeY(1), context)
+            KeyCode.KEY_D -> player.moveTo(currentPos.withRelativeX(1), context)
+            KeyCode.KEY_R -> player.moveUp(context)
+            KeyCode.KEY_F -> player.moveDown(context)
+            KeyCode.KEY_P -> player.pickItemUp(currentPos, context)     // 1
+            else -> {
+                logger.debug("UI Event ($uiEvent) does not have a corresponding command, it is ignored.")
             }
         }
-        return true
     }
+    return true
+}
 
-    private fun GameEntity<Player>.pickItemUp(position: Position3D, context: GameContext) {     // 2
-        executeCommand(PickItemUp(context, this, position))
-    }
-    
-    // ...
+private fun GameEntity<Player>.pickItemUp(position: Position3D, context: GameContext) {     // 2
+    executeCommand(PickItemUp(context, this, position))
+}
+
+// ...
 ```
 
 Here we:
@@ -393,28 +403,359 @@ Now if we add the `ItemPicker` *facet* to our player entity:
 // new import
 import org.hexworks.cavesofzircon.systems.ItemPicker
 
-    fun newPlayer() = newGameEntityOfType(Player) {
+fun newPlayer() = newGameEntityOfType(Player) {
 
-        // ...
+    // ...
 
-        facets(/* ... */ ItemPicker)
-    }
+    facets(/* ... */ ItemPicker)
+}
 ```
 
 we're able to pick up items in our game:
 
-![Pick Items Up]()
+![Looting Zircons](/assets/img/looting_zircons.gif)
 
 **Wow**, that's nice! But how do we check the *inventory*?
 
 ## Displaying the Inventory
 
+Creating a nice UI is not an easy task especially if you have no experience in designing one. Luckily Zircon comes
+with a bunch of `Component`s we can use to simplify it. Let's think about how we would display an inventory.
+A tabular display will probably suffice with a row for each item. In a row we would display the *icon*, the *name*
+of the item and a `Button` we can press to drop the *item*. We can also add a *title* and a *header* as a bonus!
+Let's see how we can go about implementing it.
 
+First, we're gonna need a *row* `Fragment` for the items:
+
+> A `Fragment` is just a wrapper for a `Component` which lets us re-use our UI elements. It differs from a simple
+`Container` like a `Panel` in a way that a `Fragment` is its own class we can instantiate, and it can also have
+its own internal state. Since the `Fragment` is a wrapper it needs some component to wrap. This is called its
+`root` which can be *any* component as you'll see later.
+
+```kotlin
+package org.hexworks.cavesofzircon.view.fragment
+
+import org.hexworks.cavesofzircon.attributes.types.iconTile
+import org.hexworks.cavesofzircon.extensions.GameItem
+import org.hexworks.zircon.api.Components
+import org.hexworks.zircon.api.component.Fragment
+import org.hexworks.zircon.api.graphics.Symbols
+
+class InventoryRowFragment(width: Int, item: GameItem) : Fragment {     // 1
+
+    val dropButton = Components.button()                        // 2
+            .wrapSides(false)
+            .withText("${Symbols.ARROW_DOWN}")                  // 3
+            .build()
+
+    override val root = Components.hbox()                       // 4
+            .withSpacing(1)                                     // 5
+            .withSize(width, 1)
+            .build().apply {
+                addComponent(Components.icon()                  // 6
+                        .withIcon(item.iconTile))
+                addComponent(Components.label()
+                        .withSize(InventoryFragment.NAME_COLUMN_WIDTH, 1)   // 7
+                        .withText(item.name))
+                addComponent(dropButton)
+            }
+}
+``` 
+
+Where we
+
+1. Implement `Fragment` and take the `width` and the `item` as a parameter
+2. Add a `Button` for dropping the *item*
+3. Make it have a nice *down arrow* as an icon
+4. And we make the `root` a `HBox`
+5. Which will add a spacing of one tile between its child components
+6. And add the *icon* 
+7. And the *name* to it.
+
+> A `HBox` is a *container* component which aligns the components you add to it
+from left to right automatically and it also handles item removal. It looks like 
+[this](https://cdn.discordapp.com/attachments/363754040103796737/576844557619167273/hbox.gif)
+and it is very useful for implementing complex UI layouts.
+
+Next up is the `InventoryFragment` which will display all rows, the header and the title. There are a lot of
+schools for designing UI workflows, but we're not going to pick a specific method. Instead we're going to be
+pragmatic: our UI elements will only know about the things which are *necessary* for them and the locality
+of our operations will follow the same pattern. This means that the *inventory* will know that when we *drop*
+an item it needs to remove a row, but anything else is not its concern, so we're going to have a callback
+which we'll use from our `System` which handles dropping:
+
+```kotlin
+package org.hexworks.cavesofzircon.view.fragment
+
+import org.hexworks.cavesofzircon.attributes.Inventory
+import org.hexworks.cavesofzircon.extensions.GameItem
+import org.hexworks.zircon.api.Components
+import org.hexworks.zircon.api.component.Fragment
+import org.hexworks.zircon.api.extensions.onComponentEvent
+import org.hexworks.zircon.api.uievent.ComponentEventType.ACTIVATED
+import org.hexworks.zircon.api.uievent.Processed
+
+class InventoryFragment(inventory: Inventory,
+                        width: Int,
+                        onDrop: (GameItem) -> Unit) : Fragment {
+
+    override val root = Components.vbox()           // 1
+            .withSize(width, inventory.size + 1)
+            .build().apply {
+                val list = this
+                addComponent(Components.hbox()      // 2
+                        .withSpacing(1)
+                        .withSize(width, 1)
+                        .build().apply {
+                            addComponent(Components.label().withText("").withSize(1, 1))
+                            addComponent(Components.header().withText("Name").withSize(NAME_COLUMN_WIDTH, 1))
+                            addComponent(Components.header().withText("Actions").withSize(ACTIONS_COLUMN_WIDTH, 1))
+                        })
+                inventory.items.forEach { item ->                           // 3
+                    addFragment(InventoryRowFragment(width, item).apply {
+                        dropButton.onComponentEvent(ACTIVATED) {            // 4
+                            list.removeComponent(this.root)                 // 5
+                            onDrop(item)                                    // 6
+                            Processed
+                        }
+                    })
+                }
+            }
+
+    companion object {
+        const val NAME_COLUMN_WIDTH = 15
+        const val ACTIONS_COLUMN_WIDTH = 10
+    }
+}
+```
+
+Here we:
+
+1. Create a `VBox` for holding the rows which is very similar to the `HBox` but it aligns its items from top to
+   bottom instead
+2. Add a header
+3. And for each inventory item we add a row fragment
+4. And an event listener which is activated whenever the `dropButton` gets activated
+5. In that case we remove the whole row
+6. And call the `onDrop` callback
+
+Now we just need to think about how to open the inventory itself. For this we're going to add 2 new systems:
+`InventoryInspector` and `ItemDropper`. Let's start with `ItemDropper` as it is very simple. For it we just need
+a `Command`, `DropItem`:
+
+```kotlin
+package org.hexworks.cavesofzircon.commands
+
+import org.hexworks.amethyst.api.entity.EntityType
+import org.hexworks.cavesofzircon.extensions.GameCommand
+import org.hexworks.cavesofzircon.extensions.GameItem
+import org.hexworks.cavesofzircon.extensions.GameItemHolder
+import org.hexworks.cavesofzircon.world.GameContext
+import org.hexworks.zircon.api.data.impl.Position3D
+
+data class DropItem(override val context: GameContext,
+                    override val source: GameItemHolder,
+                    val item: GameItem,
+                    val position: Position3D) : GameCommand<EntityType>
+```
+
+and the `Facet` `ItemDropper`:
+
+```kotlin
+package org.hexworks.cavesofzircon.systems
+
+import org.hexworks.amethyst.api.Consumed
+import org.hexworks.amethyst.api.base.BaseFacet
+import org.hexworks.amethyst.api.entity.EntityType
+import org.hexworks.cavesofzircon.attributes.types.inventory
+import org.hexworks.cavesofzircon.attributes.types.removeItem
+import org.hexworks.cavesofzircon.commands.DropItem
+import org.hexworks.cavesofzircon.extensions.GameCommand
+import org.hexworks.cavesofzircon.extensions.isPlayer
+import org.hexworks.cavesofzircon.functions.logGameEvent
+import org.hexworks.cavesofzircon.world.GameContext
+
+object ItemDropper : BaseFacet<GameContext>() {
+
+    override fun executeCommand(command: GameCommand<out EntityType>) = command
+            .responseWhenCommandIs(DropItem::class) { (context, itemHolder, item, position) ->  // 1
+                if (itemHolder.removeItem(item)) {              // 2
+                    context.world.addEntity(item, position)     // 3
+                    val subject = if (itemHolder.isPlayer) "You" else "The $itemHolder"
+                    val verb = if (itemHolder.isPlayer) "drop" else "drops"
+                    logGameEvent("$subject $verb the $item.")
+                }
+                Consumed
+            }
+}
+```
+
+In this `System` we:
+
+1. Consume the `DropItem` command
+2. Try to remove the item from the `itemHolder`
+3. And if it was successful we add it back to the `World`
+
+Inventory inspection is similar but it is a bit more involved, because we're going to use a *dialog* for it!
+Let's start with a `Command`, `InspectInventory`:
+
+```kotlin
+package org.hexworks.cavesofzircon.commands
+
+import org.hexworks.amethyst.api.entity.EntityType
+import org.hexworks.cavesofzircon.extensions.GameCommand
+import org.hexworks.cavesofzircon.extensions.GameItemHolder
+import org.hexworks.cavesofzircon.world.GameContext
+import org.hexworks.zircon.api.data.impl.Position3D
+
+data class InspectInventory(override val context: GameContext,
+                            override val source: GameItemHolder,
+                            val position: Position3D) : GameCommand<EntityType>
+```
+
+and let's see how `InventoryInspector` looks like:
+
+```kotlin
+package org.hexworks.cavesofzircon.systems
+
+import org.hexworks.amethyst.api.Consumed
+import org.hexworks.amethyst.api.base.BaseFacet
+import org.hexworks.amethyst.api.entity.EntityType
+import org.hexworks.cavesofzircon.GameConfig
+import org.hexworks.cavesofzircon.attributes.types.inventory
+import org.hexworks.cavesofzircon.commands.DropItem
+import org.hexworks.cavesofzircon.commands.InspectInventory
+import org.hexworks.cavesofzircon.extensions.GameCommand
+import org.hexworks.cavesofzircon.view.fragment.InventoryFragment
+import org.hexworks.cavesofzircon.world.GameContext
+import org.hexworks.zircon.api.Components
+import org.hexworks.zircon.api.Sizes
+import org.hexworks.zircon.api.builder.component.ModalBuilder
+import org.hexworks.zircon.api.component.ComponentAlignment.BOTTOM_LEFT
+import org.hexworks.zircon.api.extensions.onComponentEvent
+import org.hexworks.zircon.api.uievent.ComponentEventType.ACTIVATED
+import org.hexworks.zircon.api.uievent.Processed
+import org.hexworks.zircon.internal.component.modal.EmptyModalResult
+
+object InventoryInspector : BaseFacet<GameContext>() {
+
+    val DIALOG_SIZE = Sizes.create(33, 14)
+
+    override fun executeCommand(command: GameCommand<out EntityType>) = command
+            .responseWhenCommandIs(InspectInventory::class) { (context, itemHolder, position) ->
+
+                val screen = context.screen
+
+                val panel = Components.panel()      // 1
+                    .withSize(DIALOG_SIZE)
+                    .wrapWithBox(true)
+                    .wrapWithShadow(true)
+                    .withTitle("Inventory")
+                    .build()
+
+                val fragment = InventoryFragment(itemHolder.inventory, DIALOG_SIZE.width - 3) { item -> // 2
+                    itemHolder.executeCommand(DropItem(context, itemHolder, item, position))            // 3
+                }
+
+                panel.addFragment(fragment)
+
+                val modal = ModalBuilder.newBuilder<EmptyModalResult>()     // 4
+                        .withParentSize(screen.size)
+                        .withComponent(panel)
+                        .build()
+
+                panel.addComponent(Components.button()                      // 5
+                        .withText("Close")
+                        .withAlignmentWithin(panel, BOTTOM_LEFT)
+                        .build().apply {
+                            onComponentEvent(ACTIVATED) {
+                                modal.close(EmptyModalResult)
+                                Processed
+                            }
+                        })
+
+                modal.applyColorTheme(GameConfig.THEME)
+                screen.openModal(modal)
+                Consumed
+            }
+
+}
+```
+
+This `Facet` works in a way that:
+
+1. When we want to open the inventory it creates a `Panel`
+2. Which holds our inventory fragment
+3. And responds to the `onDrop` callback by sending the `DropItem` command to our entity
+4. And uses a `Modal` for displaying our panel
+5. And has a close button which will close the modal when clicked.
+
+> A `Modal` is an object which will block all inputs to other components until it is closed. If you have
+ever seen an `alert` dialog in a browser this concept will be familiar. `Modal`s can also return a value,
+but here we use the built-in `EmptyModalResult` because we don't want to use this feature here.
+
+Now we just have to add all this to our *player* entity:
+
+```kotlin
+// new imports
+import org.hexworks.cavesofzircon.systems.InventoryInspector
+import org.hexworks.cavesofzircon.systems.ItemDropper
+
+fun newPlayer() = newGameEntityOfType(Player) {
+
+    // ...
+    
+    facets(/* ... */ InventoryInspector, ItemDropper)
+}
+```
+
+and augment our `InputReceiver` with the new shortcut for opening the inventory: the `i` key:
+
+```kotlin
+// new import
+import org.hexworks.cavesofzircon.commands.InspectInventory
+
+// ...
+
+override fun update(entity: GameEntity<out EntityType>, context: GameContext): Boolean {
+    val (_, _, uiEvent, player) = context
+    val currentPos = player.position
+    if (uiEvent is KeyboardEvent) {
+        when (uiEvent.code) {
+            KeyCode.KEY_W -> player.moveTo(currentPos.withRelativeY(-1), context)
+            KeyCode.KEY_A -> player.moveTo(currentPos.withRelativeX(-1), context)
+            KeyCode.KEY_S -> player.moveTo(currentPos.withRelativeY(1), context)
+            KeyCode.KEY_D -> player.moveTo(currentPos.withRelativeX(1), context)
+            KeyCode.KEY_R -> player.moveUp(context)
+            KeyCode.KEY_F -> player.moveDown(context)
+            KeyCode.KEY_P -> player.pickItemUp(currentPos, context)
+            KeyCode.KEY_I -> player.inspectInventory(currentPos, context)
+            else -> {
+                logger.debug("UI Event ($uiEvent) does not have a corresponding command, it is ignored.")
+            }
+        }
+    }
+    return true
+}
+
+private fun GameEntity<Player>.inspectInventory(position: Position3D, context: GameContext) {
+    executeCommand(InspectInventory(context, this, position))
+}
+
+// ...
+```
+
+Now let's see what we created:
+
+![Dropping Items](/assets/img/dropping_items.gif)
+
+Now, that's nice. We've just made our roguelike great again!
 
 ## Conclusion
 
-
-Next we're going to add more items, and some new mechanics to our game: *food* and *hunger*!
+In this session we added a whole *inventory* system into our game complete with *items* and a nice
+inventory dialog. This is a nice start, so next we're going to add more items, and some new mechanics
+to our game: *food* and *hunger*!
 
 Until then go forth and *kode on*!
  
