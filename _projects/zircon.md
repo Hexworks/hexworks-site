@@ -454,19 +454,19 @@ Check the corresponding [documentation page][drawing-shapes] for more info.
 ### Fonts and tilesets
 Zircon comes with a bunch of built-in fonts tilesets. These come in 2 flavors:
 
-- CP437 tilesets *(More on using them [here]({{ site.baseurl }}{% link _zircon_docs/2018-11-22-resource-handling.md %}#cp437-tilesets))*
+- CP437 tilesets *(More on using them [here][resource-handling#cp437-tilesets])*
 - True Type Fonts
-- and Graphic tilesets *(Usage info [here]({{ site.baseurl }}{% link _zircon_docs/2018-11-22-resource-handling.md %}#graphical-tilesets))*
+- and Graphic tilesets *(Usage info [here][resource-handling#graphical-tilesets])*
 
 Read more about them in the [resource handling documentation page][resource-handling] if you want to know more
 or if you want to use your own tilesets and fonts.
 
 Zircon also comes with **its own tileset format (`ztf`: Zircon Tileset Format)** which is **very easy to use**.
-It is detailed [here]({{ site.baseurl }}{% link _zircon_docs/2018-11-22-resource-handling.md %}#graphical-tilesets).
+It is detailed [here][resource-handling#graphical-tilesets].
 
 ### REXPaint file loading
 REXPaint files (`.xp`) can be loaded into Zircon `Layer`s. Read about this feature
- [here]({{ site.baseurl }}{% link _zircon_docs/2018-11-22-resource-handling.md %}#rexpaint-files).
+ [here][resource-handling#rexpaint-files].
 
 ### Color themes
 Zircon comes with a bunch of built-in color themes which you can apply to your components.
