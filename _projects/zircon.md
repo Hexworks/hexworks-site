@@ -65,12 +65,12 @@ Before we start there are some guidelines which can help you if you are stuck:
 - If you want to build something (a `TileGraphics`, a `Component` or anything which is part of the public API) it
   is almost sure that there is a `Builder` or a `Factory` for it. The convention is that if you want to create a
   `Tile` for example, then you can use the `Tiles` class to do so. (so it is the plural form of the
-  thing which you want to build). Your IDE will help you with this. These classes reside in the 
+  thing which you want to build). Your IDE will help you with this. These classes reside in the
   `org.hexworks.zircon.api` package. There are some classes which are grouped together into a single utility class
   however. With `Components` you can obtain `Builder`s for all `Component`s like `Components.panel()` or
-  `Components.checkBox()`. Likewise you can use `DrawSurfaces` to obtain builders for `TileGraphcs` and
+  `Components.checkBox()`. Likewise you can use `DrawSurfaces` to obtain builders for `TileGraphics` and
   `TileImage`.
-- If you want to work with external files like tilesets or REXPaint files check the same package 
+- If you want to work with external files like tilesets or REXPaint files check the same package
   (`org.hexworks.zircon.api`), and look for classes which end with `*Resources`. There are a bunch of
   built-in tilesets for example which you can choose from but you can also load your own.
   The rule of thumb is that if you need something external there is probably a `*Resources` class
@@ -79,10 +79,10 @@ Before we start there are some guidelines which can help you if you are stuck:
   [internal][internal] package however is considered private to *Zircon* so don't depend on anything in it because
   it can change any time.
 - Some topics are explained in depth on the [documentation](/zircon/docs).
-- If you want to see some example code look [here][examples].  
+- If you want to see some example code look [here][examples].
 - If all else fails read the javadoc. API classes are well documented.
-- If you have any problems which are not answered here feel free to ask us at the [Hexworks Discord server][discord]. 
-  
+- If you have any problems which are not answered here feel free to ask us at the [Hexworks Discord server][discord].
+
 
 ### Creating an Application
 
@@ -197,7 +197,7 @@ public class CreatingAnApplication {
                         .build());
     }
 }
-```      
+```
 
 Running the above code will result in something like this:
 
@@ -221,10 +221,10 @@ In addition to colors and characters you can also use [Modifier]s in your [Tile]
 > A lot of fancy stuff can be done with [Modifier]s, like this:
 >  helper for this:
 > ![Modifiers](/assets/img/modifiers.gif)
-> 
+>
 > If interested check out the code examples [here][examples].
 
- 
+
 > Tileset (and by extension resource) handling in Zircon is very simple and if you are interested in how to
 load your custom fonts and other resources take a look at the [Resource handling wiki page][resource-handling].
 
@@ -291,30 +291,30 @@ What happens here is that we:
 For more explanation about these jump to the [Zircon Crash Course][crash-course].
 
 > You can do so much more with [Screen]s. If interested then check out [A primer on Screens][screen-primer]
-on the documentation! 
+on the documentation!
 
 ### Components
 
 Zircon supports a bunch of [Component]s out of the box:
 
-- `Button`: A simple clickable component with corresponding event listeners
-- `CheckBox`: Like a `Button` but with checked / unchecked state
-- `Header`: Like a label but this one has emphasis (useful when using [ColorTheme]s)
-- `Label`: Simple component with text
+- `Button`: A simple clickable component with corresponding event listeners.
+- `CheckBox`: Like a `Button` but with checked / unchecked state.
+- `Header`: Like a label but this one has emphasis (useful when using [ColorTheme]s).
+- `Label`: Simple component with text.
 - `LogArea`: Component with a list of items. New items can be added, and they will be srolled.
-- `Panel`: A [Container] which can hold multiple [Components]
-- `RadioButtonGroup` and `RadioButton`: Like a `CheckBox` but only one can be selected at a time
-- `TextArea`: Similar to a text area in HTML this [Component] can be written into
-- `TextBox`: A `TextBox` is more like a hypertext document where you can add elements with semantic
-  meaning. It supports adding `Header`s, `Paragraph`s, `ListItem`s and even `Button`s
+- `Panel`: A [Container] which can hold multiple [Components].
+- `RadioButtonGroup` and `RadioButton`: Like a `CheckBox` but only one can be selected at a time.
+- `TextArea`: Similar to a text area in HTML this [Component] can be written into.
+- `TextBox`: A `TextBox` is more like a hypertext document where you can add elements with semantic.
+  meaning. It supports adding `Header`s, `Paragraph`s, `ListItem`s and even `Button`s.
 
 These components are rather simple and you can expect them to work in a way you might be familiar with:
 
-- You can click on them (press and release are different events)
-- You can attach event listeners on them
+- You can click on them (press and release are different events).
+- You can attach event listeners on them.
 - Zircon implements focus handling so you can navigate between the components using the `[Tab]` key
  (forwards) or the `[Shift]+[Tab]` key stroke (backwards).
-- Components can be hovered and they can change their styling when you do so
+- Components can be hovered and they can change their styling when you do so.
 
 Let's look at an example (notes about how it works are in the comments):
 
@@ -461,7 +461,7 @@ Zircon comes with a bunch of built-in fonts tilesets. These come in 2 flavors:
 Read more about them in the [resource handling documentation page][resource-handling] if you want to know more
 or if you want to use your own tilesets and fonts.
 
-Zircon also comes with **its own tileset format (`ztf`: Zircon Tileset Format)** which is **very easy to use**. 
+Zircon also comes with **its own tileset format (`ztf`: Zircon Tileset Format)** which is **very easy to use**.
 It is detailed [here][resource-handling#graphical-tilesets].
 
 ### REXPaint file loading
