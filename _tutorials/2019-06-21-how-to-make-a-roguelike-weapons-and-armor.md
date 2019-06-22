@@ -88,6 +88,38 @@ val GameEntity<Weapon>.defenseValue: Int
     get() = findAttribute(ItemCombatStats::class).get().defenseValue
 ```
 
+As with inventory we're going to add a new entity type, `EquipmentHolder`:
+
+```kotlin
+package org.hexworks.cavesofzircon.attributes.types
+
+import org.hexworks.amethyst.api.entity.EntityType
+import org.hexworks.cavesofzircon.attributes.Equipment
+import org.hexworks.cavesofzircon.attributes.Inventory
+import org.hexworks.cavesofzircon.extensions.GameCombatItem
+import org.hexworks.cavesofzircon.extensions.GameEquipmentHolder
+
+interface EquipmentHolder : EntityType
+
+fun GameEquipmentHolder.equip(inventory: Inventory, item: GameCombatItem) {
+    equipment.equip(inventory, item)
+}
+
+val GameEquipmentHolder.equipment: Equipment
+    get() = findAttribute(Equipment::class).get()
+```
+
+and the corresponding aliases:
+
+```kotlin
+// add these to TypeAliases.kt
+
+typealias GameCombatItem = GameEntity<CombatItem>
+
+typealias GameEquipmentHolder = GameEntity<EquipmentHolder>
+```
+
+
 With these in place the actual `Equipment` *attribute* is rather straightforward:
 
 ```kotlin
@@ -98,7 +130,9 @@ import org.hexworks.cavesofzircon.attributes.types.Weapon
 import org.hexworks.cavesofzircon.attributes.types.attackValue
 import org.hexworks.cavesofzircon.attributes.types.defenseValue
 import org.hexworks.cavesofzircon.attributes.types.iconTile
+import org.hexworks.cavesofzircon.extensions.GameCombatItem
 import org.hexworks.cavesofzircon.extensions.GameEntity
+import org.hexworks.cavesofzircon.extensions.whenTypeIs
 import org.hexworks.cobalt.databinding.api.createPropertyFrom
 import org.hexworks.cobalt.databinding.api.property.Property
 import org.hexworks.zircon.api.Components
@@ -110,8 +144,8 @@ class Equipment(initialWeapon: GameEntity<Weapon>,
     private val weaponProperty: Property<GameEntity<Weapon>> = createPropertyFrom(initialWeapon)    // 1
     private val armorProperty: Property<GameEntity<Armor>> = createPropertyFrom(initialArmor)
 
-    val attackValue: Int
-        get() = weaponProperty.value.attackValue + armorProperty.value.attackValue                  // 2
+    val attackValue: Int                                                                            // 2
+        get() = weaponProperty.value.attackValue + armorProperty.value.attackValue
 
     val defenseValue: Int
         get() = weaponProperty.value.defenseValue + armorProperty.value.defenseValue
@@ -131,7 +165,17 @@ class Equipment(initialWeapon: GameEntity<Weapon>,
     private val armorStats: String
         get() = " A: ${armor.attackValue} D: ${armor.defenseValue}"
 
-    fun equipWeapon(inventory: Inventory, newWeapon: GameEntity<Weapon>): GameEntity<Weapon> {      // 3
+    fun equip(inventory: Inventory, combatItem: GameCombatItem): GameCombatItem {
+        combatItem.whenTypeIs<Weapon> {
+            return equipWeapon(inventory, it)
+        }
+        combatItem.whenTypeIs<Armor> {
+            return equipArmor(inventory, it)
+        }
+        throw IllegalStateException("Combat item is not Weapon or Armor.")
+    }
+
+    private fun equipWeapon(inventory: Inventory, newWeapon: GameEntity<Weapon>): GameCombatItem {
         val oldWeapon = weapon
         inventory.removeItem(newWeapon)
         inventory.addItem(oldWeapon)
@@ -139,7 +183,7 @@ class Equipment(initialWeapon: GameEntity<Weapon>,
         return oldWeapon
     }
 
-    fun equipArmor(inventory: Inventory, newArmor: GameEntity<Armor>): GameEntity<Armor> {          // 4
+    private fun equipArmor(inventory: Inventory, newArmor: GameEntity<Armor>): GameCombatItem {
         val oldArmor = armor
         inventory.removeItem(newArmor)
         inventory.addItem(oldArmor)
@@ -147,7 +191,7 @@ class Equipment(initialWeapon: GameEntity<Weapon>,
         return oldArmor
     }
 
-    override fun toComponent(width: Int): Component {                                               // 5
+    override fun toComponent(width: Int): Component {                                               // 4
         val weaponIcon = Components.icon().withIcon(weaponProperty.value.iconTile).build()
         val weaponNameLabel = Components.label()
                 .withText(weaponName)
@@ -167,7 +211,7 @@ class Equipment(initialWeapon: GameEntity<Weapon>,
                 .withText(armorStats)
                 .withSize(width - 1, 1)
                 .build()
-        
+
         weaponProperty.onChange {
             weaponIcon.iconProperty.value = weapon.iconTile
             weaponNameLabel.textProperty.value = weapon.name
@@ -197,6 +241,7 @@ class Equipment(initialWeapon: GameEntity<Weapon>,
                 .commitInlineElements()
                 .build()
     }
+
 }
 ```
 
@@ -205,9 +250,8 @@ Here we:
 1. Create a `Property` for both *weapon* and *armor* and initialize both with initial values
 2. Add shorthands for `attackValue` and `defenseValue`. Note that both types can have attack
    and defense values to make it more interesting
-3. Add a function to *equip* a *weapon* from a given *inventory*
-4. And the same for *armor*
-5. And an implementation for `toComponent`. This might seem a lot of code but we just create
+3. Add a function to *equip* a *game combat item* from a given *inventory*
+4. And an implementation for `toComponent`. This might seem a lot of code but we just create
    `Component`s here for displaying this `Attribute` on the sidebar, there is not much logic in there
    
 ## Adding Weapons and Armor   
@@ -653,12 +697,14 @@ Which will use a new `Command`:
 package org.hexworks.cavesofzircon.commands
 
 import org.hexworks.amethyst.api.entity.EntityType
+import org.hexworks.cavesofzircon.attributes.Equipment
 import org.hexworks.cavesofzircon.extensions.GameCommand
 import org.hexworks.cavesofzircon.extensions.GameItemHolder
 import org.hexworks.cavesofzircon.world.GameContext
 
 data class HandleEquipment(override val context: GameContext,
-                           override val source: GameItemHolder) : GameCommand<EntityType>
+                           override val source: GameItemHolder,
+                           val equipment: Equipment) : GameCommand<EntityType>
 ```
 
 Then we modify `InventoryInspector` to open the *Equipment* dialog when this happens:
@@ -676,7 +722,9 @@ object InventoryInspector : BaseFacet<GameContext>() {
                 val fragment = InventoryFragment(
                         // ...
                         onEquip = {
-                            itemHolder.executeCommand(HandleEquipment(context, itemHolder))
+                            itemHolder.whenTypeIs<EquipmentHolder> { equipmentHolder ->
+                                itemHolder.executeCommand(HandleEquipment(context, itemHolder, equipmentHolder.equipment))
+                            }
                         })
                 // ...
             }
@@ -685,11 +733,47 @@ object InventoryInspector : BaseFacet<GameContext>() {
 ```
 
 To process `HandleEquipment` we're going to need an `EquipmentHandler` *facet* just like how we did with
-`InventoryInspector`:
+`InventoryInspector`. `EquipmentHandler` will open a new dialog so let's implement it first. As with the *Inventory*
+we'll display the items in rows, so let's add an `EquipmentRowFragment`:
+
+```kotlin
+package org.hexworks.cavesofzircon.view.fragment
+
+import org.hexworks.cavesofzircon.attributes.types.CombatItem
+import org.hexworks.cavesofzircon.attributes.types.iconTile
+import org.hexworks.cavesofzircon.extensions.GameEntity
+import org.hexworks.zircon.api.Components
+import org.hexworks.zircon.api.component.Fragment
+
+class EquipmentRowFragment(width: Int, item: GameEntity<CombatItem>) : Fragment {
+
+    val equipButton = Components.button()
+            .wrapSides(false)
+            .withText("Equip")
+            .build()
+
+    override val root = Components.hbox()
+            .withSpacing(1)
+            .withSize(width, 1)
+            .build().apply {
+                addComponent(Components.icon()
+                        .withIcon(item.iconTile))
+                addComponent(Components.label()
+                        .withSize(InventoryFragment.NAME_COLUMN_WIDTH, 1)
+                        .withText(item.name))
+                addComponent(equipButton)
+            }
+
+}
+```
+
+with which we can implement the `EquipmentFragment` itself:
 
 ```kotlin
 
 ```
+
+
 
 ## Conclusion
 
