@@ -6,8 +6,6 @@ author: addamsson
 short_title: "How To Make a Roguelike: #15 Weapons and Armor"
 series: coz
 comments: true
-published: false
-future: false
 ---
 
 > Adding wearable items like weapons and armor is a staple of all roguelike games and *Caves of Zircon* is no different.
@@ -42,7 +40,7 @@ data class ItemCombatStats(val attackValue: Int = 0,
 }
 ```
 
-We make this a `DisplayableAttribute` so we can display it on our equipment screen later.
+We make this a `DisplayableAttribute` so we can display it on a details screen later.
 We're also going to need `CombatItem` as a base type for *weapon* and *armor*:
 
 ```kotlin
@@ -51,7 +49,7 @@ package org.hexworks.cavesofzircon.attributes.types
 interface CombatItem : Item
 ```
 
-`Armor`:
+`Armor` itself:
 
 ```kotlin
 package org.hexworks.cavesofzircon.attributes.types
@@ -67,7 +65,6 @@ val Entity<Armor, GameContext>.attackValue: Int
 
 val Entity<Armor, GameContext>.defenseValue: Int
     get() = findAttribute(ItemCombatStats::class).get().defenseValue
-
 ```
 
 and a `Weapon` type which we can use for easier implementation of
@@ -88,7 +85,7 @@ val GameEntity<Weapon>.defenseValue: Int
     get() = findAttribute(ItemCombatStats::class).get().defenseValue
 ```
 
-As with inventory we're going to add a new entity type, `EquipmentHolder`:
+As with `InventoryHolder` we're going to add a new entity type, `EquipmentHolder`:
 
 ```kotlin
 package org.hexworks.cavesofzircon.attributes.types
@@ -101,8 +98,8 @@ import org.hexworks.cavesofzircon.extensions.GameEquipmentHolder
 
 interface EquipmentHolder : EntityType
 
-fun GameEquipmentHolder.equip(inventory: Inventory, item: GameCombatItem) {
-    equipment.equip(inventory, item)
+fun GameEquipmentHolder.equip(inventory: Inventory, item: GameCombatItem): GameCombatItem {
+    return equipment.equip(inventory, item)
 }
 
 val GameEquipmentHolder.equipment: Equipment
@@ -113,14 +110,15 @@ and the corresponding aliases:
 
 ```kotlin
 // add these to TypeAliases.kt
+import org.hexworks.cavesofzircon.attributes.types.CombatItem
+import org.hexworks.cavesofzircon.attributes.types.EquipmentHolder
 
 typealias GameCombatItem = GameEntity<CombatItem>
 
 typealias GameEquipmentHolder = GameEntity<EquipmentHolder>
 ```
 
-
-With these in place the actual `Equipment` *attribute* is rather straightforward:
+With these in place we can implement the `Equipment` *attribute*:
 
 ```kotlin
 package org.hexworks.cavesofzircon.attributes
@@ -165,7 +163,7 @@ class Equipment(initialWeapon: GameEntity<Weapon>,
     private val armorStats: String
         get() = " A: ${armor.attackValue} D: ${armor.defenseValue}"
 
-    fun equip(inventory: Inventory, combatItem: GameCombatItem): GameCombatItem {
+    fun equip(inventory: Inventory, combatItem: GameCombatItem): GameCombatItem {   // 3
         combatItem.whenTypeIs<Weapon> {
             return equipWeapon(inventory, it)
         }
@@ -191,7 +189,7 @@ class Equipment(initialWeapon: GameEntity<Weapon>,
         return oldArmor
     }
 
-    override fun toComponent(width: Int): Component {                                               // 4
+    override fun toComponent(width: Int): Component {       // 4
         val weaponIcon = Components.icon().withIcon(weaponProperty.value.iconTile).build()
         val weaponNameLabel = Components.label()
                 .withText(weaponName)
@@ -354,12 +352,17 @@ object Jacket : BaseEntityType(
         description = "Dirty and rugged jacket made of leather."), Armor
 ```
 
+And we should also modify `Player` to be an `EquipmentHolder` while we're at it:
+
+```kotlin
+object Player : BaseEntityType(
+        name = "player"), Combatant, ItemHolder, EnergyUser, EquipmentHolder
+```
+
 Then we can create the actual combat item *entities* in `EntityFactory`:
 
 ```kotlin
 // Add these to EntityFactory
-
-import org.hexworks.cavesofzircon.attributes.Equipment
 import org.hexworks.cavesofzircon.attributes.ItemCombatStats
 import org.hexworks.cavesofzircon.attributes.types.Club
 import org.hexworks.cavesofzircon.attributes.types.Dagger
@@ -467,15 +470,17 @@ fun newJacket() = newGameEntityOfType(Jacket) {
 Now as you might have guessed, we just add `Equipment` to our *player* `Entity`:
 
 ```kotlin
-    fun newPlayer() = newGameEntityOfType(Player) {
-        attributes(
-                // ...
-                Equipment(
-                        initialWeapon = newClub(),
-                        initialArmor = newJacket()))
+import org.hexworks.cavesofzircon.attributes.Equipment
 
-        // ...
-    }
+fun newPlayer() = newGameEntityOfType(Player) {
+    attributes(
+            // ...
+            Equipment(
+                    initialWeapon = newClub(),
+                    initialArmor = newJacket()))
+
+    // ...
+}
 ```
 
 Then if we start up our game we'll see our initial items on the sidebar:
@@ -621,11 +626,11 @@ Now when we run around in the dungeon items can be picked up:
 
 ![Finding Combat Items](/assets/img/finding_combat_items.gif)
 
-The problem is that we can't equip them yet. Let's make the change and add an *Equip* screen!
+The problem is that we can't equip them yet. Let's make the change and add an *Equip* button to our *Inventory*!
 
 ## Equipping Weapons and Armor
 
-The *Equipment* screen will be accessible by a hotkey, `e` and from the *Inventory* screen as well.
+The *equip item* functionality will be accessible from the *Inventory* screen.
 First, let's modify `InventoryRowFragment` to have this change:
 
 ```kotlin
@@ -657,30 +662,56 @@ class InventoryRowFragment(width: Int, item: GameItem) : Fragment {
 and incorporate it in `InventoryFragment`:
 
 ```kotlin
+import org.hexworks.zircon.api.component.VBox
+import org.hexworks.cobalt.datatypes.Maybe
+import org.hexworks.cobalt.datatypes.extensions.map
+import org.hexworks.cavesofzircon.GameConfig
+
 class InventoryFragment(inventory: Inventory,
                         width: Int,
-                        onDrop: (GameItem) -> Unit,
-                        onEat: (GameItem) -> Unit,
-                        onEquip: () -> Unit) : Fragment {               // 1
+                        private val onDrop: (GameItem) -> Unit,
+                        private val onEat: (GameItem) -> Unit,
+                        private val onEquip: (GameItem) -> Maybe<GameItem>) : Fragment { // 1
 
     override val root = Components.vbox()
             .withSize(width, inventory.size + 1)
             .build().apply {
-                
-                // ...
-                    
+                val list = this
+                addComponent(Components.hbox()
+                        .withSpacing(1)
+                        .withSize(width, 1)
+                        .build().apply {
+                            addComponent(Components.label().withText("").withSize(1, 1))
+                            addComponent(Components.header().withText("Name").withSize(NAME_COLUMN_WIDTH, 1))
+                            addComponent(Components.header().withText("Actions").withSize(ACTIONS_COLUMN_WIDTH, 1))
+                        })
                 inventory.items.forEach { item ->
-                    addFragment(InventoryRowFragment(width, item).apply {
-                        
-                        // ...
-                        
-                        equipButton.onComponentEvent(ACTIVATED) {
-                            onEquip()                                   // 2
-                            Processed
-                        }
-                    })
+                    addRow(width, item, list)       // 2
                 }
             }
+
+    private fun addRow(width: Int, item: GameItem, list: VBox) {
+        list.addFragment(InventoryRowFragment(width, item).apply {
+            dropButton.onComponentEvent(ACTIVATED) {
+                list.removeComponent(this.root)
+                onDrop(item)
+                Processed
+            }
+            eatButton.onComponentEvent(ACTIVATED) {
+                list.removeComponent(this.root)
+                onEat(item)
+                Processed
+            }
+            equipButton.onComponentEvent(ACTIVATED) {
+                onEquip(item).map { oldItem ->          // 3
+                    list.removeComponent(this.root)
+                    addRow(width, oldItem, list)
+                }
+                Processed
+            }
+        })
+        list.applyColorTheme(GameConfig.THEME)
+    }
 
     // ...
 }
@@ -688,29 +719,23 @@ class InventoryFragment(inventory: Inventory,
 
 Here we:
 
-1. Add a callback, `onEquip` to our class
-2. And call it if the *player* clicks the *Equip* button
+1. Add a callback, `onEquip` to our class which takes a `GameItem` and returns a `Maybe` of `GameItem`.
+   Why a `Maybe`? Because if we fail to equip an item (becuase it is not a combat item for example) there
+   is no previously equipped item to return!
+2. Create an `addRow` function which we use to add a row to our *inventory*. This is important because we'll
+   call this again when a new item is equipped to put the old item into the list.
+3. What we do when the *equip* button is clicked it that if the equip is successful (it returned an old item)
+   we put it back to the list.
 
-Which will use a new `Command`:
 
-```kotlin
-package org.hexworks.cavesofzircon.commands
-
-import org.hexworks.amethyst.api.entity.EntityType
-import org.hexworks.cavesofzircon.attributes.Equipment
-import org.hexworks.cavesofzircon.extensions.GameCommand
-import org.hexworks.cavesofzircon.extensions.GameItemHolder
-import org.hexworks.cavesofzircon.world.GameContext
-
-data class HandleEquipment(override val context: GameContext,
-                           override val source: GameItemHolder,
-                           val equipment: Equipment) : GameCommand<EntityType>
-```
-
-Then we modify `InventoryInspector` to open the *Equipment* dialog when this happens:
+Then we modify `InventoryInspector` to swap the *equipment* when this happens:
 
 ```kotlin
-import import org.hexworks.cavesofzircon.commands.ShowEquipment
+import org.hexworks.cavesofzircon.attributes.types.CombatItem
+import org.hexworks.cavesofzircon.attributes.types.EquipmentHolder
+import org.hexworks.cavesofzircon.attributes.types.equip
+import org.hexworks.cobalt.datatypes.Maybe
+import org.hexworks.cavesofzircon.extensions.GameItem
 
 object InventoryInspector : BaseFacet<GameContext>() {
 
@@ -721,63 +746,39 @@ object InventoryInspector : BaseFacet<GameContext>() {
                 
                 val fragment = InventoryFragment(
                         // ...
-                        onEquip = {
-                            itemHolder.whenTypeIs<EquipmentHolder> { equipmentHolder ->
-                                itemHolder.executeCommand(HandleEquipment(context, itemHolder, equipmentHolder.equipment))
+                        onEquip = { item ->
+                            var result = Maybe.empty<GameItem>()
+                            itemHolder.whenTypeIs<EquipmentHolder> { equipmentHolder -> // 1
+                                item.whenTypeIs<CombatItem> { combatItem ->             // 2
+                                    result = Maybe.of(equipmentHolder.equip(itemHolder.inventory, combatItem))  // 3
+                                }
                             }
+                            result  // 4
                         })
                 // ...
             }
 }
-
 ```
 
-To process `HandleEquipment` we're going to need an `EquipmentHandler` *facet* just like how we did with
-`InventoryInspector`. `EquipmentHandler` will open a new dialog so let's implement it first. As with the *Inventory*
-we'll display the items in rows, so let's add an `EquipmentRowFragment`:
+What happens here is that:
 
-```kotlin
-package org.hexworks.cavesofzircon.view.fragment
+1. If the `itemHolder` is also an `EquipmentHolder`
+2. And the `item` is a `CombatItem`
+3. We equip it
+4. Otherwise we just return an empty `Maybe`
 
-import org.hexworks.cavesofzircon.attributes.types.CombatItem
-import org.hexworks.cavesofzircon.attributes.types.iconTile
-import org.hexworks.cavesofzircon.extensions.GameEntity
-import org.hexworks.zircon.api.Components
-import org.hexworks.zircon.api.component.Fragment
+Now if we start this up and take a look around we'll see the whole thing coming together:
 
-class EquipmentRowFragment(width: Int, item: GameEntity<CombatItem>) : Fragment {
-
-    val equipButton = Components.button()
-            .wrapSides(false)
-            .withText("Equip")
-            .build()
-
-    override val root = Components.hbox()
-            .withSpacing(1)
-            .withSize(width, 1)
-            .build().apply {
-                addComponent(Components.icon()
-                        .withIcon(item.iconTile))
-                addComponent(Components.label()
-                        .withSize(InventoryFragment.NAME_COLUMN_WIDTH, 1)
-                        .withText(item.name))
-                addComponent(equipButton)
-            }
-
-}
-```
-
-with which we can implement the `EquipmentFragment` itself:
-
-```kotlin
-
-```
-
-
+![Equipping Items](/assets/img/equipping_items.gif)
 
 ## Conclusion
 
+In this article we've added *weapons* and *armor* and also a simple *equipment* system in one
+fell swoop. Now we can run around our dungeon and find actual items which we can use!
 
+In the next article we're going to add a new type of monster which is agressive and attacks us
+if it sees us! We'll also modify the code we have for *weapons* and *armor* so that they won't be
+just lying around...we'll loot them from monsters!
 
 Until then go forth and *kode on*!
  
