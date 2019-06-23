@@ -1,5 +1,5 @@
 ---
-excerpt: "New tutorial article & Performance Upgrades"
+excerpt: "New tutorial article & Tileset Upgrades"
 title: "Weekly update: Zircon & Caves of Zircon"
 tags: [zircon, caves-of-zircon, project-update, project-update-zircon, project-update-coz]
 author: hexworks
@@ -9,8 +9,8 @@ comments: true
 
 **Caves of Zircon Tutorial**
 
-This week was about Weapons and Armor
-in *Caves of Zircon*. The article is not ready yet but it will soon be available on the site this weekend.
+This week was about [Weapons and Armor](https://hexworks.org/posts/tutorials/2019/06/21/how-to-make-a-roguelike-weapons-and-armor.html)
+in *Caves of Zircon*. The article is ready and you can read it on [the site](https://hexworks.org/posts/tutorials/2019/06/21/how-to-make-a-roguelike-weapons-and-armor.html).
 
 **Zircon**
 
