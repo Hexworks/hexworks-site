@@ -6,6 +6,8 @@ author: addamsson
 short_title: "How To Make a Roguelike: #16 Aggressive Monsters"
 series: coz
 comments: true
+future: false
+published: false
 ---
 
 > Strolling around a dungeon and looting items randomly lying on the ground is only so much fun.
@@ -209,7 +211,7 @@ Now I wouldn't say that the process is entirely hygienic but at least now we can
 In this article we explored how we can add aggressive monsters to our game by combining *behaviors*. We've
 reused a lot of the functionality we already had so we didn't have to write much code either!
 
-Next up is another roguelike staple: **experience and levelling up**!
+Next up is another roguelike staple: **experience and leveling up**!
 
 Until then go forth and *kode on*!
  
