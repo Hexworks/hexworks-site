@@ -13,15 +13,38 @@ published: false
 > Killing *zombies*, *fungi* and *bats* are fun, especially when we get loot and food from them. What's
 still missing is *gaining experience levels*, so we're going to add it now.
 
-## Designing an Aggressive Enemy
+## Designing Experience Levels
+
+If you have ever played an RPG before you might be familiar with the concept. After the *player* gains
+a significant amount of experience they level up which means that they can pick some benefit which will
+make the *player* stronger, then we go back to accumulating *experience*. Each level is harder to
+achieve than the previous one, and there is usually a level cap.
+
+For our game we're going to implement something simple. The amount of experience an `Entity` gains will
+be calculated in the following way: 
+
+```
+(target hp + target attack value + target defense value) - attacker's current level * 2
+```
+
+This will make the gainer get more *xp* if the target is more powerful and less *xp* with each
+level.
+
+The threshold for leveling up is calculated in the following way:
+
+```kotlin
+if current xp > current level ^ 1.5 * 20 then level up
+```
+
+So we will need more and more xp with each level. Let's take a look at how we can implement this!
+
+## Accumulating Experience
+
+
 
 ## Conclusion
 
-In this article we explored how we can add aggressive monsters to our game by combining *behaviors*. We've
-reused a lot of the functionality we already had so we didn't have to write much code either!
-
-Next up is another roguelike staple: **experience and leveling up**!
 
 Until then go forth and *kode on*!
  
-> The code of this article can be found under the `16_AGGRESSIVE_MONSTERS` tag.
+> The code of this article can be found under the `17_EXPERIENCE_AND_LEVELING_UP` tag.
