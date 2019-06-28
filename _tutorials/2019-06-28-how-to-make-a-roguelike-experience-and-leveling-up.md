@@ -6,8 +6,6 @@ author: addamsson
 short_title: "How To Make a Roguelike: #17 Experience and Leveling Up"
 series: coz
 comments: true
-future: false
-published: false
 ---
 
 > Killing *zombies*, *fungi* and *bats* are fun, especially when we get loot and food from them. What's
