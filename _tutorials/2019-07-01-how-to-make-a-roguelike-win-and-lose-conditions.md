@@ -6,8 +6,6 @@ author: addamsson
 short_title: "How To Make a Roguelike: #19 Win and Lose Conditions"
 series: coz
 comments: true
-future: false
-published: false
 ---
 
 > Our game has everything it needs: items, monsters, exploration, hunger and experience levels.
@@ -171,7 +169,7 @@ the *zircons* before `ItemPicker` has a chance.
 
 Let's see what we've produced:
 
-![Gathering Zircons]()
+![Gathering Zircons](/assets/img/gathering_zircons.gif)
 
 So far so good. Next up is the addition of an *exit* where if we press `f` (move down one level)
 we win the game!
@@ -181,6 +179,8 @@ we win the game!
 The first thing we're going to need is a tile for the *exit*:
 
 ```kotlin
+// add this to GameTileRepository
+
 val EXIT = Tiles.newBuilder()
         .withCharacter('+')
         .withForegroundColor(GameColors.ACCENT_COLOR)
@@ -191,6 +191,8 @@ val EXIT = Tiles.newBuilder()
 We're using `+` for it. Next up is the `Exit` type for the *exit* entity:
 
 ```kotlin
+// add this to EntityTypes.kt
+
 object Exit : BaseEntityType(
         name = "exit")
 ```
@@ -198,6 +200,8 @@ object Exit : BaseEntityType(
 and then the *exit* *entity* itself:
 
 ```kotlin
+// add this to EntityFactory
+
 import org.hexworks.cavesofzircon.attributes.types.Exit
 
 fun newExit() = newGameEntityOfType(Exit) {
@@ -216,7 +220,7 @@ private fun addExit() = also {
 
 Then we just call `addExit()` from `buildGame` and now we can see it added to the dungeon:
 
-![Finding the Exit]()
+![Finding the Exit](/assets/img/finding_the_exit.png)
 
 Now that we have an actual *exit* we just need to make it enable the *player* to exit
 through it and win the game! To signal this condition we're going to add a new *event*:
@@ -367,7 +371,7 @@ gather
 
 Let's see how we can win the game:
 
-![Winning The Game]()
+![Winning The Game](/assets/img/winning_the_game.png)
 
 ## Losing the Game
 
@@ -498,7 +502,7 @@ Here:
 
 Let's see dying in action!
 
-![Dying]()
+![Dying](/assets/img/dying.png)
 
 Nice.
 
