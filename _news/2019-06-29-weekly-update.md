@@ -1,11 +1,11 @@
-**Zircon: an extensible, multiplatform and user-friendly tile engine.**
-
-[GitHub](https://github.com/Hexworks/zircon) | 
-[Maven](https://jitpack.io/#Hexworks/zircon/2019.1.1-PREVIEW) | 
-[Discord](https://discordapp.com/invite/twQwhdm) | 
-[Patreon](https://www.patreon.com/join/hexworks) | 
-[Docs](https://hexworks.org/zircon/docs/) | 
-[Board](https://github.com/Hexworks/zircon/projects/2)
+---
+excerpt: "Multiple new tutorial articles are out!"
+title: "Weekly update: Zircon & Caves of Zircon"
+tags: [zircon, caves-of-zircon, project-update, project-update-zircon, project-update-coz]
+author: hexworks
+short_title: "Weekly update: Zircon & Caves of Zircon"
+comments: true
+---
 
 **Caves of Zircon Tutorial**
 
