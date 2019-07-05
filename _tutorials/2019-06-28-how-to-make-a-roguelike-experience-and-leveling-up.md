@@ -421,6 +421,7 @@ To display this we just need to listen to the `PlayerGainedLevel` *event* in `Pl
 
 ```kotlin
 import import org.hexworks.cavesofzircon.events.PlayerGainedLevel
+import org.hexworks.cavesofzircon.view.dialog.LevelUpDialog
 
 // ...
 

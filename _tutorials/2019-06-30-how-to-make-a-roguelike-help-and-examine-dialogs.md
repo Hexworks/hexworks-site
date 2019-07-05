@@ -6,8 +6,6 @@ author: addamsson
 short_title: "How To Make a Roguelike: #18 Help and Examine Dialogs"
 series: coz
 comments: true
-future: false
-published: false
 ---
 
 > We now have a nice game which has almost all the things which are necessary for a roguelike,
@@ -218,7 +216,7 @@ object InventoryInspector : BaseFacet<GameContext>() {
 
 Let's see what we have created!
 
-
+![Examining Items](/assets/img/examining_items.gif)
 
 ## Conclusion
 
