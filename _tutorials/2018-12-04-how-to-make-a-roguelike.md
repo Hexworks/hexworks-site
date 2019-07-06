@@ -11,9 +11,35 @@ comments: true
 > This tutorial series is loosely based on [Trystan's Awesome Roguelike Tutorial](http://trystans.blogspot.com/2016/01/roguelike-tutorial-00-table-of-contents.html).
   Go check it out if you want to use Java instead.
   
+> #### Table of Contents
+>
+> Here are the links to all of the current tutorial articles if you want to skip the introduction
+> or want to continue where you left off previously.
+> 
+> 1. [#1 Project Setup](https://hexworks.org/posts/tutorials/2018/12/12/how-to-make-a-roguelike-project-setup.html)
+> 2. [#2 Views, Screens, Inputs](https://hexworks.org/posts/tutorials/2018/12/28/how-to-make-a-roguelike-views-screens-inputs.html)
+> 3. [#3 Generating Random Caves](https://hexworks.org/posts/tutorials/2019/01/05/how-to-make-a-roguelike-generating-random-caves.html)
+> 4. [#4 The Player](https://hexworks.org/posts/tutorials/2019/02/13/how-to-make-a-roguelike-the-player.html)
+> 5. [#5 Exploring The Cave](https://hexworks.org/posts/tutorials/2019/02/28/how-to-make-a-roguelike-exploring-the-cave.html)
+> 6. [#6 Entity Interactions](https://hexworks.org/posts/tutorials/2019/03/14/how-to-make-a-roguelike-entity-interactions.html)
+> 7. [#7 Stationary Monsters](https://hexworks.org/posts/tutorials/2019/03/21/how-to-make-a-roguelike-stationary-monsters.html)
+> 8. [#8 Combat and Damage](https://hexworks.org/posts/tutorials/2019/04/02/how-to-make-a-roguelike-combat-and-damage.html)
+> 9. [#9 A Multi-level Dungeon](https://hexworks.org/posts/tutorials/2019/04/17/how-to-make-a-roguelike-a-multi-level-dungeon.html)
+> 10. [#10 Vision and Fog of War](https://hexworks.org/posts/tutorials/2019/04/27/how-to-make-a-roguelike-vision-and-fog-of-war.html)
+> 11. [#11 Wandering Monsters](https://hexworks.org/posts/tutorials/2019/05/07/how-to-make-a-roguelike-wandering-monsters.html)
+> 12. [#12 Items and Inventory](https://hexworks.org/posts/tutorials/2019/05/15/how-to-make-a-roguelike-items-and-inventory.html)
+> 13. [#13 Food and Hunger](https://hexworks.org/posts/tutorials/2019/05/23/how-to-make-a-roguelike-food-and-hunger.html)
+> 14. [#14 Displaying Stats](https://hexworks.org/posts/tutorials/2019/06/14/how-to-make-a-roguelike-displaying-stats.html)
+> 15. [#15 Weapons and Armor](https://hexworks.org/posts/tutorials/2019/06/21/how-to-make-a-roguelike-weapons-and-armor.html)
+> 16. [#16 Aggressive Monsters](https://hexworks.org/posts/tutorials/2019/06/26/how-to-make-a-roguelike-aggressive-monsters.html)
+> 17. [#17 Experience and Leveling Up](https://hexworks.org/posts/tutorials/2019/06/28/how-to-make-a-roguelike-experience-and-leveling-up.html)
+> 18. [#18 Help and Examine Dialogs](https://hexworks.org/posts/tutorials/2019/06/30/how-to-make-a-roguelike-help-and-examine-dialogs.html)
+> 19. [#19 Win and Lose Conditions](https://hexworks.org/posts/tutorials/2019/07/01/how-to-make-a-roguelike-win-and-lose-conditions.html)
+
+  
 ## Introduction
 
-If you are reading this it means that you are probably planning of writing a game of some sort.
+If you are reading this it means that you are probably planning to write a game of some sort.
 Writing games is not only fun and useful if you are just starting out as a programmer but even
 if you have a lot of coding experience under your belt and you want to learn a new language.
 
