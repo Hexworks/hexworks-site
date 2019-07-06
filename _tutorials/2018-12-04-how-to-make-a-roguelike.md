@@ -35,7 +35,7 @@ comments: true
 > 17. [#17 Experience and Leveling Up](https://hexworks.org/posts/tutorials/2019/06/28/how-to-make-a-roguelike-experience-and-leveling-up.html)
 > 18. [#18 Help and Examine Dialogs](https://hexworks.org/posts/tutorials/2019/06/30/how-to-make-a-roguelike-help-and-examine-dialogs.html)
 > 19. [#19 Win and Lose Conditions](https://hexworks.org/posts/tutorials/2019/07/01/how-to-make-a-roguelike-win-and-lose-conditions.html)
-
+> 20. [#20 Wrapping Up](https://hexworks.org/posts/tutorials/2019/07/02/how-to-make-a-roguelike-wrapping-up.html)
   
 ## Introduction
 
