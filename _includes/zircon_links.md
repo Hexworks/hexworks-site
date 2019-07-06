@@ -1,4 +1,4 @@
-[discord]:https://discordapp.com/invite/twQwhdm
+[discord]:https://discord.gg/vSNgvBh
 [examples]:https://github.com/Hexworks/zircon/tree/master/zircon.jvm.examples/src/main
 [java-skeleton]:https://github.com/Hexworks/zircon.skeleton.java
 [kotlin-skeleton]:https://github.com/Hexworks/zircon.skeleton.kotlin

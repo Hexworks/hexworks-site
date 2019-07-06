@@ -2,7 +2,7 @@
 
 [GitHub](https://github.com/Hexworks/zircon) | 
 [Maven](https://jitpack.io/#Hexworks/zircon/2019.1.1-PREVIEW) | 
-[Discord](https://discordapp.com/invite/twQwhdm) | 
+[Discord](https://discord.gg/vSNgvBh) | 
 [Patreon](https://www.patreon.com/join/hexworks) | 
 [Docs](https://hexworks.org/zircon/docs/) | 
 [Board](https://github.com/Hexworks/zircon/projects/2)
