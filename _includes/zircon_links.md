@@ -3,20 +3,20 @@
 [java-skeleton]:https://github.com/Hexworks/zircon.skeleton.java
 [kotlin-skeleton]:https://github.com/Hexworks/zircon.skeleton.kotlin
 
-[release-process]:{{ site.baseurl }}/zircon/docs/2019-01-11-release-process-and-versioning-scheme
-[crash-course]:{{ site.baseurl }}/zircon/docs/2018-07-18-a-zircon-crash-course
-[screen-primer]:{{ site.baseurl }}/zircon/docs/2018-08-18-a-primer-on-screens
-[tile-graphics]:{{ site.baseurl }}/zircon/docs/2018-11-19-how-to-work-with-tile-graphics
-[resource-handling]:{{ site.baseurl }}/zircon/docs/2018-11-22-resource-handling
-[design-philosophy]:{{ site.baseurl }}/zircon/docs/2018-11-20-the-design-philosophy-behind-zircon
-[color-themes]:{{ site.baseurl }}/zircon/docs/2018-11-20-working-with-color-themes
-[how-layers-work]:{{ site.baseurl }}/zircon/docs/2018-11-21-how-layers-work
-[input-handling]:{{ site.baseurl }}/zircon/docs/2018-11-21-input-handling
-[the-component-system]:{{ site.baseurl }}/zircon/docs/2018-11-15-the-component-system
-[drawing-shapes]:{{ site.baseurl }}/zircon/docs/2018-11-21-shapes
-[logging]:{{ site.baseurl }}/zircon/docs/2019-03-27-logging
-[animations]:{{ site.baseurl }}/zircon/docs/2019-04-26-animation-support
-[zircon-docs]:{{ site.baseurl }}/zircon/docs/
+[release-process]:https://hexworks.org/projects/zircon/docs/2019-01-11-release-process-and-versioning-scheme
+[crash-course]:https://hexworks.org/projects/zircon/docs/2018-07-18-a-zircon-crash-course
+[screen-primer]:https://hexworks.org/projects/zircon/docs/2018-08-18-a-primer-on-screens
+[tile-graphics]:https://hexworks.org/projects/zircon/docs/2018-11-19-how-to-work-with-tile-graphics
+[resource-handling]:https://hexworks.org/projects/zircon/docs/2018-11-22-resource-handling
+[design-philosophy]:https://hexworks.org/projects/zircon/docs/2018-11-20-the-design-philosophy-behind-zircon
+[color-themes]:https://hexworks.org/projects/zircon/docs/2018-11-20-working-with-color-themes
+[how-layers-work]:https://hexworks.org/projects/zircon/docs/2018-11-21-how-layers-work
+[input-handling]:https://hexworks.org/projects/zircon/docs/2018-11-21-input-handling
+[the-component-system]:https://hexworks.org/projects/zircon/docs/2018-11-15-the-component-system
+[drawing-shapes]:https://hexworks.org/projects/zircon/docs/2018-11-21-shapes
+[logging]:https://hexworks.org/projects/zircon/docs/2019-03-27-logging
+[animations]:https://hexworks.org/projects/zircon/docs/2019-04-26-animation-support
+[zircon-docs]:https://hexworks.org/projects/zircon/docs/
 
 
 [api]:https://github.com/Hexworks/zircon/tree/master/zircon.core/src/commonMain/kotlin/org/hexworks/zircon/api
