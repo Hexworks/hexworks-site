@@ -4,6 +4,7 @@ title: Working With Color Themes
 tags: [zircon, documentation, zircon-documentation]
 author: hexworks
 short_title: Working With Color Themes
+source_code_url: https://github.com/Hexworks/zircon/blob/master/zircon.jvm.examples/src/main/java/org/hexworks/zircon/examples/docs/WorkingWithColorThemes.java
 ---
 
 [ColorTheme]s are a simple form of adding consistent design to your [Component]s.
@@ -35,53 +36,38 @@ example below). If you want to build your own you can use `ColorThemes.newBuilde
 Here is an example of color themes in action.
 
 ```java
-import org.hexworks.zircon.api.*;
-import org.hexworks.zircon.api.component.ColorTheme;
-import org.hexworks.zircon.api.grid.TileGrid;
-import org.hexworks.zircon.api.screen.Screen;
-
-import java.util.Random;
-
-public class WorkingWithColorThemes {
-
-    public static void main(String[] args) {
-
-        final TileGrid tileGrid = SwingApplications.startTileGrid(
-                AppConfigs.newConfig()
-                        .withSize(Sizes.create(12, 10))
-                        .withDefaultTileset(CP437TilesetResources.rogueYun16x16())
-                        .build());
-
-        final Screen screen = Screens.createScreenFor(tileGrid);
-
-        screen.addComponent(Components.label()
-                .withText("Hello")
-                .withPosition(Positions.offset1x1())
+final TileGrid tileGrid = LibgdxApplications.startTileGrid(
+        AppConfig.newBuilder()
+                .withSize(12, 10)
+                .withDefaultTileset(CP437TilesetResources.rogueYun16x16())
                 .build());
 
-        screen.addComponent(Components.panel()
-                .withTitle("Panel")
-                .wrapWithBox(true)
-                .withPosition(Positions.create(1, 3))
-                .withSize(Sizes.create(10, 5))
-                .build());
+final Screen screen = Screen.create(tileGrid);
 
-        ColorTheme custom = ColorThemes.newBuilder()
-                .withAccentColor(TileColors.fromString("#ff0000"))
-                .withPrimaryForegroundColor(TileColors.fromString("#ffaaff"))
-                .withSecondaryForegroundColor(TileColors.fromString("#dd88dd"))
-                .withPrimaryBackgroundColor(TileColors.fromString("#555555"))
-                .withSecondaryBackgroundColor(TileColors.fromString("#222222"))
-                .build();
+screen.addComponent(Components.label()
+        .withText("Hello")
+        .withPosition(1, 1)
+        .build());
 
-        ColorTheme builtIn = ColorThemes.adriftInDreams();
+screen.addComponent(Components.panel()
+        .withDecorations(box(BoxType.SINGLE, "Panel"))
+        .withPosition(1, 3)
+        .withSize(10, 5)
+        .build());
 
-        screen.applyColorTheme(new Random().nextInt(2) > 0 ? custom : builtIn);
+ColorTheme custom = ColorThemes.newBuilder()
+        .withAccentColor(TileColor.fromString("#ff0000"))
+        .withPrimaryForegroundColor(TileColor.fromString("#ffaaff"))
+        .withSecondaryForegroundColor(TileColor.fromString("#dd88dd"))
+        .withPrimaryBackgroundColor(TileColor.fromString("#555555"))
+        .withSecondaryBackgroundColor(TileColor.fromString("#222222"))
+        .build();
 
-        screen.display();
-    }
-}
+ColorTheme builtIn = ColorThemes.adriftInDreams();
 
+screen.setTheme(new Random().nextInt(2) > 0 ? custom : builtIn);
+
+screen.display();
 ```
 
 By running this code you'll be presented with this nice-looking window:

@@ -9,27 +9,56 @@ short_title: A Zircon Crash Course
 >This document is a Crash Course to get you familiar with the concepts which are essential if you
 want to work with Zircon.
 
-## Drawables and DrawSurfaces
+## DrawSurfaces Tiles and TileComposites
 
-Zircon is all about drawing stuff on the screen so it is not a surprise that the two core interfaces
-in Zircon are [Drawable] and [DrawSurface].
+Zircon is all about drawing stuff on the screen so it is not a surprise that the core interfaces
+revolve around this concept.
 
 A good analogy for the [DrawSurface] is a piece of paper. It is *something* which you can draw stuff *on*
 and it looks like this:
 
 ```kotlin
 // Something to draw on, just like a piece of paper
-interface DrawSurface {
+interface DrawSurface : Clearable, TileComposite, TilesetOverride {
 
-    fun draw(drawable: Drawable, position: Position)
-    // ^^^--- this draws an arbitrary Drawable at a given Position
+    fun draw(tile: Tile,
+             drawPosition: Position)
+    // ^^^--- this draws a Tile at a given Position
+
+    fun draw(tileComposite: TileComposite,
+             drawPosition: Position)
+    // ^^^--- this draws an arbitrary TileComposite at a given Position
+
+
 }
 ```
 
-There are some new concepts in the above example: [Drawable] and [Position].
+There are some new concepts in the above example: [Tile], [TileComposite] and [Position].
 
-[Drawable] is *something* which you can draw onto a [DrawSurface]. For example when you are writing a letter to
-someone you are writing *letters* onto a *piece of paper*. 
+[TileComposite] is an object composed of [Tile]s which you can draw onto a [DrawSurface]. For example when you are
+writing a letter to someone you are writing *letters* onto a *piece of paper*. In this analogy a [Tile] is a single
+*character* in your letter. It looks like this:
+
+```kotlin
+interface TileComposite : Sizeable {
+
+    val tiles: Map<Position, Tile>
+
+    fun getTileAt(position: Position): Maybe<Tile> {
+        return if (size.containsPosition(position)) {
+            Maybe.of(tiles[position] ?: Tile.empty())
+        } else {
+            Maybe.empty()
+        }
+    }
+}
+```
+
+As you can see it contains a `Map` of [Tile]s at given [Position]s and a way to query them.
+
+> `Maybe` is a special object and you will see it throughout Zircon. It is very similar to `Optional` in Java.
+> We use `Maybe` to denote something which might or might not be present. In `DrawSurface` for example it is possible
+> that there is no [Tile] at a given [Position]. In this case an empty `Maybe` is returned.
 
 A [Position] is *where* you draw. For example when you use a text editor you write characters after each other and
 when you press `[Enter]` a new line starts. That's why we have [Position]:
@@ -42,127 +71,54 @@ interface Position : Comparable<Position> {
 }
 ```
 
-Now, that we cleaned up how do we draw [Drawable]s onto [DrawSurface]s at given [Position]s, let's take a look at what
-kind of [Drawable]s and [DrawSurface]s do we have.
-
-## Tiles and TileGraphics
-
-[Tile]s are a kind of [Drawable] which only occupy a single [Position]. For example a [CharacterTile] can be used to
-draw an actual character (like `x`) onto a [DrawSurface]. This operation is so common that it is included in
-the actual code of [DrawSurface]:
-
-```kotlin
-// Something to draw on, just like a piece of paper
-interface DrawSurface {
-
-    fun getTileAt(position: Position): Maybe<Tile>
-    // ^^^--- this one lets you take a peek at a Tile at a given Position
-
-    fun setTileAt(position: Position, tile: Tile)
-    // ^^^--- this one lets you take set a Tile at a given Position
-
-    fun draw(drawable: Drawable, position: Position)
-    // ^^^--- this draws an arbitrary Drawable at a given Position
-}
-```
-
-> `Maybe` is a special object and you will see it throughout Zircon. It is very similar to `Optional` in Java.
-> We use `Maybe` to denote something which might or might not be present. In `DrawSurface` for example it is possible
-> that there is no [Tile] at a given [Position]. In this case an empty `Maybe` is returned.
-
-Now that we know an actual [Drawable] let's see how a [DrawSurface] looks like. Enter the [TileGraphics].
-A [TileGraphics] is an *in-memory* image (piece of paper if you will). It is not visible on the *actual screen*
-but you can draw [Tile]s and other [Drawable]s on it nevertheless. [TileGraphics]s also work like blueprints:
-you can `draw` them on any other [DrawSurface]. Let's take a look at it:
-
-```kotlin
-interface TileGraphic : Clearable, Boundable, DrawSurface, Drawable, Styleable, TilesetOverride {
-
-    fun fetchFilledPositions(): List<Position>
-    // ^^^--- returns all the positions which contain a Tile
-
-    fun fetchFilledTiles(): Iterable<Tile>
-    // ^^^--- returns all the tiles in this object
-
-    fun fetchCells(): Iterable<Cell>
-    // ^^^--- returns the cells (position + tile pairs) of this graphic
-    
-    fun fetchCellsBy(offset: Position, size: Size): Iterable<Cell>
-    // ^^^--- returns a subset of this graphic as cells
-
-    fun resize(newSize: Size, filler: Tile): TileGraphic
-    // ^^^--- resizes this graphics to the given size using the given filler to fill empty positions
-
-    fun resize(newSize: Size): TileGraphics
-    // ^^^--- resizes this tile graphics using the given size
-
-    fun fill(filler: Tile): TileGraphics
-    // ^^^--- fills the empty parts of this graphics with the given filler
-
-    fun putText(text: String, position: Position = Position.defaultPosition())
-    // ^^^--- draws Character Tiles using the given text at the given position
-
-    fun applyStyle(styleSet: StyleSet)
-    // ^^^--- applies the given style to the tiles in this graphics
-    
-    fun toTileImage(): TileImage
-    // ^^^--- creates an immutable "snapshot" of this graphics. We'll talk about this later.
-    
-    fun toSubTileGraphics(rect: Rect): SubTileGraphics
-    // ^^^--- returns a portion of this graphics as a new graphics
-}
-```
-
-This is much more complex than our simple [DrawSurface] interface, so what's going on? First, [TileGraphics]
-implements a lot of interfaces: `Clearable, DrawSurface, Drawable, Styleable`.
-
-> The interfaces mentioned above are called *behaviors*. You can find more of them in [this package](https://github.com/Hexworks/zircon/tree/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/api/behavior).
+> The interfaces you can see [DrawSurface] implementing above are called *behaviors*. They are very similar to mixins
+> in other languages. You can find more of them in [this package](https://github.com/Hexworks/zircon/tree/master/zircon.core/src/commonMain/kotlin/org/hexworks/zircon/api/behavior).
 
 Zircon has interfaces for each behavior which is reused in other Zircon components, so here they perform the
 following jobs:
 
 - [Clearable] lets you *clear* the graphics. This means setting all its tiles to an empty tile.
-- [DrawSurface] and [Drawable] is already explained.
-- [Styleable] lets you get and set a [StyleSet] for this graphics. More on this later.
+- [DrawSurface] and [TileComposite] is already explained.
+- [TilesetOverride] lets you pick a specific [TilesetResource] to be used
 
 > This makes both the development and use of Zircon much easier, since these *behaviors* can be combined in any way
 to get different results but the terms used will stay the same throughout the system.
 > This also makes the code more testable since there is (usually) only one implementation for each *behavior* which
 is used by all components.
 
-The rest of the functions in the [TileGraphics] interface lets you manipulate the graphic itself, like combining it
-with other graphic objects, transforming it, or slicing it with the `toSubImage` function.
+## TileGraphics
+
+[TileGraphics] is a specialization of [DrawSurface] and it is used as the core abstraction for manipulating tiles
+throughout Zircon:
+
+```kotlin
+interface TileGraphics : Copiable<TileGraphics>, DrawSurface {
+
+    fun toSubTileGraphics(rect: Rect): TileGraphics
+
+    fun toLayer(offset: Position = Position.zero()): Layer
+
+    fun toResized(newSize: Size): TileGraphics
+
+    fun toResized(newSize: Size, filler: Tile): TileGraphics
+}
+```
+
+As you can see a [TileGraphics] can be copied and it contains some factory methods which you can use to derive
+other [DrawSurface]s such as [Layer]s and sub tile graphics objects. The former is explained [here][how-layers-work],
+the latter is an object which can be used as a "window" over a [TileGraphics] which will constrain read/write operations
+on the underlying [TileGraphics] object.
 
 Let's create an *actual* [TileGraphics]:
 
 ```java
-import org.hexworks.zircon.api.CP437TilesetResources;
-import org.hexworks.zircon.api.Modifiers;
-import org.hexworks.zircon.api.Sizes;
-import org.hexworks.zircon.api.StyleSets;
-import org.hexworks.zircon.api.DrawSurfaces;
-import org.hexworks.zircon.api.Tiles;
-import org.hexworks.zircon.api.color.ANSITileColor;
-import org.hexworks.zircon.api.graphics.TileGraphics;
-
-public class CreatingATileGraphics {
-
-    public static void main(String[] args) {
-
-        TileGraphics graphics = DrawSurfaces.tileGraphicsBuilder()
-                .withSize(Sizes.create(10, 10))
-                .withStyle(StyleSets.newBuilder()
-                        .withBackgroundColor(ANSITileColor.RED)
-                        .withForegroundColor(ANSITileColor.MAGENTA)
-                        .withModifiers(Modifiers.glow())
-                        .build())
-                .withTileset(CP437TilesetResources.rexPaint16x16())
-                .build()
-                .fill(Tiles.newBuilder()
-                        .withCharacter('x')
-                        .build());
-    }
-}
+TileGraphics graphics = DrawSurfaces.tileGraphicsBuilder()
+        .withSize(10, 10)
+        .withTileset(CP437TilesetResources.rexPaint16x16())
+        .withFiller(Tile.newBuilder()
+                .withCharacter('x')
+                .build())
+        .build();
 ```
 
 So what happens here? Let's see:
@@ -171,12 +127,10 @@ So what happens here? Let's see:
 2. We set its size to `10x10`
 3. We fill it with the `x` character
 4. We use the REXPaint16x16 tileset for it
-5. We set a `StyleSet` to be used by this [TileGraphics]
-6. And we finally create an actual instance of the [TileGraphics]
+5. And we finally create an actual instance of the [TileGraphics]
 
 > Note that in Zircon there is a helper class for every object which you might want to create and for
-> ease of use it is named after the object it creates using plural form.
-> So here we use `TileGraphics` to create instances of `TileGraphics` and `Sizes` to create `Size` objects.
+> ease of use it is named after the object it creates.
 
 Now we have a [TileGraphics] but what is all that stuff about colors, styles and modifiers?
 
@@ -202,11 +156,12 @@ Now that we got the basics out of the way, let's see how we can put some *actual
 ## Applications, AppConfigs and TileGrids
 
 For drawing things on your screen Zircon has the [TileGrid]. This provides you with a surface on which 
-you can draw [Tile]s, [TileGraphics]s and basically anything which is [Drawable]:
+you can draw [Tile]s, [TileGraphics]s and basically anything which is [TileComposite]:
 
 ```kotlin
 interface TileGrid
-    : AnimationHandler, Clearable, DrawSurface, InputEmitter, Layerable, ShutdownHook, Styleable, TypingSupport {
+    : AnimationHandler, Clearable, DrawSurface, Layerable,
+              ShutdownHook, TypingSupport, UIEventSource, ViewContainer {
 
     val widthInPixels: Int
         get() = currentTileset().width * width
@@ -222,19 +177,19 @@ Again, we have a very simple `interface` and a bunch of *behavior*s which make a
 - [AnimationHandler] adds the functionality to put [Animation]s on the grid. More about [Animation]s [here][animations].
 - [Clearable] lets you *clear* the graphic. This means setting all its tiles to an empty tile
 - [DrawSurface] is something you know by now
-- [InputEmitter] emits all the inputs which were received from the underlying GUI framework as Zircon [Input] events.
-  This means that you don't have to know how input handling works in Swing or LibGDX, Zircon takes care of this for you.
 - [Layerable] lets you put multiple layers on your screen. With this you can have overlays, effects, and that kind of
   stuff. Layering is explained in depth in its own chapter [here][how-layers-work].
 - [ShutdownHook] gives you the ability to listen to a shutdown event. (eg: when the user closes the screen) This is
   abstracted away from the actual underlying system (like Swing or LibGDX).
-- [Styleable] lets you get and set a [StyleSet] for this grid.
 - [TypingSupport] adds `putCharacter` and `putTile` to the mix and acts as if you were typing on the screen (from left
   to right, and then top to bottom).
+- [UIEventSource] emits all the inputs which were received from the underlying GUI framework as Zircon [Input] events.
+  This means that you don't have to know how input handling works in Swing or LibGDX, Zircon takes care of this for you.
+- [ViewContainer] adds support for [View]s.
   
-As you can see [TileGrid] is very similar to [TileGraphics] but there is a *very* important difference: what you `draw`,
-`set` or `put` on a [TileGrid] is immediately visible on your screen. That's why a [TileGrid] is not a [Drawable]. It
-is the end of the line, where all [Drawable] go to become visible on your screen.
+As you can see [TileGrid] is very similar to [TileGraphics] but there is a *very* important difference: what you `draw`
+on a [TileGrid] is immediately visible on your screen. It is the end of the line, where all [TileComposite] go to
+become visible on your screen.
 
 It also comes with functionality which you can use to interact with the underlying GUI system. You needn't worry about
 how the actual GUI system works, the [TileGrid]s job is to abstract all that away and give you a clean interface.  
@@ -244,7 +199,7 @@ Zircon solves this problem with composition: All of the above mentioned behavior
 within a [TileGrid] which is responsible for only one thing.
 For example [TileGrid] implements the [Layerable] interface and internally all operations defined by it are 
 delegated to an object which implements [Layerable] only.
-You can peruse these [here](https://github.com/Hexworks/zircon/tree/master/zircon.core/common/src/main/kotlin/org/hexworks/zircon/api/behavior).
+You can peruse these [here](https://github.com/Hexworks/zircon/tree/master/zircon.core/src/commonMain/kotlin/org/hexworks/zircon/api/behavior).
 In this sense you can consider a [TileGrid] as a [Facade](https://en.wikipedia.org/wiki/Facade_pattern).
 
 ### Creating a TileGrid
@@ -253,33 +208,19 @@ This is all very nice, but how do I create a [TileGrid]? How come it is drawn on
 do anything? That's because an [Application] takes care of all that for you:
 
 ```java
-import org.hexworks.zircon.api.AppConfigs;
-import org.hexworks.zircon.api.CP437TilesetResources;
-import org.hexworks.zircon.api.Sizes;
-import org.hexworks.zircon.api.SwingApplications;
-import org.hexworks.zircon.api.grid.TileGrid;
-
-public class CreatingAnApplication {
-
-    public static void main(String[] args) {
-
-        TileGrid tileGrid = SwingApplications.startTileGrid(                        // 1
-                AppConfigs.newConfig()                                              // 2
-                        .withSize(Sizes.create(10, 10))                             // 3
-                        .withDefaultTileset(CP437TilesetResources.rexPaint16x16())  // 4
-                        .build());                                                  // 5
-
-    }
-}
+TileGrid tileGrid = SwingApplications.startTileGrid(                        // 1
+        AppConfig.newBuilder()                                              // 2
+                .withSize(10, 10)                                           // 3
+                .withDefaultTileset(CP437TilesetResources.rexPaint16x16())  // 4
+                .build());  
 ```
 
 In the above example we:
 
 1. Create a new *Swing-backed* [Application]
 2. Creates a configuration for that application
-3. Sets the size of the window to be `30x20`
-4. Sets the tileset to be used to the REXPaint16x16 one
-5. Starts the [Application]
+3. Sets the size of the window to be `10x10`
+4. Sets the tileset to be used to REXPaint16x16
 
 So what's an [Application] anyway? In short an [Application] is responsible for rendering the contents of a [TileGrid]
 on the screen continuously and delegating all events, and actions which are coming from the underlying GUI system to

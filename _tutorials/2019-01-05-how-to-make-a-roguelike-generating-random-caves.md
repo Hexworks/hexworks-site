@@ -310,7 +310,7 @@ Here we
    our `Block` will be this single `Tile`. Think about blocks as if they were a box which you can put things (layers)
    into.
 5. In this game we don't care about the sides of our blocks since we'll be looking at them from a top down view so
-   we just return our `EMPTY` tile which is transparent. Whenever you use `Tiles.empty()` Zircon will ignore rendering
+   we just return our `EMPTY` tile which is transparent. Whenever you use `Tile.empty()` Zircon will ignore rendering
    it so you don't have to worry about it.
    
 Since we already have a repository for `Tile`s it is straightforward to create a factory for our `Block`s as well:

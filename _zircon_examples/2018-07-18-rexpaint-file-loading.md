@@ -4,6 +4,7 @@ title: Rexpaint file loading example
 tags: [zircon, documentation, zircon-example]
 author: hexworks
 short_title: Rexpaint file loading example
+source_code_url: https://github.com/Hexworks/zircon/blob/master/zircon.jvm.examples/src/main/java/org/hexworks/zircon/examples/RexLoaderExample.java
 ---
 
 > If you don't have a project set up just yet you can download either the [Java][java-skeleton] or the [Kotin][kotlin-skeleton] 
@@ -18,48 +19,20 @@ Loading Rexpaint (`.xp`) files is very simple in Zircon. The following is a runn
 copy and paste into your project and run:
 
 ```java
-import org.hexworks.zircon.api.*;
-import org.hexworks.zircon.api.application.Application;
-import org.hexworks.zircon.api.data.Size;
-import org.hexworks.zircon.api.graphics.Layer;
-import org.hexworks.zircon.api.grid.TileGrid;
-import org.hexworks.zircon.api.resource.BuiltInCP437TilesetResource;
-import org.hexworks.zircon.api.resource.REXPaintResource;
-import org.hexworks.zircon.api.resource.TilesetResource;
-import org.hexworks.zircon.api.screen.Screen;
+REXPaintResource rex = REXPaintResource.loadREXFile(RESOURCE);
 
-import java.io.InputStream;
-import java.util.List;
+TileGrid tileGrid = SwingApplications.startTileGrid(AppConfig.newBuilder()
+        .withDefaultTileset(CP437TilesetResources.taffer20x20())
+        .withSize(SIZE)
+        .withDebugMode(true)
+        .build());
 
-public class RexLoaderExample {
-    private static final int TERMINAL_WIDTH = 16;
-    private static final int TERMINAL_HEIGHT = 16;
-    private static final TilesetResource TILESET = BuiltInCP437TilesetResource.YOBBO_20X20;
-    private static final Size SIZE = Sizes.create(TERMINAL_WIDTH, TERMINAL_HEIGHT);
-    private static final InputStream RESOURCE = RexLoaderExample.class.getResourceAsStream("/rex_files/cp437_table.xp");
-
-    public static void main(String[] args) {
-        REXPaintResource rex = REXPaintResource.loadREXFile(RESOURCE);
-
-        Application app = SwingApplications.startApplication(AppConfigs.newConfig()
-                .withDefaultTileset(BuiltInCP437TilesetResource.TAFFER_20X20)
-                .withSize(SIZE)
-                .withDebugMode(true)
-                .build());
-
-        final TileGrid tileGrid = app.getTileGrid();
-
-        app.start();
-
-        final Screen screen = Screens.createScreenFor(tileGrid);
-        screen.setCursorVisibility(false);
-        List<Layer> layers = rex.toLayerList(TILESET);
-        for (Layer layer : layers) {
-            screen.pushLayer(layer);
-        }
-        screen.display();
-    }
+final Screen screen = Screen.create(tileGrid);
+List<Layer> layers = rex.toLayerList(TILESET);
+for (Layer layer : layers) {
+    screen.addLayer(layer);
 }
+screen.display();
 ```
 
 After running this code you should see this on your screen:

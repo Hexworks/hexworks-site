@@ -4,6 +4,7 @@ title: How to Work With TileGraphics
 tags: [zircon, documentation, zircon-documentation]
 author: hexworks
 short_title: How to Work With TileGraphics
+source_code_url: https://github.com/Hexworks/zircon/blob/master/zircon.jvm.examples/src/main/java/org/hexworks/zircon/examples/docs/CreatingTileGraphicsFromShapes.java
 ---
 
 > This document will help you understand how to compose Tiles into in-memory graphics objects called TileGraphics
@@ -22,53 +23,36 @@ A [TileGraphics] can be created by either using the [DrawSurfaces] helper or the
 Let's see an example:
 
 ```java
-import org.hexworks.zircon.api.*;
-import org.hexworks.zircon.api.application.AppConfig;
-import org.hexworks.zircon.api.color.ANSITileColor;
-import org.hexworks.zircon.api.graphics.Symbols;
-import org.hexworks.zircon.api.graphics.TileGraphics;
-import org.hexworks.zircon.api.grid.TileGrid;
-import org.hexworks.zircon.api.resource.TilesetResource;
+AppConfig config = AppConfig.newBuilder()
+        .withDefaultTileset(TILESET)
+        .build();
 
-public class CreatingTileGraphicsFromShapes {
+TileGrid tileGrid = SwingApplications.startTileGrid(
+        config);
 
-    private static final TilesetResource TILESET = CP437TilesetResources.rexPaint16x16();
+final TileGraphics background = DrawSurfaces.tileGraphicsBuilder()
+        .withSize(tileGrid.getSize()) // you can fetch the size of a TileGrid like this
+        .withFiller(Tile.newBuilder()
+                .withCharacter(Symbols.BULLET)
+                .withBackgroundColor(ANSITileColor.BLUE)
+                .withForegroundColor(ANSITileColor.CYAN)
+                .build())
+        .build();
 
-    public static void main(String[] args) {
+final TileGraphics rectangle = Shapes.buildRectangle(
+        Position.zero(),
+        tileGrid.getSize())
+        .toTileGraphics(Tile.newBuilder()
+                        .withCharacter(Symbols.BLOCK_DENSE)
+                        .withBackgroundColor(TileColor.transparent())
+                        .withForegroundColor(ANSITileColor.RED)
+                        .build(),
+                config.getDefaultTileset());
 
-        AppConfig config = AppConfigs.newConfig()
-                .withDefaultTileset(TILESET)
-                .build();
+background.draw(rectangle, Position.zero());
 
-        TileGrid tileGrid = SwingApplications.startTileGrid(
-                config);
-
-        final TileGraphics background = DrawSurfaces.tileGraphicsBuilder()
-                .withSize(tileGrid.getSize()) // you can fetch the size of a TileGrid like this
-                .build()
-                .fill(Tiles.newBuilder()
-                        .withCharacter(Symbols.BULLET)
-                        .withBackgroundColor(ANSITileColor.BLUE)
-                        .withForegroundColor(ANSITileColor.CYAN)
-                        .build());
-
-        final TileGraphics rectangle = Shapes.buildRectangle(
-                Positions.zero(),
-                tileGrid.getSize())
-                .toTileGraphics(Tiles.newBuilder()
-                                .withCharacter(Symbols.BLOCK_DENSE)
-                                .withBackgroundColor(TileColors.transparent())
-                                .withForegroundColor(ANSITileColor.RED)
-                                .build(),
-                        config.getDefaultTileset());
-
-        background.draw(rectangle, Positions.zero());
-
-        // the default position is (0x0) which is the top left corner
-        tileGrid.draw(background, Positions.zero());
-
-    }
-}
+// the default position is (0x0) which is the top left corner
+tileGrid.draw(background, Position.zero());
 ```
 
 The result of running this code snippet should look like this:
@@ -88,7 +72,7 @@ about a [Tile] that it belongs to your image. If you need this kind of informati
 [how-layers-work][how-layers-work] work.
 
 You can draw [TileGraphics] objects onto each other (as you can see in the example above). Keep in mind that there is a special
-empty [Tile] which is accessible from the [Tiles] class like this: `Tiles.empty()`.
+empty [Tile] which is accessible from the [Tile] class like this: `Tile.empty()`.
 
 `EMPTY` [Tile]s **will not be copied** over to the [DrawSurface] when you call `draw` so you can create
 flattened layers this way (the same happens in the example above).

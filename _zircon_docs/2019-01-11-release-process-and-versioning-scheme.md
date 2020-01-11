@@ -46,8 +46,8 @@ An example Jitpack dependency:
 
 Gradle:
 ```groovy
-implementation 'org.hexworks.zircon:zircon.core-jvm:2019.0.9-PREVIEW'
-implementation 'org.hexworks.zircon:zircon.jvm.swing:2019.0.9-PREVIEW'
+implementation 'org.hexworks.zircon:zircon.core-jvm:2019.1.2-PREVIEW'
+implementation 'org.hexworks.zircon:zircon.jvm.swing:2019.1.2-PREVIEW'
 ```
 
 Maven:
@@ -56,12 +56,12 @@ Maven:
 <dependency>
     <groupId>org.hexworks.zircon</groupId>
     <artifactId>zircon.core-jvm</artifactId>
-    <version>2019.0.9-PREVIEW</version>
+    <version>2019.1.2-PREVIEW</version>
 </dependency>
 <dependency>
     <groupId>org.hexworks.zircon</groupId>
     <artifactId>zircon.jvm.swing</artifactId>
-    <version>2019.0.9-PREVIEW</version>
+    <version>2019.1.2-PREVIEW</version>
 </dependency>
 ```
 

@@ -4,6 +4,7 @@ title: How Layers Work
 tags: [zircon, documentation, zircon-documentation]
 author: hexworks
 short_title: How Layers Work
+source_code_url: https://github.com/Hexworks/zircon/blob/master/zircon.jvm.examples/src/main/java/org/hexworks/zircon/examples/docs/UsingLayers.java
 ---
 
 A [Layer] is a specialized [TileGraphics] object which can be drawn upon a [Layerable] object.
@@ -18,54 +19,37 @@ Both the [TileGrid] and the [Screen] interfaces implement [Layerable] so you can
 or remove one by its reference (like when you use a `Set`):
 
 ```java
-import org.hexworks.zircon.api.AppConfigs;
-import org.hexworks.zircon.api.DrawSurfaces;
-import org.hexworks.zircon.api.Layers;
-import org.hexworks.zircon.api.Positions;
-import org.hexworks.zircon.api.Sizes;
-import org.hexworks.zircon.api.SwingApplications;
-import org.hexworks.zircon.api.TileColors;
-import org.hexworks.zircon.api.Tiles;
-import org.hexworks.zircon.api.color.ANSITileColor;
-import org.hexworks.zircon.api.graphics.Layer;
-import org.hexworks.zircon.api.grid.TileGrid;
+TileGrid tileGrid = LibgdxApplications.startTileGrid(AppConfig.newBuilder()
+        .withSize(20, 10)
+        .build());
 
-public class UsingLayers {
+Layer layer0 = Layer.newBuilder()
+        .withTileGraphics(DrawSurfaces.tileGraphicsBuilder()
+                .withSize(3, 3)
+                .withFiller(Tile.newBuilder()
+                        .withForegroundColor(ANSITileColor.GREEN)
+                        .withBackgroundColor(TileColor.transparent())
+                        .withCharacter('X')
+                        .build())
+                .build())
+        .withOffset(1, 1)
+        .build();
 
-    public static void main(String[] args) {
+Layer layer1 = Layer.newBuilder()
+        .withTileGraphics(DrawSurfaces.tileGraphicsBuilder()
+                .withSize(3, 3)
+                .withFiller(Tile.newBuilder()
+                        .withForegroundColor(ANSITileColor.RED)
+                        .withBackgroundColor(TileColor.transparent())
+                        .withCharacter('+')
+                        .build())
+                .build())
+        .withOffset(3, 3)
+        .build();
 
-        TileGrid tileGrid = SwingApplications.startTileGrid(AppConfigs.newConfig()
-                        .withSize(Sizes.create(20, 20))
-                        .build());
+tileGrid.addLayer(layer0);
+tileGrid.addLayer(layer1);
 
-        Layer layer0 = Layers.newBuilder()
-                .withTileGraphics(DrawSurfaces.tileGraphicsBuilder()
-                        .withSize(Sizes.create(3, 3))
-                        .build()
-                        .fill(Tiles.newBuilder()
-                                .withForegroundColor(ANSITileColor.GREEN)
-                                .withBackgroundColor(TileColors.transparent())
-                                .withCharacter('X')
-                                .build()))
-                .withOffset(Positions.offset1x1())
-                .build();
-
-        Layer layer1 = Layers.newBuilder()
-                .withTileGraphics(DrawSurfaces.tileGraphicsBuilder()
-                        .withSize(Sizes.create(3, 3))
-                        .build()
-                        .fill(Tiles.newBuilder()
-                                .withForegroundColor(ANSITileColor.RED)
-                                .withBackgroundColor(TileColors.transparent())
-                                .withCharacter('+')
-                                .build()))
-                .withOffset(Positions.create(3, 3))
-                .build();
-
-        tileGrid.pushLayer(layer0);
-        tileGrid.pushLayer(layer1);
-    }
-}
 ```
 
 After running this code you'll see this on your screen:
@@ -73,7 +57,7 @@ After running this code you'll see this on your screen:
 ![How Layers Work](/assets/img/how-layers-work.png)
 
 > Note that in the above example all objects are created by using the corresponding helper class:
-> [Layers], [DrawSurfaces] and [Tiles]. This is a common pattern in Zircon and you should
+> [Layers], [DrawSurfaces] and [Tile]s. This is a common pattern in Zircon and you should
 > use `these Builder`s for creating all Zircon objects. Read about [The design philosophy behind Zircon][design-philosophy] for more info.
 
 ## Layer mechanics

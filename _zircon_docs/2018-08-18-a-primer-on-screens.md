@@ -4,6 +4,7 @@ title: A Primer on Screens
 tags: [zircon, documentation, zircon-documentation]
 author: hexworks
 short_title: A Primer on Screens
+source_code_url: https://github.com/Hexworks/zircon/blob/master/zircon.jvm.examples/src/main/java/org/hexworks/zircon/examples/docs/CreatingAScreen.java
 ---
 
 [Screen]s are in-memory [TileGrid]s. They have an internal representation of a grid and support all
@@ -18,63 +19,41 @@ in your app and you can switch between them simultaneously by using the `display
 [Screen]s also let you use [Component]s like [Button]s and [Panel]s. Let's see how we can use [Screen]s.
 
 ```java
-import org.hexworks.zircon.api.*;
-import org.hexworks.zircon.api.grid.TileGrid;
-import org.hexworks.zircon.api.screen.Screen;
+TileGrid tileGrid = SwingApplications.startTileGrid(
+        AppConfig.newBuilder()
+                .withSize(20, 8)
+                .withDefaultTileset(CP437TilesetResources.wanderlust16x16())
+                .build());
 
-public class CreatingAScreen {
-
-    public static void main(String[] args) {
-
-        TileGrid tileGrid = SwingApplications.startTileGrid(
-                AppConfigs.newConfig()
-                        .withSize(Sizes.create(20, 8))
-                        .withDefaultTileset(CP437TilesetResources.wanderlust16x16())
-                        .build());
-
-        final Screen screen = Screens.createScreenFor(tileGrid);
-    }
-}
+final Screen screen = Screen.create(tileGrid);
 ```
 
 You can interact with a [Screen] in the same way as you would use a [TileGrid]. All the drawing operations work
 as expected. Running the following snippet:
 
 ```java
-import org.hexworks.zircon.api.*;
-import org.hexworks.zircon.api.component.ColorTheme;
-import org.hexworks.zircon.api.graphics.TileGraphics;
-import org.hexworks.zircon.api.grid.TileGrid;
-import org.hexworks.zircon.api.screen.Screen;
+TileGrid tileGrid = SwingApplications.startTileGrid(
+        AppConfig.newBuilder()
+                .withSize(20, 8)
+                .withDefaultTileset(CP437TilesetResources.wanderlust16x16())
+                .build());
 
-public class CreatingAScreen {
+final Screen screen = Screen.create(tileGrid);
 
-    public static void main(String[] args) {
+final ColorTheme theme = ColorThemes.adriftInDreams();
 
-        TileGrid tileGrid = SwingApplications.startTileGrid(
-                AppConfigs.newConfig()
-                        .withSize(Sizes.create(20, 8))
-                        .withDefaultTileset(CP437TilesetResources.wanderlust16x16())
-                        .build());
+final TileGraphics image = DrawSurfaces.tileGraphicsBuilder()
+        .withSize(tileGrid.getSize())
+        .withFiller(Tile.newBuilder()
+                .withForegroundColor(theme.getPrimaryForegroundColor())
+                .withBackgroundColor(theme.getPrimaryBackgroundColor())
+                .withCharacter('~')
+                .build())
+        .build();
 
-        final Screen screen = Screens.createScreenFor(tileGrid);
+screen.draw(image, Position.zero(), image.getSize());
 
-        final ColorTheme theme = ColorThemes.adriftInDreams();
-
-        final TileGraphics image = DrawSurfaces.tileGraphicsBuilder()
-                .withSize(tileGrid.getSize())
-                .build()
-                .fill(Tiles.newBuilder()
-                        .withForegroundColor(theme.getPrimaryForegroundColor())
-                        .withBackgroundColor(theme.getPrimaryBackgroundColor())
-                        .withCharacter('~')
-                        .build());
-
-        screen.draw(image, Positions.zero());
-
-        screen.display();
-    }
-}
+screen.display();
 ```
 
 will result in this nice ocean:
@@ -111,40 +90,37 @@ another [Screen] was `display`ed on the [TileGrid]).
 Here is how you can attach multiple [Screen]s to a [TileGrid] and switch between them:
 
 ```java
-import org.hexworks.zircon.api.*;
-import org.hexworks.zircon.api.component.Button;
-import org.hexworks.zircon.api.grid.TileGrid;
-import org.hexworks.zircon.api.screen.Screen;
+TileGrid tileGrid = SwingApplications.startTileGrid();
 
-public class SwitchingScreens {
+final Screen screen0 = Screen.create(tileGrid);
+final Button next = Components.button()
+        .withText("Next")
+        .withPosition(8, 1)
+        .build();
+screen0.addComponent(next);
 
-    public static void main(String[] args) {
+final Screen screen1 = Screen.create(tileGrid);
+final Button prev = Components.button()
+        .withText("Prev")
+        .withPosition(1, 1)
+        .build();
+screen1.addComponent(prev);
 
-        TileGrid tileGrid = SwingApplications.startTileGrid();
+next.handleComponentEvents(ComponentEventType.ACTIVATED, (event) -> {
+    LOGGER.info("Switching to Screen 1");
+    screen1.display();
+    return UIEventResponse.preventDefault();
+});
+prev.handleComponentEvents(ComponentEventType.ACTIVATED, (event) -> {
+    LOGGER.info("Switching to Screen 0");
+    screen0.display();
+    return UIEventResponse.processed();
+});
 
-        final Screen screen0 = Screens.createScreenFor(tileGrid);
-        final Button next = Components.button()
-                .withText("Next")
-                .withPosition(Positions.offset1x1())
-                .build();
-        screen0.addComponent(next);
+screen0.setTheme(ColorThemes.adriftInDreams());
+screen1.setTheme(ColorThemes.afterTheHeist());
 
-        final Screen screen1 = Screens.createScreenFor(tileGrid);
-        final Button prev = Components.button()
-                .withText("Prev")
-                .withPosition(Positions.offset1x1())
-                .build();
-        screen1.addComponent(prev);
-
-        next.onMouseReleased(mouseAction -> screen1.display());
-        prev.onMouseReleased(mouseAction -> screen0.display());
-
-        screen0.applyColorTheme(ColorThemes.adriftInDreams());
-        screen1.applyColorTheme(ColorThemes.afterTheHeist());
-
-        screen0.display();
-    }
-}
+screen1.display();
 ```
 
 And it looks like this in action:

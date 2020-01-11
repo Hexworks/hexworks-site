@@ -17,6 +17,9 @@ regenerate: true
         </div>
     </header>
     <div id="post-body" itemprop="articleBody">
+        {% if page.source_code_url %}
+            {% include source_code_details.html url = page.source_code_url %}
+        {% endif %}
         {{ content }}
     </div>
     {% include page_nav.html %}

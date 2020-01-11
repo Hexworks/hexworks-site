@@ -29,12 +29,12 @@ from Maven:
     <dependency>
         <groupId>org.hexworks.zircon</groupId>
         <artifactId>zircon.core-jvm</artifactId>
-        <version>2019.1.0-PREVIEW</version>
+        <version>2019.1.2-PREVIEW</version>
     </dependency>
     <dependency>
         <groupId>org.hexworks.zircon</groupId>
         <artifactId>zircon.jvm.swing</artifactId>
-        <version>2019.1.0-PREVIEW</version>
+        <version>2019.1.2-PREVIEW</version>
     </dependency>
 </dependencies>
 
@@ -50,8 +50,8 @@ allprojects {
 }
 
 dependencies {
-    implementation 'org.hexworks.zircon:zircon.core-jvm:2019.1.0-PREVIEW'
-    implementation 'org.hexworks.zircon:zircon.jvm.swing:2019.1.0-PREVIEW'
+    implementation 'org.hexworks.zircon:zircon.core-jvm:2019.1.2-PREVIEW'
+    implementation 'org.hexworks.zircon:zircon.jvm.swing:2019.1.2-PREVIEW'
 }
 ```
 
@@ -64,8 +64,9 @@ Before we start there are some guidelines which can help you if you are stuck:
 
 - If you want to build something (a `TileGraphics`, a `Component` or anything which is part of the public API) it
   is almost sure that there is a `Builder` or a `Factory` for it. The convention is that if you want to create a
-  `Tile` for example, then you can use the `Tiles` class to do so. (so it is the plural form of the
-  thing which you want to build). Your IDE will help you with this. These classes reside in the
+  `Tile` you can use the factory functions defined on said class. If there are multiple classes of objects which
+  can be created there might also be an utility class (like `Shapes` to create different `Shape` objects.
+   Your IDE will help you with this. These classes reside in the
   `org.hexworks.zircon.api` package. There are some classes which are grouped together into a single utility class
   however. With `Components` you can obtain `Builder`s for all `Component`s like `Components.panel()` or
   `Components.checkBox()`. Likewise you can use `DrawSurfaces` to obtain builders for `TileGraphics` and
@@ -119,92 +120,59 @@ Since most of the time you don't care about the [Application] itself, there is a
 [TileGrid] directly:
 
 ```java
-import org.hexworks.zircon.api.SwingApplications;
-import org.hexworks.zircon.api.grid.TileGrid;
-
-public class CreatingATileGrid {
-
-    public static void main(String[] args) {
-
-        TileGrid tileGrid = SwingApplications.startTileGrid();
-    }
-}
+TileGrid tileGrid = SwingApplications.startTileGrid();
 ```
 
-Now let's see how we can specify how a [TileGrid] is created. We'll use the [AppConfigs] helper for this:
+Now let's see how we can specify how a [TileGrid] is created. We'll use the [AppConfig] for this:
 
 ```java
-import org.hexworks.zircon.api.AppConfigs;
-import org.hexworks.zircon.api.CP437TilesetResources;
-import org.hexworks.zircon.api.Sizes;
-import org.hexworks.zircon.api.SwingApplications;
-import org.hexworks.zircon.api.application.Application;
-
-public class CreatingAnApplication {
-
-    public static void main(String[] args) {
-
-        Application application = SwingApplications.startApplication(
-                AppConfigs.newConfig()
-                        .withSize(Sizes.create(30, 20))
-                        .withDefaultTileset(CP437TilesetResources.rexPaint16x16())
-                        .withClipboardAvailable(true)
-                        .build());
-    }
-}
-
+TileGrid tileGrid = SwingApplications.startTileGrid(
+        AppConfig.newBuilder()
+                .withSize(10, 10)
+                .withDefaultTileset(CP437TilesetResources.rexPaint16x16())
+                .build());
 ```
 
 Adding and formatting [Tile]s is very simple:
 
 ```java
-import org.hexworks.zircon.api.*;
-import org.hexworks.zircon.api.color.ANSITileColor;
-import org.hexworks.zircon.api.grid.TileGrid;
+TileGrid tileGrid = SwingApplications.startTileGrid(
+        AppConfig.newBuilder()
+                .withSize(10, 10)
+                .withDefaultTileset(CP437TilesetResources.rexPaint16x16())
+                .build());
 
-public class CreatingAnApplication {
+tileGrid.draw(
+        Tile.newBuilder()
+                .withBackgroundColor(ANSITileColor.CYAN)
+                .withForegroundColor(ANSITileColor.WHITE)
+                .withCharacter('x')
+                .build(),
+        Position.create(2, 3));
 
-    public static void main(String[] args) {
+tileGrid.draw(
+        Tile.newBuilder()
+                .withBackgroundColor(ANSITileColor.RED)
+                .withForegroundColor(ANSITileColor.GREEN)
+                .withCharacter('y')
+                .build(),
+        Position.create(3, 4));
 
-        TileGrid tileGrid = SwingApplications.startTileGrid(
-                AppConfigs.newConfig()
-                        .withSize(Sizes.create(10, 10))
-                        .withDefaultTileset(CP437TilesetResources.rexPaint16x16())
-                        .build());
-
-        tileGrid.setTileAt(
-                Positions.create(2, 3),
-                Tiles.newBuilder()
-                        .withBackgroundColor(ANSITileColor.CYAN)
-                        .withForegroundColor(ANSITileColor.WHITE)
-                        .withCharacter('x')
-                        .build());
-
-        tileGrid.setTileAt(
-                Positions.create(3, 4),
-                Tiles.newBuilder()
-                        .withBackgroundColor(ANSITileColor.RED)
-                        .withForegroundColor(ANSITileColor.GREEN)
-                        .withCharacter('y')
-                        .build());
-
-        tileGrid.setTileAt(
-                Positions.create(4, 5),
-                Tiles.newBuilder()
-                        .withBackgroundColor(ANSITileColor.BLUE)
-                        .withForegroundColor(ANSITileColor.MAGENTA)
-                        .withCharacter('z')
-                        .build());
-    }
-}
+tileGrid.draw(
+        Tile.newBuilder()
+                .withBackgroundColor(ANSITileColor.BLUE)
+                .withForegroundColor(ANSITileColor.MAGENTA)
+                .withCharacter('z')
+                .build(),
+        Position.create(4, 5));
 ```
 
 Running the above code will result in something like this:
 
 ![Creating a TileGrid](/assets/img/creating_a_tile_grid.png)
 
-As you can see there is a helper for every class which you might want to use. Here we used `Positions.create`
-to create a [Position], `Sizes.create` for creating [Size]s and the [TileBuilder] to create tiles.
+As you can see there are factory methods for every class which you might want to use. Here we used `Position.create`
+to create a [Position], `Size.create` for creating [Size]s and the [TileBuilder] to create tiles.
 
 A `Position` denotes a coordinate on a `TileGrid`, so for example a `Position` of (`2`, `3`) points to the 3rd
 column and the 4th row (x, y) on the grid.
@@ -240,41 +208,28 @@ the previous [Screen].
 Let's create a [Screen] and fill it up with some stuff:
 
 ```java
-import org.hexworks.zircon.api.*;
-import org.hexworks.zircon.api.component.ColorTheme;
-import org.hexworks.zircon.api.graphics.TileGraphics;
-import org.hexworks.zircon.api.grid.TileGrid;
-import org.hexworks.zircon.api.screen.Screen;
+TileGrid tileGrid = SwingApplications.startTileGrid(
+        AppConfig.newBuilder()
+                .withSize(20, 8)
+                .withDefaultTileset(CP437TilesetResources.wanderlust16x16())
+                .build());
 
-public class CreatingAScreen {
+final Screen screen = Screen.create(tileGrid);
 
-    public static void main(String[] args) {
+final ColorTheme theme = ColorThemes.adriftInDreams();
 
-        TileGrid tileGrid = SwingApplications.startTileGrid(
-                AppConfigs.newConfig()
-                        .withSize(Sizes.create(20, 8))
-                        .withDefaultTileset(CP437TilesetResources.wanderlust16x16())
-                        .build());
+final TileGraphics image = DrawSurfaces.tileGraphicsBuilder()
+        .withSize(tileGrid.getSize())
+        .withFiller(Tile.newBuilder()
+                .withForegroundColor(theme.getPrimaryForegroundColor())
+                .withBackgroundColor(theme.getPrimaryBackgroundColor())
+                .withCharacter('~')
+                .build())
+        .build();
 
-        final Screen screen = Screens.createScreenFor(tileGrid);
+screen.draw(image, Position.zero(), image.getSize());
 
-        final ColorTheme theme = ColorThemes.adriftInDreams();
-
-        final TileGraphics image = DrawSurfaces.tileGraphicsBuilder()
-                .withSize(tileGrid.getSize())
-                .build()
-                .fill(Tiles.newBuilder()
-                        .withForegroundColor(theme.getPrimaryForegroundColor())
-                        .withBackgroundColor(theme.getPrimaryBackgroundColor())
-                        .withCharacter('~')
-                        .build());
-
-        screen.draw(image, Positions.zero());
-
-        screen.display();
-    }
-}
-
+screen.display();
 ```
 
 and we've got a nice ocean:
@@ -319,97 +274,73 @@ These components are rather simple and you can expect them to work in a way you 
 Let's look at an example (notes about how it works are in the comments):
 
 ```java
-import org.hexworks.zircon.api.AppConfigs;
-import org.hexworks.zircon.api.CP437TilesetResources;
-import org.hexworks.zircon.api.ColorThemes;
-import org.hexworks.zircon.api.Components;
-import org.hexworks.zircon.api.LibgdxApplications;
-import org.hexworks.zircon.api.Positions;
-import org.hexworks.zircon.api.Screens;
-import org.hexworks.zircon.api.Sizes;
-import org.hexworks.zircon.api.SwingApplications;
-import org.hexworks.zircon.api.UIEventResponses;
-import org.hexworks.zircon.api.component.Button;
-import org.hexworks.zircon.api.component.CheckBox;
-import org.hexworks.zircon.api.component.Header;
-import org.hexworks.zircon.api.component.Panel;
-import org.hexworks.zircon.api.grid.TileGrid;
-import org.hexworks.zircon.api.screen.Screen;
+final TileGrid tileGrid = SwingApplications.startTileGrid(
+        AppConfig.newBuilder()
+                .withSize(34, 18)
+                .withDefaultTileset(CP437TilesetResources.aduDhabi16x16())
+                .build());
+final Screen screen = Screen.create(tileGrid);
 
-import static org.hexworks.zircon.api.uievent.ComponentEventType.ACTIVATED;
+Panel panel = Components.panel()
+        .withDecorations(
+                // panels can be wrapped in a box
+                box(BoxType.SINGLE, "Panel"),
+                shadow()) // shadow can be added
+        .withSize(32, 16) // the size must be smaller than the parent's size
+        .withPosition(1, 1)
+        .build(); // position is always relative to the parent
 
-public class UsingComponents {
+final Header header = Components.header()
+        // this will be 1x1 left and down from the top left
+        // corner of the panel
+        .withPosition(1, 1)
+        .withText("Header")
+        .build();
 
-    public static void main(String[] args) {
+final CheckBox checkBox = Components.checkBox()
+        .withText("Check me!")
+        .withPosition(Position.create(0, 1)
+                // the position class has some convenience methods
+                // for you to specify your component's position as
+                // relative to another one
+                .relativeToBottomOf(header))
+        .build();
 
-        final TileGrid tileGrid = SwingApplications.startTileGrid(
-                AppConfigs.newConfig()
-                        .withSize(Sizes.create(34, 18))
-                        .withDefaultTileset(CP437TilesetResources.aduDhabi16x16())
-                        .build());
-        final Screen screen = Screens.createScreenFor(tileGrid);
+final Button left = Components.button()
+        .withPosition(Position.create(0, 1) // this means 1 row below the check box
+                .relativeToBottomOf(checkBox))
+        .withText("Left")
+        .build();
 
-        Panel panel = Components.panel()
-                .wrapWithBox(true) // panels can be wrapped in a box
-                .withTitle("Panel") // if a panel is wrapped in a box a title can be displayed
-                .wrapWithShadow(true) // shadow can be added
-                .withSize(Sizes.create(32, 16)) // the size must be smaller than the parent's size
-                .withPosition(Positions.offset1x1())
-                .build(); // position is always relative to the parent
+final Button right = Components.button()
+        .withPosition(Position.create(1, 0) // 1 column right relative to the left BUTTON
+                .relativeToRightOf(left))
+        .withText("Right")
+        .build();
 
-        final Header header = Components.header()
-                // this will be 1x1 left and down from the top left
-                // corner of the panel
-                .withPosition(Positions.offset1x1())
-                .withText("Header")
-                .build();
+panel.addComponent(header);
+panel.addComponent(checkBox);
+panel.addComponent(left);
+panel.addComponent(right);
 
-        final CheckBox checkBox = Components.checkBox()
-                .withText("Check me!")
-                .withPosition(Positions.create(0, 1)
-                        // the position class has some convenience methods
-                        // for you to specify your component's position as
-                        // relative to another one
-                        .relativeToBottomOf(header))
-                .build();
+screen.addComponent(panel);
 
-        final Button left = Components.button()
-                .withPosition(Positions.create(0, 1) // this means 1 row below the check box
-                        .relativeToBottomOf(checkBox))
-                .withText("Left")
-                .build();
+// we can apply color themes to a screen
+screen.setTheme(ColorThemes.monokaiBlue());
 
-        final Button right = Components.button()
-                .withPosition(Positions.create(1, 0) // 1 column right relative to the left BUTTON
-                        .relativeToRightOf(left))
-                .withText("Right")
-                .build();
+// this is how you can define interactions with a component
+left.handleComponentEvents(ACTIVATED, (event) -> {
+    screen.setTheme(ColorThemes.monokaiGreen());
+    return UIEventResponse.processed();
+});
 
-        panel.addComponent(header);
-        panel.addComponent(checkBox);
-        panel.addComponent(left);
-        panel.addComponent(right);
+right.handleComponentEvents(ACTIVATED, (event) -> {
+    screen.setTheme(ColorThemes.monokaiViolet());
+    return UIEventResponse.processed();
+});
 
-        screen.addComponent(panel);
-
-        // we can apply color themes to a screen
-        screen.applyColorTheme(ColorThemes.monokaiBlue());
-
-        // this is how you can define interactions with a component
-        left.onComponentEvent(ACTIVATED, (event) -> {
-            screen.applyColorTheme(ColorThemes.monokaiGreen());
-            return UIEventResponses.processed();
-        });
-
-        right.onComponentEvent(ACTIVATED, (event) -> {
-            screen.applyColorTheme(ColorThemes.monokaiViolet());
-            return UIEventResponses.processed();
-        });
-
-        // in order to see the changes you need to display your screen.
-        screen.display();
-    }
-}
+// in order to see the changes you need to display your screen.
+screen.display();
 ```
 
 And the result will look like this:

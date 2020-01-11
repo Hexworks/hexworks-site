@@ -18,8 +18,7 @@ Most of them have `enum` values which will give you some built-in resources (lik
 Zircon handles multiple types of tilesets. Currently there is support for graphic, image, CP437 and true type tilesets.
 
 ### CP437 tilesets
-CP437 tilesets come in the form of transparent `.png` files. You can peruse
-[BuiltInCP437TilesetResource] to check the details. The rules of using CP437 tilesets:
+CP437 tilesets come in the form of transparent `.png` files. The rules of using CP437 tilesets:
 
 - Your `.png` file has to have a transparent background
 - You are free to use the built-in CP437 fonts as you see fit (they come from the 
@@ -30,48 +29,45 @@ CP437 tilesets come in the form of transparent `.png` files. You can peruse
 You can use the built in CP437 tilesets by using the helper class:
 
 ```java
-import org.hexworks.zircon.api.CP437TilesetResources;
-import org.hexworks.zircon.api.resource.CP437TilesetResource;
-
 public class UsingCP437Tilesets {
 
     public static void main(String[] args) {
 
-        CP437TilesetResource tileset = CP437TilesetResources.rogueYun16x16();
+        TilesetResource tileset = CP437TilesetResources.rogueYun16x16();
 
     }
 }
-
 ```
 
 Loading your own `TilesetResource` is also simple, you just have to provide a `width`, a `height`, and an 
-`InputStream` which points to your file:
+path which points to your file:
 
 ```java
-CP437TilesetResource.loadCP437Tileset(16, 16, stream);
+CP437TilesetResources.loadCP437Tileset(16, 16, path);
 ```
 
 ### Graphical tilesets
 
-[Graphic tilesets](https://github.com/Hexworks/zircon/blob/master/zircon.jvm/src/main/kotlin/org/codetome/zircon/api/resource/GraphicTilesetResource.kt) are a bit more complex and they come with their own format (currently a `.zip` file containing your tile files and some metadata). Check how the `NETHACK` tileset example looks like [here](https://github.com/Hexworks/zircon/tree/master/zircon.core/common/src/main/resources/graphic_tilesets).
+Graphical tilesets are a bit more complex and they come with their own format (currently a `.zip` file containing your
+tile files and some metadata). Check how the `NETHACK` tileset example looks like 
+[here](https://github.com/Hexworks/zircon/tree/master/zircon.core/src/commonMain/resources/graphic_tilesets).
 
 You can use the built-in `NETHACK` tileset like this:
 
 ```java
-GraphicTilesetResource.NETHACK_16X16.toFont(new PickFirstMetaStrategy());
+GraphicTilesetResources.nethack16x16();
 ```
 
-Or you can load your own `.zip` file by using `GraphicTilesetResource.loadGraphicTileset` like this:
+Or you can load your own `.zip` file by using `GraphicTilesetResource.loadTilesetFromFilesystem` like this:
 
 ```java
-GraphicTilesetResource.loadGraphicTileset("path/to.zip", new PickFirstMetaStrategy())
+GraphicTilesetResources.loadTilesetFromFilesystem(width, height, "path/to.zip")
 ```
-
-What is a `MetadataPickingStrategy` you might ask?
 
 ### The Zircon Tileset format
 
-The tileset format which is supported by Zircon is a `.zip` file which **must** contain a `tileinfo.yml` which is the metadata about each *tile* and at least one `.png` file which contains the tiles. `tileinfo.yml` looks like this:
+The tileset format which is supported by Zircon is a `.zip` file which **must** contain a `tileinfo.yml` which is the metadata 
+about each *tile* and at least one `.png` file which contains the tiles. `tileinfo.yml` looks like this:
 
 ```yml
 # Nethack tileset ported to the Zircon tileset format
@@ -102,14 +98,21 @@ Description will be empty by default.
 
 ### Metadata picking strategy
 
-When Zircon tries to draw a `TextCharacter` on the screen it needs to fetch a texture for that character. In the case of Physical and CP437 fonts this is easy since there is a *1:1* mapping to each texture.
+When Zircon tries to draw a `TextCharacter` on the screen it needs to fetch a texture for that character. In the case of
+Physical and CP437 fonts this is easy since there is a *1:1* mapping to each texture.
 
-In graphic tilesets however each tile has a `name` and some `tag`s so it is no longer a straightforward mapping. This is why you can set `tags` for each `TextCharacter`. They will be used as filters to figure out which tile to choose from a graphic tileset. This is how it works:
+In graphic tilesets however each tile has a `name` and some `tag`s so it is no longer a straightforward mapping.
+This is why you can set `tags` for each `TextCharacter`. They will be used as filters to figure out which tile to choose
+from a graphic tileset. This is how it works:
 
 - Zircon will try to fetch a texture for a `TextCharacter` based on its `char` value (eg: `x`)
-- If there are more than 1 textures it will use the `tags` from `TextCharacter` to filter for a match. **Note that** a texture is **only considered** if it has **all** the `tags` from `TextCharacter`. So for example if you `TextCharacter` has `tags` (`foo` and `bar`) and your tile has `bar` it won't be considered, but if your tile has (`foo`, `bar` and `baz`) it will be a match.
+- If there are more than 1 textures it will use the `tags` from `TextCharacter` to filter for a match.
+**Note that** a texture is **only considered** if it has **all** the `tags` from `TextCharacter`. So for example if you
+`TextCharacter` has `tags` (`foo` and `bar`) and your tile has `bar` it won't be considered, but if your tile has
+ (`foo`, `bar` and `baz`) it will be a match.
 
-If there is still *more than one option* to choose from Zircon will use the `MetadataPickingStrategy` you supplied to pick **one** tile. There are two built-in strategies, but you can write your own:
+If there is still *more than one option* to choose from Zircon will use the `MetadataPickingStrategy` you supplied to
+pick **one** tile. There are two built-in strategies, but you can write your own:
 
 - `PickFirstMetaStrategy` <-- this will pick the **first** tile from the list. Good option if you don't care or if you always want to see the same tile
 - `PickRandomMetaStrategy` <-- this will pick a random tile form the matches. Good if you want varied tiles (like walls for example)
@@ -118,7 +121,7 @@ If there is still *more than one option* to choose from Zircon will use the `Met
 
 ## REXPaint files
 
-You can load REXPaint files (`.xp`) by using [RexPaintResource](https://github.com/Hexworks/zircon/blob/master/zircon.core/jvm/src/main/kotlin/org/hexworks/zircon/api/resource/REXPaintResource.kt).
+You can load REXPaint files (`.xp`) by using [RexPaintResource](https://github.com/Hexworks/zircon/blob/master/zircon.core/src/jvmMain/kotlin/org/hexworks/zircon/api/resource/REXPaintResource.kt).
 
 Any REXPaint file is supported (even layered ones). You can load your file by calling `REXPaintResource.loadREXFile` like this:
 
@@ -132,17 +135,17 @@ once you loaded your `.xp` file it can be converted to Zircon `Layer`s by using 
 List<Layer> layers = rex.toLayerList();
 ```
 
-Read more about `Layer`s [here](https://github.com/Hexworks/zircon/wiki/How-Layers-work).
+Read more about `Layer`s [here](/zircon/docs/2018-11-21-how-layers-work).
 
 There is also a complete example which you can try out [here](https://github.com/Hexworks/zircon/blob/master/zircon.jvm.examples/src/main/java/org/hexworks/zircon/examples/RexLoaderExample.java).
 
 ## Color Themes
 
-`ColorTheme`s are special kind of resource, and they are detailed [here](https://github.com/Hexworks/zircon/wiki/Working-with-ColorThemes).
+`ColorTheme`s are special kind of resource, and they are detailed [here](/zircon/docs/2018-11-20-working-with-color-themes).
 
 ## Animations
 
-Animations come with their own file format (`.zap` = Zircon Animation Package). Animations are a beta feature and you can read more about them [here](https://github.com/Hexworks/zircon/wiki/Animation-support).
+Animations come with their own file format (`.zap` = Zircon Animation Package). Animations are a beta feature and you can read more about them [here](/zircon/docs/2019-04-26-animation-support).
 
 
 {% include zircon_links.md %}
