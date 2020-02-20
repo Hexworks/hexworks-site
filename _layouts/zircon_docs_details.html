@@ -7,14 +7,7 @@ regenerate: true
         {% if page.tags %}
         {% include tag_list.html tags = page.tags %}
         {% endif %}
-        <h1 class="post-title"
-            itemprop="name headline">{{ page.title }}</h1>
-        <div id="post-meta">
-            <time datetime="{{ page.date | date_to_xmlschema }}"
-                  itemprop="datePublished">
-                {{ page.date | date: "%Y. %m. %d." }}
-            </time>
-        </div>
+        <h1 class="post-title" itemprop="name headline">{{ page.title }}</h1>
     </header>
     <div id="post-body" itemprop="articleBody">
         {% if page.source_code_url %}

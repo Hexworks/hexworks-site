@@ -4,8 +4,9 @@ title: A Primer on Screens
 tags: [zircon, documentation, zircon-documentation]
 author: hexworks
 short_title: A Primer on Screens
-source_code_url: https://github.com/Hexworks/zircon/blob/master/zircon.jvm.examples/src/main/java/org/hexworks/zircon/examples/docs/CreatingAScreen.java
 ---
+
+> In this document we'll explore how Screens work in Zircon through some practical examples.
 
 [Screen]s are in-memory [TileGrid]s. They have an internal representation of a grid and support all
 functionality which is provided by one. They wrap your actual [TileGrid] and come with a `display` function which
@@ -79,7 +80,7 @@ As with [TileGrid]s [Screen]s support adding and removing [Layer]s. Read the [re
 
 ## Usage
 
-[Screen] have one method, which makes its use very simple:
+[Screen] has one method, which makes its usage very simple:
 
 `display` swaps the contents of its *internal* [TileGrid] with the one which you created by using an application
 builder.
@@ -107,12 +108,12 @@ final Button prev = Components.button()
 screen1.addComponent(prev);
 
 next.handleComponentEvents(ComponentEventType.ACTIVATED, (event) -> {
-    LOGGER.info("Switching to Screen 1");
+    System.out.println("Switching to Screen 1");
     screen1.display();
     return UIEventResponse.preventDefault();
 });
 prev.handleComponentEvents(ComponentEventType.ACTIVATED, (event) -> {
-    LOGGER.info("Switching to Screen 0");
+    System.out.println("Switching to Screen 0");
     screen0.display();
     return UIEventResponse.processed();
 });

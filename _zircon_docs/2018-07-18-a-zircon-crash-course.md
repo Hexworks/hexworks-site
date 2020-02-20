@@ -29,7 +29,7 @@ interface DrawSurface : Clearable, TileComposite, TilesetOverride {
              drawPosition: Position)
     // ^^^--- this draws an arbitrary TileComposite at a given Position
 
-
+    
 }
 ```
 
@@ -44,13 +44,7 @@ interface TileComposite : Sizeable {
 
     val tiles: Map<Position, Tile>
 
-    fun getTileAt(position: Position): Maybe<Tile> {
-        return if (size.containsPosition(position)) {
-            Maybe.of(tiles[position] ?: Tile.empty())
-        } else {
-            Maybe.empty()
-        }
-    }
+    fun getTileAt(position: Position): Maybe<Tile>
 }
 ```
 
@@ -79,7 +73,7 @@ following jobs:
 
 - [Clearable] lets you *clear* the graphics. This means setting all its tiles to an empty tile.
 - [DrawSurface] and [TileComposite] is already explained.
-- [TilesetOverride] lets you pick a specific [TilesetResource] to be used
+- [TilesetOverride] lets you pick a specific [TilesetResource] to be used.
 
 > This makes both the development and use of Zircon much easier, since these *behaviors* can be combined in any way
 to get different results but the terms used will stay the same throughout the system.
@@ -107,7 +101,7 @@ interface TileGraphics : Copiable<TileGraphics>, DrawSurface {
 As you can see a [TileGraphics] can be copied and it contains some factory methods which you can use to derive
 other [DrawSurface]s such as [Layer]s and sub tile graphics objects. The former is explained [here][how-layers-work],
 the latter is an object which can be used as a "window" over a [TileGraphics] which will constrain read/write operations
-on the underlying [TileGraphics] object.
+positionally on the underlying [TileGraphics] object.
 
 Let's create an *actual* [TileGraphics]:
 
@@ -137,7 +131,7 @@ Now we have a [TileGraphics] but what is all that stuff about colors, styles and
 ## Colors, StyleSets, Modifiers
 
 Objects like [Tile]s or [TileGraphics]s can have foreground and background colors. You can either use the [ANSITileColor]
-`enum` to pick a pre-defined [TileColor] or you can create a new one by using [TileColors]. This class
+`enum` to pick a pre-defined [TileColor] or you can create a new one by using the factory methods in [TileColor]. This class
 has some useful factory methods for this like: `fromRGB` and `fromString`. The latter can be
 called with simple CSS-like strings (eg: `#334455`).
 
@@ -160,7 +154,7 @@ you can draw [Tile]s, [TileGraphics]s and basically anything which is [TileCompo
 
 ```kotlin
 interface TileGrid
-    : AnimationHandler, Clearable, DrawSurface, Layerable,
+    : AnimationRunner, Clearable, DrawSurface, Layerable,
               ShutdownHook, TypingSupport, UIEventSource, ViewContainer {
 
     val widthInPixels: Int
@@ -174,7 +168,7 @@ interface TileGrid
 
 Again, we have a very simple `interface` and a bunch of *behavior*s which make a [TileGrid] a [TileGrid]:
 
-- [AnimationHandler] adds the functionality to put [Animation]s on the grid. More about [Animation]s [here][animations].
+- [AnimationRunner] adds the functionality to put [Animation]s on the grid. More about [Animation]s [here][animations].
 - [Clearable] lets you *clear* the graphic. This means setting all its tiles to an empty tile
 - [DrawSurface] is something you know by now
 - [Layerable] lets you put multiple layers on your screen. With this you can have overlays, effects, and that kind of
@@ -231,25 +225,12 @@ interface Application {
 
     val tileGrid: TileGrid
 
-    /**
-     * Initializes this [Application] and starts continuous rendering.
-     */
     fun start()
 
-    /**
-     * Pauses rendering.
-     */
     fun pause()
 
-    /**
-     * Resumes rendering.
-     */
     fun resume()
 
-    /**
-     * Stops this [Application] and frees all of its resources.
-     * Once an [Application] is stopped it can't be started again.
-     */
     fun stop()
 }
 ```
@@ -262,7 +243,7 @@ essential for doing actual work with Zircon?
 A [Layer] is a specialized [TileGraphics] which can be drawn upon a [Layerable] object (a [TileGrid] for example).
 A [Layer] differs from a [TileGraphics] in the way it is handled.
 It can be repositioned relative to its parent while a [TileGraphics] can only be *drawn*.
-Both [Layer]s and [TileGraphics]s are in-memory objects which are drawn only when the underlying [Layerable] object is drawn.
+Both [Layer]s and [TileGraphics] objects are in-memory objects which are drawn only when the underlying [Layerable] object is drawn.
 
 Using the previous analogy with the sheet of paper: when you *draw* a [TileGraphics] onto a [TileGrid] is like when
 you take a look at a piece of paper and copy its contents onto another piece of paper.
@@ -285,7 +266,7 @@ in your app and you can switch between them simultaneously by using the `display
 [Screen]s also let you use [Component]s like [Button]s and [Panel]s. This is how the [Screen] interface looks like:
 
 ```kotlin
-interface Screen : TileGrid, ComponentContainer {
+interface Screen : ComponentContainer, Themeable, TileGrid {
 
     fun display()
 
