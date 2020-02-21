@@ -16,7 +16,7 @@ comments: true
 
 ## Highlights of this release
 
-With the tutorial project [Caves of Zircon](https://github.com/Hexworks/caves-of-zircon) finished we had a lot of time to work on new features since the last major release and we've also improved the documentation and the examples.
+With the tutorial project [Caves of Zircon](https://hexworks.org/posts/tutorials/2018/12/04/how-to-make-a-roguelike.html) finished we had a lot of time to work on new features since the last major release and we've also improved the documentation and the examples.
 
 The [Documentation Page](https://hexworks.org/zircon/docs/) was overhauled and retrofitted with the recent changes in *Zircon* so now you can all enjoy the new content. What was missing for quite some time is a thorough explanation of the *Component System* which is now detailed [here](https://hexworks.org/zircon/docs/2018-11-15-the-component-system).
 
