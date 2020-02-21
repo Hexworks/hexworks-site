@@ -20,7 +20,7 @@ With the tutorial project [Caves of Zircon](https://hexworks.org/posts/tutorials
 
 The [Documentation Page](https://hexworks.org/zircon/docs/) was overhauled and retrofitted with the recent changes in *Zircon* so now you can all enjoy the new content. What was missing for quite some time is a thorough explanation of the *Component System* which is now detailed [here](https://hexworks.org/zircon/docs/2018-11-15-the-component-system).
 
-We also worked on the [examples][examples] which now encompass all features of *Zircon*. Component examples now also have a tileset/color theme selector. You can take a look [here](https://cdn.discordapp.com/attachments/363754040103796737/679310297424724006/components.gif).
+We also worked on the [examples](https://github.com/Hexworks/zircon/tree/master/zircon.jvm.examples/src/main) which now encompass all features of *Zircon*. Component examples now also have a tileset/color theme selector. You can take a look [here](https://cdn.discordapp.com/attachments/363754040103796737/679310297424724006/components.gif).
 
 The internals of *Zircon* were refactored to use [persistent data structures](https://en.wikipedia.org/wiki/Persistent_data_structure) so we now have stable snapshots for rendering. In practice this means that there are no more flickering or visual artifacts when you use *Zircon*.
 
