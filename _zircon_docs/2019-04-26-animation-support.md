@@ -6,6 +6,6 @@ author: hexworks
 short_title: Animation Support
 ---
 
-Coming soon!
+> Animations are a beta feature in *Zircon*. The docs will be updated when they become stable.
 
 {% include zircon_links.md %}

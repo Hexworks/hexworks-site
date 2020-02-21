@@ -4,8 +4,10 @@ title: Input Handling
 tags: [zircon, documentation, zircon-documentation]
 author: hexworks
 short_title: Input Handling
-source_code_url: https://github.com/Hexworks/zircon/blob/master/zircon.jvm.examples/src/main/java/org/hexworks/zircon/examples/docs/InputHandling.java
+source_code_url: https://github.com/Hexworks/zircon/blob/master/zircon.jvm.examples/src/main/java/org/hexworks/zircon/examples/docs/InputHandlingExample.java
 ---
+
+> Handling user inputs is the cornerstone of any application with a UI. In this document you'll learn how it works in Zircon.
 
 Since Zircon is a multiplatform project it needs to have an uniform representation of input events like
 key presses and mouse clicks. For this purpose Zircon has [UIEvent]. There are multiple kind of [UIEvent]s:
@@ -25,7 +27,7 @@ All [TileGrid]s and [Screen]s implement [UIEventSource] so you can listen to [Mo
 
 The following example demonstrates how to listen to all of the above event types:
 
-> Note that when you subscribe to [ComponentEvent]s on a [Component] you will only receive [ComponentEvent] events which
+> Note that when you subscribe to [ComponentEvent]s on a [Component] you will only receive [ComponentEvent]s which
 were sent to that specific component.
 
 ```java
@@ -35,13 +37,13 @@ Screen screen = Screen.create(tileGrid);
 Panel panel = Components.panel()
         .withDecorations(box(BoxType.SINGLE, "New Game"), shadow())
         .withSize(20, 10)
-        .withAlignmentWithin(tileGrid, CENTER)
+        .withAlignmentWithin(tileGrid, ComponentAlignment.CENTER)
         .build();
 
 Button button = Components.button()
         .withText("Play")
         .withPosition(5, 5)
-        .withAlignmentWithin(panel, CENTER)
+        .withAlignmentWithin(panel, ComponentAlignment.CENTER)
         .build();
 
 screen.addComponent(panel);

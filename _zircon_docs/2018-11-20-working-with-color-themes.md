@@ -4,7 +4,6 @@ title: Working With Color Themes
 tags: [zircon, documentation, zircon-documentation]
 author: hexworks
 short_title: Working With Color Themes
-source_code_url: https://github.com/Hexworks/zircon/blob/master/zircon.jvm.examples/src/main/java/org/hexworks/zircon/examples/docs/WorkingWithColorThemes.java
 ---
 
 [ColorTheme]s are a simple form of adding consistent design to your [Component]s.

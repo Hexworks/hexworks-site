@@ -4,7 +4,6 @@ title: How to Work With TileGraphics
 tags: [zircon, documentation, zircon-documentation]
 author: hexworks
 short_title: How to Work With TileGraphics
-source_code_url: https://github.com/Hexworks/zircon/blob/master/zircon.jvm.examples/src/main/java/org/hexworks/zircon/examples/docs/CreatingTileGraphicsFromShapes.java
 ---
 
 > This document will help you understand how to compose Tiles into in-memory graphics objects called TileGraphics
@@ -24,11 +23,10 @@ Let's see an example:
 
 ```java
 AppConfig config = AppConfig.newBuilder()
-        .withDefaultTileset(TILESET)
+        .withDefaultTileset(CP437TilesetResources.rexPaint16x16())
         .build();
 
-TileGrid tileGrid = SwingApplications.startTileGrid(
-        config);
+TileGrid tileGrid = SwingApplications.startTileGrid(config);
 
 final TileGraphics background = DrawSurfaces.tileGraphicsBuilder()
         .withSize(tileGrid.getSize()) // you can fetch the size of a TileGrid like this
@@ -63,13 +61,13 @@ The result of running this code snippet should look like this:
 
 ## How TileGraphics works
 
-As you can see in the above example the easiest way to create a[TileGraphics] is to use the [DrawSurfaces] helper.
+As you can see in the above example the easiest way to create a [TileGraphics] is to use the [DrawSurfaces] helper.
 Every [TileGraphics] must have a `Size` but it has no [Position].
  
 When you `draw` a [TileGraphics] on a [DrawSurface] the original image will stay the same and only the [DrawSurface]
 will change which means that `draw` is a copy operation. After `draw`ing a [TileGraphics] you won't be able to tell
 about a [Tile] that it belongs to your image. If you need this kind of information look at how
-[how-layers-work][how-layers-work] work.
+[how layers work][how-layers-work] work.
 
 You can draw [TileGraphics] objects onto each other (as you can see in the example above). Keep in mind that there is a special
 empty [Tile] which is accessible from the [Tile] class like this: `Tile.empty()`.

@@ -6,24 +6,22 @@ author: hexworks
 short_title: Resource Handling
 ---
 
-A *resource* in Zircon is an asset which comes from an external source (an `.xp` file for example).
-Zircon handles several types of *resources*, you can check the `resource` package 
-[here][resource] if you want to see details.
+A *resource* in Zircon is an asset which comes from an external source (an `.xp` file for example). Zircon handles several types of *resources*, you can check the `resource` package [here][resource] if you want to see details.
 
-A resource usually has a helper class and comes with some static methods which help you load the given resource by hand.
-Most of them have `enum` values which will give you some built-in resources (like CP437 tilesets). See more details below.
+A resource usually has a helper class and comes with some static methods which help you load the given resource by hand. Most of them have `enum` values which will give you some built-in resources (like CP437 tilesets). See more details below.
 
 ## Tilesets
 
-Zircon handles multiple types of tilesets. Currently there is support for graphic, image, CP437 and true type tilesets.
+Zircon handles multiple types of tilesets. Currently there is support for *graphical*, *image*, *CP437* and *true type* tilesets.
 
 ### CP437 tilesets
+
 CP437 tilesets come in the form of transparent `.png` files. The rules of using CP437 tilesets:
 
 - Your `.png` file has to have a transparent background
 - You are free to use the built-in CP437 fonts as you see fit (they come from the 
 [Dwarf Fortress Tileset Repository](http://dwarffortresswiki.org/Tileset_repository) and from 
-[REXPaint](http://www.gridsagegames.com/rexpaint/)
+[REXPaint](http://www.gridsagegames.com/rexpaint/).
 - Your `.png` file must be a sprite composed of 16x16 character images depicting all CP437 tiles
 
 You can use the built in CP437 tilesets by using the helper class:
@@ -98,17 +96,17 @@ Description will be empty by default.
 
 ### Metadata picking strategy
 
-When Zircon tries to draw a `TextCharacter` on the screen it needs to fetch a texture for that character. In the case of
+When Zircon tries to draw a [Tile] on the screen it needs to fetch a texture for that character. In the case of
 Physical and CP437 fonts this is easy since there is a *1:1* mapping to each texture.
 
-In graphic tilesets however each tile has a `name` and some `tag`s so it is no longer a straightforward mapping.
-This is why you can set `tags` for each `TextCharacter`. They will be used as filters to figure out which tile to choose
+In graphical tilesets however each tile has a `name` and some `tag`s so it is no longer a straightforward mapping.
+This is why you can set `tags` for each [Tile]. They will be used as filters to figure out which tile to choose
 from a graphic tileset. This is how it works:
 
-- Zircon will try to fetch a texture for a `TextCharacter` based on its `char` value (eg: `x`)
-- If there are more than 1 textures it will use the `tags` from `TextCharacter` to filter for a match.
-**Note that** a texture is **only considered** if it has **all** the `tags` from `TextCharacter`. So for example if you
-`TextCharacter` has `tags` (`foo` and `bar`) and your tile has `bar` it won't be considered, but if your tile has
+- Zircon will try to fetch a texture for a [Tile] based on its `char` value (eg: `x`)
+- If there are more than 1 textures it will use the `tags` from [Tile] to filter for a match.
+**Note that** a texture is **only considered** if it has **all** the `tags` from [Tile]. So for example if you
+[Tile] has `tags` (`foo` and `bar`) and your tile has `bar` it won't be considered, but if your tile has
  (`foo`, `bar` and `baz`) it will be a match.
 
 If there is still *more than one option* to choose from Zircon will use the `MetadataPickingStrategy` you supplied to
@@ -137,7 +135,7 @@ List<Layer> layers = rex.toLayerList();
 
 Read more about `Layer`s [here](/zircon/docs/2018-11-21-how-layers-work).
 
-There is also a complete example which you can try out [here](https://github.com/Hexworks/zircon/blob/master/zircon.jvm.examples/src/main/java/org/hexworks/zircon/examples/RexLoaderExample.java).
+There is also a complete example which you can try out [here](https://github.com/Hexworks/zircon/blob/master/zircon.jvm.examples/src/main/java/org/hexworks/zircon/examples/other/RexLoaderExampleJava.java).
 
 ## Color Themes
 
