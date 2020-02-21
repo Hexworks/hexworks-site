@@ -40,7 +40,7 @@ We also implemented a bunch of new components:
 - Component decorations were retrofitted to have an `INTERACTIVE`/`NON_INTERACTIVE` mode to better align with specific needs. Example [here](https://cdn.discordapp.com/attachments/363754040103796737/680025017869795367/rendering_modes.gif).
 - We also implemented a post-rendering feature for `Component`s.
 
-A new feature was added to [TileColor] for color interpolation. This can be handy if you want to create [color gradients](https://cdn.discordapp.com/attachments/363754040103796737/680074649207701509/interpolation.gif).
+A new feature was added to `TileColor` for color interpolation. This can be handy if you want to create [color gradients](https://cdn.discordapp.com/attachments/363754040103796737/680074649207701509/interpolation.gif).
 
 *Zircon* now also supports *event bubbling*. This topic is detailed in the [docs](https://hexworks.org/zircon/docs/2018-11-21-input-handling).
 
