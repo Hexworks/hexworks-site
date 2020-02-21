@@ -50,13 +50,13 @@ Maven:
     <dependency>
         <groupId>org.hexworks.zircon</groupId>
         <artifactId>zircon.core-jvm</artifactId>
-        <version>2020.0.2-PREVIEW</version>
+        <version>2020.1.0-RELEASE</version>
     </dependency>
     <!-- Zircon target package. You can use either zircon.jvm.swing or zircon.jvm.libgdx -->
     <dependency>
         <groupId>org.hexworks.zircon</groupId>
         <artifactId>zircon.jvm.swing</artifactId>
-        <version>2020.0.2-PREVIEW</version>
+        <version>2020.1.0-RELEASE</version>
     </dependency>
 </dependencies>
 ```
@@ -65,8 +65,8 @@ Gradle:
 
 ```groovy
 dependencies {
-    implementation "org.hexworks.zircon:zircon.core-jvm:2020.0.2-PREVIEW"
-    implementation "org.hexworks.zircon:zircon.jvm.swing:2020.0.2-PREVIEW"
+    implementation "org.hexworks.zircon:zircon.core-jvm:2020.1.0-RELEASE"
+    implementation "org.hexworks.zircon:zircon.jvm.swing:2020.1.0-RELEASE"
 }
 ```
 
