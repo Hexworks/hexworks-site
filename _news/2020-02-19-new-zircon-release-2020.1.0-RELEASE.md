@@ -12,7 +12,7 @@ comments: true
 > If you are not yet familiar with the project take a look at our
 > [Project Page](https://hexworks.org/projects/zircon/).
 >
->> You can grab this release from Maven Central. More on how to add *Zircon* as a dependency to your project can be found [here](https://hexworks.org/zircon/docs/2019-01-11-release-process-and-versioning-scheme.)
+> You can grab this release from Maven Central. More on how to add *Zircon* as a dependency to your project can be found [here](https://hexworks.org/zircon/docs/2019-01-11-release-process-and-versioning-scheme.)
 
 ## Highlights of this release
 
