@@ -37,6 +37,10 @@ comments: true
 > 19. [#19 Win and Lose Conditions](https://hexworks.org/posts/tutorials/2019/07/01/how-to-make-a-roguelike-win-and-lose-conditions.html)
 > 20. [#20 Wrapping Up](https://hexworks.org/posts/tutorials/2019/07/02/how-to-make-a-roguelike-wrapping-up.html)
   
+## Disclaimer
+
+> Some API changes were made in [Zircon](https://github.com/hexworks/zircon) since this tutorial was written so it is **important** to use the specific versions of Zircon and other libraries as outlined in this tutorial *(not the latest version)*. This tutorial series will be refurbished once the next major release of Zircon is out, so stay tuned!
+  
 ## Introduction
 
 If you are reading this it means that you are probably planning to write a game of some sort.
