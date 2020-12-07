@@ -14,6 +14,8 @@ Apart from the ones above there are also [Container]s which can have other [Comp
 
 ## How Components Work
 
+> Peruse the [Component Examples](https://github.com/Hexworks/zircon/blob/master/zircon.jvm.examples/src/main/java/org/hexworks/zircon/examples/components/AllComponentsExampleJava.java) package if you want to look at some actual code!
+
 [Component]s work in a similar way as [Layer]s do. They have graphical content which is backed by a [TileGraphics] object and they can also be
 moved around like [Layer]s. The main difference between them is that their structure is hierarchical: they form a *tree*. [Component]s serve
 as *leaf objects* in this tree and [Container]s can have child [Component]s.

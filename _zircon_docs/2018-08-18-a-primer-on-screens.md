@@ -4,6 +4,7 @@ title: A Primer on Screens
 tags: [zircon, documentation, zircon-documentation]
 author: hexworks
 short_title: A Primer on Screens
+source_code_url: https://github.com/Hexworks/zircon/blob/master/zircon.jvm.examples/src/main/java/org/hexworks/zircon/examples/docs/APrimerOnScreens.java
 ---
 
 > In this document we'll explore how Screens work in Zircon through some practical examples.

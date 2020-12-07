@@ -30,6 +30,8 @@ The following example demonstrates how to listen to all of the above event types
 > Note that when you subscribe to [ComponentEvent]s on a [Component] you will only receive [ComponentEvent]s which
 were sent to that specific component.
 
+> Click [here](https://github.com/Hexworks/zircon/blob/master/zircon.jvm.examples/src/main/java/org/hexworks/zircon/examples/docs/InputHandlingExample.java) to see the actual source code.
+
 ```java
 TileGrid tileGrid = SwingApplications.startTileGrid();
 Screen screen = Screen.create(tileGrid);

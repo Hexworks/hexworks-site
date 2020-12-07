@@ -27,6 +27,9 @@ CP437 tilesets come in the form of transparent `.png` files. The rules of using 
 You can use the built in CP437 tilesets by using the helper class:
 
 ```java
+import org.hexworks.zircon.api.CP437TilesetResources;
+import org.hexworks.zircon.api.resource.TilesetResource;
+
 public class UsingCP437Tilesets {
 
     public static void main(String[] args) {
@@ -41,7 +44,7 @@ Loading your own `TilesetResource` is also simple, you just have to provide a `w
 path which points to your file:
 
 ```java
-CP437TilesetResources.loadCP437Tileset(16, 16, path);
+CP437TilesetResources.loadTilesetFromFilesystem(16, 16, path);
 ```
 
 ### Graphical tilesets

@@ -21,12 +21,16 @@ and it looks like this:
 // Something to draw on, just like a piece of paper
 interface DrawSurface : Clearable, TileComposite, TilesetOverride {
 
-    fun draw(tile: Tile,
-             drawPosition: Position)
+    fun draw(
+        tile: Tile,
+        drawPosition: Position
+    )
     // ^^^--- this draws a Tile at a given Position
 
-    fun draw(tileComposite: TileComposite,
-             drawPosition: Position)
+    fun draw(
+        tileComposite: TileComposite,
+        drawPosition: Position
+    )
     // ^^^--- this draws an arbitrary TileComposite at a given Position
 
     
