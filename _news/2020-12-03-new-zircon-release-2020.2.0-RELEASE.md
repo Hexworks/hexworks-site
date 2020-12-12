@@ -18,13 +18,13 @@ comments: true
 
 ## Highlights of this release
 
-This was a very busy year for us. After the previous release we started focusing in the internals of Zircon. Previously we didn't have an
+This was a very busy year for us. After the previous release we started focusing on the internals of Zircon. Previously we didn't have an
 FPS goal nor performance optimizations in the code. The Swing benchmark was running with `~60 FPS` with a `80x24` grid and `16x16` tiles.
 If someone used a full HD screen it was significantly slower, so we added some optimizations. Right now with a full HD screen and `16x16` tiles (that's a size of `120x67`) Zircon runs with `~100 FPS` in the benchmarks. This means that we achieved a **~8x** speedup! The goal
 for the next release is to have `100 FPS` with `8x8` tiles.
 
 This performance optimization was made possible by some internal refactorings. The rendering model was modified in a way that the renderer
-no longer queries the state of the `TileGrid`, but lets all individual `Layer`s and `Component`s to `render` themselves. This also means
+no longer queries the state of the `TileGrid`, but lets all individual `Layer`s and `Component`s `render` themselves. This also means
 that internal state is no longer stored in `Component`s, they are rendered whenever it is necessary instead.
 
 There is also a `FastTileGraphics` implementation that enables this optimization. It uses an `Array` internally and it is significantly faster than the old `TileGraphics` that was using a `PersistentList`.
