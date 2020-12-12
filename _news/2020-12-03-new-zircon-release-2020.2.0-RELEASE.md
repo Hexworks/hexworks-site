@@ -14,7 +14,7 @@ comments: true
 >
 > The kdocs can be found [here](https://hexworks.github.io/zircon/). Javadocs are also coming soon!
 >
-> You can grab this release from Maven Central. More on how to add *Zircon* as a dependency to your project can be found [here](https://hexworks.org/zircon/docs/2019-01-11-release-process-and-versioning-scheme).
+> You can grab this release from Maven Central [here](https://search.maven.org/search?q=g:org.hexworks.zircon). More on how to add *Zircon* as a dependency to your project can be found [here](https://hexworks.org/zircon/docs/2019-01-11-release-process-and-versioning-scheme).
 
 ## Highlights of this release
 
