@@ -18,119 +18,93 @@ comments: true
 
 ## Highlights of this release
 
-With the tutorial project [Caves of Zircon](https://hexworks.org/posts/tutorials/2018/12/04/how-to-make-a-roguelike.html) finished we had a lot of time to work on new features since the last major release and we've also improved the documentation and the examples.
+This was a very busy year for us. After the previous release we started focusing in the internals of Zircon. Previously we didn't have an
+FPS goal nor performance optimizations in the code. The Swing benchmark was running with `~60 FPS` with a `80x24` grid and `16x16` tiles.
+If someone used a full HD screen it was significantly slower, so we added some optimizations. Right now with a full HD screen and `16x16` tiles (that's a size of `120x67`) Zircon runs with `~100 FPS` in the benchmarks. This means that we achieved a **~8x** speedup! The goal
+for the next release is to have `100 FPS` with `8x8` tiles.
 
-The [Documentation Page](https://hexworks.org/zircon/docs/) was overhauled and retrofitted with the recent changes in *Zircon* so now you can all enjoy the new content. What was missing for quite some time is a thorough explanation of the *Component System* which is now detailed [here](https://hexworks.org/zircon/docs/2018-11-15-the-component-system).
+This performance optimization was made possible by some internal refactorings. The rendering model was modified in a way that the renderer
+no longer queries the state of the `TileGrid`, but lets all individual `Layer`s and `Component`s to `render` themselves. This also means
+that internal state is no longer stored in `Component`s, they are rendered whenever it is necessary instead.
 
-We also worked on the [examples](https://github.com/Hexworks/zircon/tree/master/zircon.jvm.examples/src/main) which now encompass all features of *Zircon*. Component examples now also have a tileset/color theme selector. You can take a look [here](https://cdn.discordapp.com/attachments/363754040103796737/679310297424724006/components.gif).
+There is also a `FastTileGraphics` implementation that enables this optimization. It uses an `Array` internally and it is significantly faster than the old `TileGraphics` that was using a `PersistentList`.
 
-The internals of *Zircon* were refactored to use [persistent data structures](https://en.wikipedia.org/wiki/Persistent_data_structure) so we now have stable snapshots for rendering. In practice this means that there are no more flickering or visual artifacts when you use *Zircon*.
+Zircon now also supports `StackedTile`s. a `StackedTile` is a composite that has a *stack* of `Tile`s within it. This is very useful to create composite tile objects and also for rendering. It also enables the `Component` system (and the `GameArea`) to be significantly easier to implement. It is is not yet clear what stacking means take a look at [this](https://cdn.discordapp.com/attachments/363754040103796737/775365392498819092/unknown.png) screenshot!
 
-All `Component`s in *Zircon* were retrofitted with *data binding* features. What this means is that properties like the disabled state of a component or
-their colors can be bound to each other with a single line of code. [This](https://cdn.discordapp.com/attachments/603285896829206548/603300249485705246/zircon_component_databinding.gif) example showcases some `Label`s and `Button`s being bound to another `Label`s textual content.
+There are some new prototypes as well. One of them is an [Android renderer](https://cdn.discordapp.com/attachments/363754040103796737/720279635325354015/android.gif)!
 
-`Group` was added which is not a component itself but it takes advantage of the new *data binding* features of *Zircon* to synchronize components with each other even if they are not in a parent/child relationship. `Group` has its own `ColorTheme` for example which when updated will update all components in it. The `RadioButtonGroup` was also retrofitted to use this abstraction so now you no longer have to put `RadioButton`s in the same container.
+Many of you were looking for Javadocs so we also added this to the project! You can find it [here](https://hexworks.github.io/zircon/). This is kdocs (Kotlin Docs) for now, but soon we'll add proper Javadocs as well! We also started to add code samples within the docs, so you'll be able to see what's what without having to navigate away.
 
-We also implemented a bunch of new components:
+We also started a proper depreciation cycle now, that Zircon has a significant userbase. When we deprecate something it will be annotated with the `@Deprecated` annotation, and these things will get removed in the next release. We also documented (in the source code) what to use instead of the things we're going to remove.
 
-- `HBox` and `VBox` were requested by a lot of our uses so we implemented them. They automatically align their child components either horizontally or vertically. They can also be nested into each other to create complex UIs and layouts. [This](https://cdn.discordapp.com/attachments/603285896829206548/603303497362047006/zircon_component_table.png) is an example for a combination of the two, [this](https://cdn.discordapp.com/attachments/603285896829206548/603303713964032011/zircon_component_vbox.gif) is a `VBox` with some interactions.
-- [Number inputs](https://cdn.discordapp.com/attachments/363754040103796737/603996935740850176/numberInputwithButtons.gif) can be used to input only numbers.
-- [Scroll bar](https://cdn.discordapp.com/attachments/363754040103796737/610073006437302282/scrollbars.gif)s enable you to scroll content in a component.
-- With [Sliders](https://cdn.discordapp.com/attachments/363754040103796737/603996924282011669/newSliders.gif) you can easily pick values from a range.
-- [Toggle buttons](https://cdn.discordapp.com/attachments/603285896829206548/678717722355433492/toggle.gif) were retrofitted to look more intuitive and visually appealing.
-- With [Progress bars](https://cdn.discordapp.com/attachments/363754040103796737/680048998337609747/progress_bar.gif) you can display the progress of a process.
-- Component decorations were retrofitted to have an `INTERACTIVE`/`NON_INTERACTIVE` mode to better align with specific needs. Example [here](https://cdn.discordapp.com/attachments/363754040103796737/680025017869795367/rendering_modes.gif).
-- We also implemented a post-rendering feature for `Component`s.
+The `GameArea` received some refurbishments as well. Now the `GameArea` is rendered using a simple `ComponentRenderer` which means that you can use any `Component` for rendering a `GameArea`. This also means that this component can be a `Container` and can have additional children! Another addition to the `GameArea` is filtering. Now you can add filters to a `GameArea` that looks similar to a `Modifier`, but it has more parameters including the `Position3D` of the `Block` that's being modified in the `GameArea`. One useful example for this is to implement depth and distance filters. In [this](https://cdn.discordapp.com/attachments/363754040103796737/778393384380792833/pyramids.gif) example there is a *depth* filter. The pyramid's colors are all the same, but the filter changes *front* and *top* tiles to add a visual effect, and also makes blocks that have a lower `z` level appear darker. [This](https://cdn.discordapp.com/attachments/603285896829206548/787418009080823838/unknown.png) is how a building looks like with a filter applied.
 
-A new feature was added to `TileColor` for color interpolation. This can be handy if you want to create [color gradients](https://cdn.discordapp.com/attachments/363754040103796737/680074649207701509/interpolation.gif).
+Another thing you might have noticed fromt he GIF is that now you can switch between projections on the fly. You can also see it in action in [this](https://cdn.discordapp.com/attachments/603285896829206548/784811176080572416/map_generation_3d.gif) map generation example.
 
-*Zircon* now also supports *event bubbling*. This topic is detailed in the [docs](https://hexworks.org/zircon/docs/2018-11-21-input-handling).
+We usually refurbish the `ColorTheme`s with each release and this one is no different. There are some now ones as you can see in [this](https://cdn.discordapp.com/attachments/363754040103796737/703397248838664201/themes.gif) example. You can also use them in your [games](https://cdn.discordapp.com/attachments/603286045240590336/701468223031214241/falsedoor.png).
 
-We also have an image -> ASCII converter in the works: [click](https://cdn.discordapp.com/attachments/603285896829206548/603304759859871768/zircon_ascii_by_mr_pancake.png).
+You can now add **padding** to your `Component`s. Padding is implemented with a `ComponentDecoration` so it can be added to any component, and it looks like [this](https://cdn.discordapp.com/attachments/363754040103796737/786288342945103912/unknown.png).
+
+With this release now we have almost everything in place to implement the rest of the backlog! Here are some prototypes for what's going to be added to the next release including some `Fragment`s that you were waiting for a while now!
+
+- [Tab Bar](https://cdn.discordapp.com/attachments/363754040103796737/786348926289707028/tabs.gif)
+- [Selector](https://cdn.discordapp.com/attachments/363754040103796737/769588806981517332/M84kh690XN.gif)
+- [Dropdowns](https://cdn.discordapp.com/attachments/363754040103796737/786718994212192286/menus.gif)
+- [Table](https://cdn.discordapp.com/attachments/363754040103796737/786600570667925534/unknown.png)
+
 
 Here is a full list of issues we finished for this release:
 
 ## New Features
 
-- [#144](https://github.com/Hexworks/zircon/issues/144): Add slider widget. 
-- [#123](https://github.com/Hexworks/zircon/issues/123): Implement the `Group` component. 
-- [#123](https://github.com/Hexworks/zircon/issues/123): Implement the `NumberInput` component. 
-- [#257](https://github.com/Hexworks/zircon/issues/257): Add the transform function from TileImage to TileGraphics and Layer. 
-- [#181](https://github.com/Hexworks/zircon/issues/181): Feature: H/V Boxes. 
-- [#126](https://github.com/Hexworks/zircon/issues/126): Introduce event bubbling for `Input` events. 
-- [#190](https://github.com/Hexworks/zircon/issues/190): Simple Progress Bar. 
-- [#193](https://github.com/Hexworks/zircon/issues/193): Implement FadeIn/Out modifiers. 
-- [#291](https://github.com/Hexworks/zircon/issues/291): Implement the NumberInput component. 
-- [#292](https://github.com/Hexworks/zircon/issues/292): New Component: ScrollBar. 
-- [#95](https://github.com/Hexworks/zircon/issues/95): Add option for post-component rendering decorations. 
-- [#288](https://github.com/Hexworks/zircon/issues/288): Add interactive and non-interactive rendering mode for decorations. 
-- [#289](https://github.com/Hexworks/zircon/issues/289): Add a way to interpolate between colors.
+- [#360](https://github.com/Hexworks/zircon/issues/360): Enable the ModalComponentContainer to try dispatching UIEvents to multiple containers if a container returns Pass
+- [#357](https://github.com/Hexworks/zircon/issues/357): Add the option to add padding to a component
+- [#355](https://github.com/Hexworks/zircon/issues/355): Add the option to keep the Component's properties when it is attached.
+- [#350](https://github.com/Hexworks/zircon/issues/350): Create a filtering mechanism for the GameArea that would enable adding effects to individual Blocks.
+- [#359](https://github.com/Hexworks/zircon/issues/359): Enable multiple Fragments to be added to a Container in one go.
+- [#91](https://github.com/Hexworks/zircon/issues/91): Add frame rate limiting capability
+- [#348](https://github.com/Hexworks/zircon/issues/348): Add a function that will create a TileBuilder out of a Tile
+- [#349](https://github.com/Hexworks/zircon/issues/349): Add a function that will create a BlockBuilder out of a Block
+- [#339](https://github.com/Hexworks/zircon/issues/339): Create a Tile implementation that's composed of multiple Tiles.
+- [#297](https://github.com/Hexworks/zircon/issues/297): Set application icon
+- [#299](https://github.com/Hexworks/zircon/issues/299): Create matchers for UIEvents
+- [#315](https://github.com/Hexworks/zircon/issues/315): New Fragment: TilesetSelector and ColorThemeSelector
+- [#300](https://github.com/Hexworks/zircon/issues/300): Enable the user to set default keyboard shortcuts
+- [#296](https://github.com/Hexworks/zircon/issues/296): Add callbacks for Rendering
 
 ## Enhancements
 
-- [#286](https://github.com/Hexworks/zircon/issues/286): Refurbish documentation on the website.
-- [#253](https://github.com/Hexworks/zircon/issues/253): Improve the visual appearance of component states .
-- [#282](https://github.com/Hexworks/zircon/issues/282): Make the ToggleButton have better UX .
-- [#245](https://github.com/Hexworks/zircon/issues/245): A component shall have a property hasFocus. 
-- [#283](https://github.com/Hexworks/zircon/issues/283): Add copy functions to TileColor. 
-- [#161](https://github.com/Hexworks/zircon/issues/161): Move requestFocus to its own interface: FocusableComponent. 
-- [#219](https://github.com/Hexworks/zircon/issues/219): Deploy to Maven Central.
-- [#261](https://github.com/Hexworks/zircon/issues/261): Refactor RadioButtonGroup to be a logical Group instead of a Component. 
-- [#264](https://github.com/Hexworks/zircon/issues/264): Enable all Components to be Disablable, Hideable, Themeable and have TilesetOverride. 
-- [#94](https://github.com/Hexworks/zircon/issues/94): Check API for concurrency issues. 
-- [#263](https://github.com/Hexworks/zircon/issues/263): Make ColorTheme a property of Component. 
-- [#251](https://github.com/Hexworks/zircon/issues/251): Make components inherit properties.
-- [#110](https://github.com/Hexworks/zircon/issues/110): GameComponent should be a container. 
-- [#258](https://github.com/Hexworks/zircon/issues/258): Only modify a TileGraphics if the operation would lead to a change. 
-- [#256](https://github.com/Hexworks/zircon/issues/256): Add the option to hide/show Layers. 
-- [#255](https://github.com/Hexworks/zircon/issues/255): Properly implement the disabled state for CheckBox and Button. 
-- [#254](https://github.com/Hexworks/zircon/issues/254): Modify Component bounds check to be only relaxed in debug mode. 
-- [#242](https://github.com/Hexworks/zircon/issues/242): Migrate gradle build scripts to use Kotlin DSL + buildSrc. 
-- [#202](https://github.com/Hexworks/zircon/issues/202): Make Blocks mutable. 
-- [#200](https://github.com/Hexworks/zircon/issues/200): Use databinding for mutable component states (selected, checked, text, etc).
-- [#196](https://github.com/Hexworks/zircon/issues/196): Allow Icons to use any Tile. 
-- [#199](https://github.com/Hexworks/zircon/issues/199): Allow editing the items in a RadioButtonGroup. 
-- [#203](https://github.com/Hexworks/zircon/issues/203):  Add support for Focus and Activation events to Components.
-- [#210](https://github.com/Hexworks/zircon/issues/210): Component: Visibilty Property. 
+- [#345](https://github.com/Hexworks/zircon/issues/345): Document all the API classes properly 
+- [#325](https://github.com/Hexworks/zircon/issues/325): Create docs pages for each release using Dokka
+- [#329](https://github.com/Hexworks/zircon/issues/329): Make Layer implement Layerable 
+- [#328](https://github.com/Hexworks/zircon/issues/328): Refactor Components to be Layers 
+- [#353](https://github.com/Hexworks/zircon/issues/353): Use fun interfaces where applicable 
+- [#352](https://github.com/Hexworks/zircon/issues/352): Refactor builders to use prototypes with defaults. 
+- [#146](https://github.com/Hexworks/zircon/issues/146): Generate javadoc (Dokka) during build and deploy it to a site 
+- [#344](https://github.com/Hexworks/zircon/issues/344): Harmonize mutable and accessor mixin names. 
+- [#338](https://github.com/Hexworks/zircon/issues/338): Optimize Rendering Performance 
+- [#327](https://github.com/Hexworks/zircon/issues/327): Use a push model instead of a pull one for rendering 
+- [#332](https://github.com/Hexworks/zircon/issues/332): Checkbox - Alignment & Text 
+- [#319](https://github.com/Hexworks/zircon/issues/319): Size3d#containsPosition(position: Position3D) should also check for negative values 
+- [#318](https://github.com/Hexworks/zircon/issues/318): Add new Color Themes  
+- [#308](https://github.com/Hexworks/zircon/issues/308): Refactor Internal State handling to use Properties 
+- [#87](https://github.com/Hexworks/zircon/issues/87): Review tint, shade and tone in TileColor 
 
 ## Bug fixes
 
-- [#287](https://github.com/Hexworks/zircon/issues/287): HBox and VBox won't accept a Component which would fill up the space completely.
-- [#278](https://github.com/Hexworks/zircon/issues/278): StaticEffectMarkovChainExample is not working. 
-- [#276](https://github.com/Hexworks/zircon/issues/276): GlitchEffectMarkovChainExample is not working. 
-- [#284](https://github.com/Hexworks/zircon/issues/284): Adding a disabled Component to a container will re-enable it. 
-- [#222](https://github.com/Hexworks/zircon/issues/222): LibGDXApplications is not swappable for SwingApplications. 
-- [#50](https://github.com/Hexworks/zircon/issues/50): Input does not catch keystroke <CTRL>+Z on Windows 10 and Ubuntu 17.10. 
-- [#231](https://github.com/Hexworks/zircon/issues/231): Fullscreen doesn't work if all the tiles can't fit on screen. 
-- [#218](https://github.com/Hexworks/zircon/issues/218): LogArea does not scroll to last line when line is wordwrapped. 
-- [#247](https://github.com/Hexworks/zircon/issues/247): Event RequestCursorAt does not work as expected in a text area. 
-- [#139](https://github.com/Hexworks/zircon/issues/139): If text area is enabled and receives the focus programatically, it does not receive the first key event. 
-- [#246](https://github.com/Hexworks/zircon/issues/246): Keycode TAB is always propagated to the default handler. 
-- [#160](https://github.com/Hexworks/zircon/issues/160): Multiple screens handling Input regardless of which one is active. 
-- [#209](https://github.com/Hexworks/zircon/issues/209): Panel: changes of TitleProperty get not reflected. 
-- [#119](https://github.com/Hexworks/zircon/issues/119): Screen.setCursorVisibility(true) does not work. 
-- [#274](https://github.com/Hexworks/zircon/issues/274): Activating a component doesn't always use the correct style. 
-- [#221](https://github.com/Hexworks/zircon/issues/221): Log Area text appears in other panels for a single frame. 
-- [#252](https://github.com/Hexworks/zircon/issues/252): Transparent background is not working when using TileTransformModifier. 
-- [#281](https://github.com/Hexworks/zircon/issues/281): Pressing Tab repeatedly doesn't keep traversing the focus. 
-- [#280](https://github.com/Hexworks/zircon/issues/280): Removing a focused component will sometimes isolate the previous and next components. 
-- [#279](https://github.com/Hexworks/zircon/issues/279): Adding or removing a focusable component doesn't retain focus of currently focused component. 
-- [#275](https://github.com/Hexworks/zircon/issues/275): Visual style applied by focus is taken away when component is hovered. 
-- [#272](https://github.com/Hexworks/zircon/issues/272): GameComponent doesn't use decorations. 
-- [#233](https://github.com/Hexworks/zircon/issues/233): Pressing shift while editing a TextArea moves the cursor. 
-- [#227](https://github.com/Hexworks/zircon/issues/227): Buttons within modals can be misaligned. 
-- [#92](https://github.com/Hexworks/zircon/issues/92): Implement the snapshot function in DrawSurface properly. 
-- [#232](https://github.com/Hexworks/zircon/issues/232): Border decoration renderer is not working for Components. 
-- [#175](https://github.com/Hexworks/zircon/issues/175): Black bar appears in LibgdxApplication. 
-- [#194](https://github.com/Hexworks/zircon/issues/194): Libgdx renderer prints a warning on macOS and doesn't display tiles. 
-- [#201 ](https://github.com/Hexworks/zircon/issues/201): Fix CircleCI parallelism problem. 
-- [#198](https://github.com/Hexworks/zircon/issues/198): TextArea accepts huge sizes which leads to memory leaks. 
-- [#197](https://github.com/Hexworks/zircon/issues/197): Fix TextBox division by zero problem when creating a TextBox. 
-- [#195](https://github.com/Hexworks/zircon/issues/195): Fix LogArea positioning when it has wrappers. 
-- [#180](https://github.com/Hexworks/zircon/issues/180): Window titles don't work. 
-- [#151](https://github.com/Hexworks/zircon/issues/151): Drawable.drawOnto(DrawSurface) implementation in DefaultLayer does not seem to work. 
-- [#187](https://github.com/Hexworks/zircon/issues/187): ToggleButtonBuilder ignores the isSelected(Boolean) function. 
-- [#186](https://github.com/Hexworks/zircon/issues/186): TextArea blows up on forward delete if there's no character after the cursor. 
+- [#336](https://github.com/Hexworks/zircon/issues/336): Moving a Component with anything other than moveTo can lead to failed bounds check 
+- [#316](https://github.com/Hexworks/zircon/issues/316): RectangleFactory (possibly others, too) ignores shape position 
+- [#321](https://github.com/Hexworks/zircon/issues/321): MouseEventType.MOUSE_WHEEL_ROTATED_UP not getting triggered 
+- [#311](https://github.com/Hexworks/zircon/issues/311): Components are not visible in AllComponentsExampleJava 
+- [#307](https://github.com/Hexworks/zircon/issues/307): Clean up tilesets 
+- [#305](https://github.com/Hexworks/zircon/issues/305): Libgdx not working in 2020.0.2-PREVIEW 
+- [#304](https://github.com/Hexworks/zircon/issues/304): Clearing a TileGrid breaks draw operations 
+- [#230](https://github.com/Hexworks/zircon/issues/230): Occassional incorrect window size 
+- [#341](https://github.com/Hexworks/zircon/issues/341): Fix the rendering logic in GameArea 
+- [#302](https://github.com/Hexworks/zircon/issues/302): Blocks are not rendered properly in a GameArea when tiles are not opaque. 
+- [#277](https://github.com/Hexworks/zircon/issues/277): Hiding with transforming is leaving black background in LayerTransformerExample 
+- [#301](https://github.com/Hexworks/zircon/issues/301): Component remains activated when space is pressed and focus is lost (pressing Tab)  
+- [#298](https://github.com/Hexworks/zircon/issues/298): Focus handling keys don't work when using LibGDX 
 
 ## Road Map
   
@@ -148,8 +122,6 @@ We've covered a lot of ground in this release, but there are still things to do:
 - [Accordion Component](https://github.com/Hexworks/zircon/issues/27)
 - [Combo Box Component](https://github.com/Hexworks/zircon/issues/262)
 - [IntelliJ Plugin](https://github.com/Hexworks/zircon/issues/191)
-- [Javadoc-style Documentation](https://github.com/Hexworks/zircon/issues/146)
-- [Console for Zircon](https://github.com/Hexworks/zircon/issues/183)
 - [Grid / Screen Filters](https://github.com/Hexworks/zircon/issues/271)
 
 ## Credits
