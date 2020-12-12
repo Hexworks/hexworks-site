@@ -16,6 +16,8 @@ comments: true
 >
 > You can grab this release from Maven Central [here](https://search.maven.org/search?q=g:org.hexworks.zircon). More on how to add *Zircon* as a dependency to your project can be found [here](https://hexworks.org/zircon/docs/2019-01-11-release-process-and-versioning-scheme).
 
+> Also if you have any questions about this release, feel free to come up to our [Discord Server](https://discord.com/invite/vSNgvBh) and ask them!
+
 ## Highlights of this release
 
 This was a very busy year for us. After the previous release we started focusing on the internals of Zircon. Previously we didn't have an
