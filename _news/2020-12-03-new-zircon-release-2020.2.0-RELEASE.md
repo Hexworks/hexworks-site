@@ -29,6 +29,7 @@ comments: true
 - Proper depreciation cycle!
 - New [Color Themes](https://cdn.discordapp.com/attachments/363754040103796737/703397248838664201/themes.gif)
 - [Padding support](https://cdn.discordapp.com/attachments/363754040103796737/786288342945103912/unknown.png)
+- Performance optimization: **8x** FPS!
 - New Fragments:
     - [Tab Bar](https://cdn.discordapp.com/attachments/363754040103796737/786348926289707028/tabs.gif)
     - [Selector](https://cdn.discordapp.com/attachments/363754040103796737/769588806981517332/M84kh690XN.gif)
