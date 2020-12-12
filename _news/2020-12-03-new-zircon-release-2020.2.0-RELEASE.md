@@ -18,6 +18,23 @@ comments: true
 
 > Also if you have any questions about this release, feel free to come up to our [Discord Server](https://discord.com/invite/vSNgvBh) and ask them!
 
+## TL;DR For the Impatient:
+
+- [Stacked Tiles](https://cdn.discordapp.com/attachments/363754040103796737/775365392498819092/unknown.png)
+- [Android Renderer prototype](https://cdn.discordapp.com/attachments/363754040103796737/720279635325354015/android.gif)
+- [Javadocs](https://hexworks.github.io/zircon/) (finally)
+- (not just) [Color filters for the Game Area](https://cdn.discordapp.com/attachments/363754040103796737/778393384380792833/pyramids.gif)
+  - Another example [here](https://cdn.discordapp.com/attachments/603285896829206548/787418009080823838/unknown.png)
+- [Switching between projection modes on the fly](https://cdn.discordapp.com/attachments/603285896829206548/784811176080572416/map_generation_3d.gif)
+- Proper depreciation cycle!
+- New [Color Themes](https://cdn.discordapp.com/attachments/363754040103796737/703397248838664201/themes.gif)
+- [Padding support](https://cdn.discordapp.com/attachments/363754040103796737/786288342945103912/unknown.png)
+- New Fragments:
+    - [Tab Bar](https://cdn.discordapp.com/attachments/363754040103796737/786348926289707028/tabs.gif)
+    - [Selector](https://cdn.discordapp.com/attachments/363754040103796737/769588806981517332/M84kh690XN.gif)
+    - [Dropdowns](https://cdn.discordapp.com/attachments/363754040103796737/786718994212192286/menus.gif)
+    - [Table](https://cdn.discordapp.com/attachments/363754040103796737/786600570667925534/unknown.png)
+
 ## Highlights of this release
 
 This was a very busy year for us. After the previous release we started focusing on the internals of Zircon. Previously we didn't have an
