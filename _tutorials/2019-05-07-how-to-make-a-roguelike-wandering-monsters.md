@@ -6,6 +6,7 @@ author: addamsson
 short_title: "How To Make a Roguelike: #11 Wandering Monsters"
 series: coz
 comments: true
+updated_at: 2019-05-07
 ---
 
 > Now that we have Fog of War in place which we can reveal let's make it a bit more exciting by

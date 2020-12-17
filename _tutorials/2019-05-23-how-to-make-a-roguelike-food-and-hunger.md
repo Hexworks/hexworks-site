@@ -6,6 +6,7 @@ author: addamsson
 short_title: "How To Make a Roguelike: #13 Food and Hunger"
 series: coz
 comments: true
+updated_at: 2019-05-23
 ---
 
 > Now, that we are able to pick up items and take a look at them in the inventory we can start to add more

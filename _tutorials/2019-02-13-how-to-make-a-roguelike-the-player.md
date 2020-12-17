@@ -6,6 +6,7 @@ author: addamsson
 short_title: "How To Make a Roguelike: #4 The Player"
 series: coz
 comments: true
+updated_at: 2019-02-13
 ---
 
 > With our cave in place the next thing to do is to add a Player to move around the cave.

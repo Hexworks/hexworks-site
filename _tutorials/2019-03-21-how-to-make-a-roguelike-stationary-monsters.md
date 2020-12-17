@@ -6,6 +6,7 @@ author: addamsson
 short_title: "How To Make a Roguelike: #7 Stationary Monsters"
 series: coz
 comments: true
+updated_at: 2019-03-21
 ---
 
 > Last time we added interactions between our entities and taught the Player how to *dig*. Now it

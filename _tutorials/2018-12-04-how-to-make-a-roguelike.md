@@ -6,6 +6,7 @@ author: addamsson
 short_title: "How To Make a Roguelike"
 series: coz
 comments: true
+updated_at: 2020-11-20
 ---
 
 > This tutorial series is loosely based on [Trystan's Awesome Roguelike Tutorial](http://trystans.blogspot.com/2016/01/roguelike-tutorial-00-table-of-contents.html).
@@ -13,7 +14,7 @@ comments: true
   
 > #### Table of Contents
 >
-> Here are the links to all of the current tutorial articles if you want to skip the introduction
+> Here are the links to all the current tutorial articles if you want to skip the introduction
 > or want to continue where you left off previously.
 > 
 > 1. [#1 Project Setup](https://hexworks.org/posts/tutorials/2018/12/12/how-to-make-a-roguelike-project-setup.html)
@@ -37,15 +38,11 @@ comments: true
 > 19. [#19 Win and Lose Conditions](https://hexworks.org/posts/tutorials/2019/07/01/how-to-make-a-roguelike-win-and-lose-conditions.html)
 > 20. [#20 Wrapping Up](https://hexworks.org/posts/tutorials/2019/07/02/how-to-make-a-roguelike-wrapping-up.html)
   
-## Disclaimer
-
-> Some API changes were made in [Zircon](https://github.com/hexworks/zircon) since this tutorial was written so it is **important** to use the specific versions of Zircon and other libraries as outlined in this tutorial *(not the latest version)*. This tutorial series will be refurbished once the next major release of Zircon is out, so stay tuned!
-  
 ## Introduction
 
 If you are reading this it means that you are probably planning to write a game of some sort.
 Writing games is not only fun and useful if you are just starting out as a programmer but even
-if you have a lot of coding experience under your belt and you want to learn a new language.
+if you have a lot of coding experience under your belt, and you want to learn a new language.
 
 The problem is that if you want to write one you'll have to learn how to create 3D graphics,
 how to use a complex game engine, and all sorts of related things...are you not?
@@ -54,21 +51,21 @@ how to use a complex game engine, and all sorts of related things...are you not?
 
 If we take a look at the definition of a Roguelike:
 
-> Roguelike is a subgenre of role-playing video game characterized by a dungeon crawl through procedurally generated levels, turn-based gameplay, tile-based graphics, and permanent death of the player character.
+> Roguelike is a subgenre of role-playing video game characterized by a dungeon crawl through procedurally
+> generated levels, turn-based gameplay, tile-based graphics, and permanent death of the player character.
 
-it turns out that it has some inherent features which make writing one easy and fun!
+it turns out that it has some inherent features that make writing one easy and fun!
 This tutorial series is therefore about writing *your own roguelike game* from scratch.
 
 ## Language and library choices
 
 For this tutorial we'll use the [Kotlin](https://kotlinlang.org/) programming language.
-"Why not use C++, Java or Python?" you might ask. The reason is that
+"Why not use C++, Java or Python?" you might ask. The reasons are:
 
-- Low-level languages like C++ make it much harder to focus on writing actual game mechanics
+- Low-level languages like C++ make it much harder to focus on writing actual game mechanisms
   and you quickly get bogged down with memory management, complex language features and such.
   For a roguelike raw performance is not nearly as important as if you were writing an AAA title.
-- While Java has tons of libraries for this purpose it is a bit outdated even with the new improvements
-  with Java 10 and 11.
+- While Java has tons of libraries for this purpose it is a bit outdated even with the new improvements.
 - Python is a nice language, but its dynamic nature makes it harder do reason about your code
   as your codebase grows. Apart from that it is also more difficult to write code which runs on
   a multitude of platforms (including the browser).
@@ -113,20 +110,20 @@ To top it all off, you can use *any* Java library, since Kotlin gives you seamle
 ## Game Libraries
 
 For this game we're gonna use [Zircon](https://github.com/Hexworks/zircon), which is a Tile engine,
-the [Amethyst](https://github.com/Hexworks/amethyst) Entity Attribute System and some useful features
+the [Amethyst](https://github.com/Hexworks/amethyst) SEA (Systems, Entities, Attributes) library, and some useful features
 form the [Cobalt](https://github.com/Hexworks/cobalt) library, like data binding and the `EventBus`.
 
-> Note that I've chosen these libraries because I'm familiar with them and I also think that they are
-  the best fit for the problem at hand. Disclaimer: I work on those libraries so I might be biased
+> Note that I've chosen these libraries because I'm familiar with them, and I also think that they are
+  the best fit for the problem at hand. Disclaimer: I work on those libraries, so I might be biased,
   but you'll see if they work out for you or not.
   
 ## Other things we need
 
 For this tutorial we're gonna need some basic [Git](https://git-scm.com/) and [Gradle](https://gradle.org/)
-knowledge. I'll explain these on the way so you needn't worry about them for now.
+knowledge. I'll explain these on the way, so you needn't worry about them for now.
 
 As for our development environment I highly recommend the [Intellij IDEA Community Edition](https://www.jetbrains.com/idea/download).
-It is not only *free* but it is the best Kotlin ide you can get.
+It is not only *free*, but it is the best Kotlin IDE you can get.
   
-Now that we are all set, let's start coding! In the next article we'll set up our project
+Now we are all set, let's start coding! In the next article we'll set up our project
 and start working on our game right away!

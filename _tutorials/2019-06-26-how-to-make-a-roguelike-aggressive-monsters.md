@@ -6,6 +6,7 @@ author: addamsson
 short_title: "How To Make a Roguelike: #16 Aggressive Monsters"
 series: coz
 comments: true
+updated_at: 2019-06-26
 ---
 
 > Strolling around a dungeon and looting items randomly lying on the ground is only so much fun.

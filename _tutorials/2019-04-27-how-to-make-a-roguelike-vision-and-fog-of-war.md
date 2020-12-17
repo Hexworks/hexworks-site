@@ -6,6 +6,7 @@ author: addamsson
 short_title: "How To Make a Roguelike: #10 Vision and Fog of War"
 series: coz
 comments: true
+updated_at: 2019-04-27
 ---
 
 > The last time around we connected the levels of our dungeon effectively adding a new *dimension* to

@@ -10,16 +10,26 @@
                   itemprop="datePublished">
                 {{ page.date | date: "%Y. %m. %d." }}
             </time>
+            &nbsp;
+            {% if page.updated_at %}
+                Last modified:
+                <time datetime="{{ page.updated_at | date_to_xmlschema }}"
+                      itemprop="dateModified">
+                    {{ page.updated_at | date: "%Y. %m. %d." }}
+                </time>
+                &nbsp;
+            {% endif %}
             {% if page.author %}
-            <span itemprop="author"
-                  itemscope
-                  itemtype="http://schema.org/Person">
-                <span itemprop="name">
-                    <!--<a href="/authors/{{ page.author }}">-->
-                        {{ page.author }}
-                    <!--</a>-->
+                Written by:
+                <span itemprop="author"
+                      itemscope
+                      itemtype="http://schema.org/Person">
+                    <span itemprop="name">
+                        <!--<a href="/authors/{{ page.author }}">-->
+                            {{ page.author }}
+                        <!--</a>-->
+                    </span>
                 </span>
-            </span>
             {% endif %}
         </div>
     </header>

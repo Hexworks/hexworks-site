@@ -6,6 +6,7 @@ author: addamsson
 short_title: "How To Make a Roguelike: #2 Views, Screens, Inputs"
 series: coz
 comments: true
+updated_at: 2018-12-28
 ---
 
 > Having a skeleton project is nice, but we should start doing some actual work on our project.

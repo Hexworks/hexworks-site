@@ -6,6 +6,7 @@ author: addamsson
 short_title: "How To Make a Roguelike: #14 Displaying Stats"
 series: coz
 comments: true
+updated_at: 2019-06-14
 ---
 
 > We know a lot of things about our character. We know how hungry we are, what items

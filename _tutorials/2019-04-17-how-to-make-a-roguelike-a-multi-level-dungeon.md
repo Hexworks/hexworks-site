@@ -6,6 +6,7 @@ author: addamsson
 short_title: "How To Make a Roguelike: #9 A Multi-level Dungeon"
 series: coz
 comments: true
+updated_at: 2019-04-17
 ---
 
 > We have added multiple levels to our dungeon previously they are just not accessible yet. Let's add some stairs

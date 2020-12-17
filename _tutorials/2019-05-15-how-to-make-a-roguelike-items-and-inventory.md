@@ -6,6 +6,7 @@ author: addamsson
 short_title: "How To Make a Roguelike: #12 Items and Inventory"
 series: coz
 comments: true
+updated_at: 2019-05-15
 ---
 
 > We have almost everything for our game. We can explore the cave, fight with monsters, traverse levels, but

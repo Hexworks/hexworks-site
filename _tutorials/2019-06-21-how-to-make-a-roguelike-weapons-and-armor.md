@@ -6,6 +6,7 @@ author: addamsson
 short_title: "How To Make a Roguelike: #15 Weapons and Armor"
 series: coz
 comments: true
+updated_at: 2019-06-21
 ---
 
 > Adding wearable items like weapons and armor is a staple of all roguelike games and *Caves of Zircon* is no different.

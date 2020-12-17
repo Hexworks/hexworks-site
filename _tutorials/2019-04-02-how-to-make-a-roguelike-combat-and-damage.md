@@ -6,6 +6,7 @@ author: addamsson
 short_title: "How To Make a Roguelike: #8 Combat and Damage"
 series: coz
 comments: true
+updated_at: 2019-04-02
 ---
 
 > We already have monsters in our game but hitting them just results in an instagib. Now we're going

@@ -6,6 +6,7 @@ author: addamsson
 short_title: "How To Make a Roguelike: #5 Exploring the Cave"
 series: coz
 comments: true
+updated_at: 2019-02-28
 ---
 
 > In the previous article we introduced [Amethyst](https://github.com/Hexworks/amethyst) which

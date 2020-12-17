@@ -6,6 +6,7 @@ author: addamsson
 short_title: "How To Make a Roguelike: #20 Wrapping Up"
 series: coz
 comments: true
+updated_at: 2019-07-02
 ---
 
 > With a complete roguelike game under our belts we can now think about the next steps in our

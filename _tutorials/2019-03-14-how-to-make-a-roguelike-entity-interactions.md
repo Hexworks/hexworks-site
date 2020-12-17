@@ -6,6 +6,7 @@ author: addamsson
 short_title: "How To Make a Roguelike: #6 Entity Interactions"
 series: coz
 comments: true
+updated_at: 2019-03-14
 ---
 
 > In the previous article we added cave exploration and scrolling, but there is not much going on

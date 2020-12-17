@@ -1,4 +1,5 @@
----
+
+.---
 excerpt: This article explains how to set up the tutorial project on your computer and get started with it.
 title: "How To Make a Roguelike: #1 Project Setup"
 tags: [zircon, caves-of-zircon, roguelikes, kotlin]
@@ -6,6 +7,7 @@ author: addamsson
 short_title: "How To Make a Roguelike: #1 Project Setup"
 series: coz
 comments: true
+updated_at: 2018-12-12
 ---
 
 > Now that you are decided to write your own roguelike, the first thing to do is to

@@ -6,6 +6,7 @@ author: addamsson
 short_title: "How To Make a Roguelike: #18 Help and Examine Dialogs"
 series: coz
 comments: true
+updated_at: 2019-06-30
 ---
 
 > We now have a nice game which has almost all the things which are necessary for a roguelike,
