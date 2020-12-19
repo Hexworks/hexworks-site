@@ -13,45 +13,31 @@ with_all: false
 
 ## Getting Started
 
-If you want to work with Zircon you can add it to your project as a dependency.
-For this you need to add the Jitpack repository and the dependency itself
+If you want to work with Zircon you can add it to your project as a dependency. Zircon is on Maven Central so adding it is rather simple:
 
 from Maven:
 
 ```xml
-<repositories>
-    <repository>
-        <id>jitpack.io</id>
-        <url>https://jitpack.io</url>
-    </repository>
-</repositories>
 <dependencies>
     <dependency>
         <groupId>org.hexworks.zircon</groupId>
         <artifactId>zircon.core-jvm</artifactId>
-        <version>2019.1.2-PREVIEW</version>
+        <version>2020.2.0-RELEASE</version>
     </dependency>
     <dependency>
         <groupId>org.hexworks.zircon</groupId>
         <artifactId>zircon.jvm.swing</artifactId>
-        <version>2019.1.2-PREVIEW</version>
+        <version>2020.2.0-RELEASE</version>
     </dependency>
 </dependencies>
-
 ```
 
 or you can also use Gradle:
 
-```groovy
-allprojects {
-    repositories {
-        maven { url 'https://jitpack.io' }
-    }
-}
-
+```kotlin
 dependencies {
-    implementation 'org.hexworks.zircon:zircon.core-jvm:2019.1.2-PREVIEW'
-    implementation 'org.hexworks.zircon:zircon.jvm.swing:2019.1.2-PREVIEW'
+    implementation("org.hexworks.zircon:zircon.core-jvm:2020.2.0-RELEASE")
+    implementation("org.hexworks.zircon:zircon.jvm.swing:2020.2.0-RELEASE")
 }
 ```
 
