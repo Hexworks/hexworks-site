@@ -6,7 +6,7 @@ author: addamsson
 short_title: "How To Make a Roguelike: #3 Generating Random Caves"
 series: coz
 comments: true
-updated_at: 2012-12-16
+updated_at: 2020-12-16
 ---
 
 > Now, that we have set up our Views it is time to start using the `GameArea` and generate caves
