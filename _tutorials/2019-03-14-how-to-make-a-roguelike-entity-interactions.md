@@ -390,22 +390,3 @@ Until then go forth and *kode on*!
  
 > The code of this article can be found under the `6_ENTITY_INTERACTIONS` tag.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
