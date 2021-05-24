@@ -11,6 +11,8 @@ updated_at: 2021-03-25
 
 > Now that we have Fog of War in place which we can reveal let's make it a bit more exciting by adding some wandering monsters into the mix that can jump on us...or rather bump into us! This will also be the first instance of *real* combat: it won't be just beating things to a pulp like we did with fungi, because these creatures will hit back!
 
+> ⚠️ **Bug report**: You might have noticed that if you're pressing the keys too fast the game spits out concurrent modification exceptions or other weird things. This was caused by a bug in *Amethyst*. Fortunately you can upgrade *Amethyst* to a new version that fixes this problem. Modify `gradle.properties` and set `amethyst_version` to `2021.0.1-RELEASE`.
+
 ## A Wild Bat Appears
 
 So let's think a bit about what we want to add. It should be something really simple which is easy to code and will serve as a good first example. One of the most likely cave dwellers is a *bat* so let's add one to our game!
