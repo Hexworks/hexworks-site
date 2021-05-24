@@ -287,4 +287,4 @@ In this tutorial we've added a very simple *vision system* to our game which we 
 
 Until then go forth and *kode on*!
  
-> The code of this article can be found under the `10_VISION_AND_FOG_OF_WAR` tag.
+> The code of this article can be found in commit #10.

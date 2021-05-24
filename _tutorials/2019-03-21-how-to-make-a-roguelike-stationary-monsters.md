@@ -343,24 +343,4 @@ Adding our first monster was easy, it seems that we're starting to reap the bene
 
 Until then go forth and *kode on*!
  
-> The code of this article can be found under the `7_STATIONARY_MONSTERS` tag.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+> The code of this article can be found in commit #7.

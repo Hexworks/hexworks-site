@@ -375,5 +375,4 @@ that will be able to display the caves we'll generate by our own hands!
 
 Until then go forth and *kode on*!
  
-> The code of this article can be found under the `2_VIEWS_SCREENS_INPUTS` tag.
-
+> The code of this article can be found in commit #2.

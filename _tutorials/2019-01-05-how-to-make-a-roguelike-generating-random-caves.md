@@ -617,5 +617,4 @@ article we'll add a *player* to our dungeon with which we can explore it.
 
 Until then go forth and *kode on*!
  
-> The code of this article can be found under the `3_GENERATING_RANDOM_CAVES` tag.
-
+> The code of this article can be found in commit #3.

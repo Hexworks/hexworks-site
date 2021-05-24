@@ -780,5 +780,5 @@ player actions, like digging into our game!
 
 Until then go forth and *kode on*!
  
-> The code of this article can be found under the `4_THE_PLAYER` tag.
+> The code of this article can be found in commit #4.
 

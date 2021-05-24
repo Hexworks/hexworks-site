@@ -49,16 +49,12 @@ then navigate to the newly created project:
 cd caves-of-zircon-tutorial
 ```
 
-This project contains the code from start to finish and for each article there is a Git *tag*.
+This project contains the code from start to finish and for each article there is a Git *commit*.
 So let's reset our project to see the initial project setup by running this command:
 
 ```bash
-git reset --hard PROJECT_SETUP
+git reset --hard 00047e1
 ```
-
-> Note that you can see all the milestones of this project by running `git tag` in the command line.
-
-> If you want to get started with a *Zircon* project from scratch you can also clone the [Zircon Skeleton](https://github.com/Hexworks/zircon.skeleton.kotlin) project. In fact this is what we did as well when we started this tutorial! It comes with batteries included and you can start coding right away!
 
 ### Using Gradle
 
@@ -116,5 +112,4 @@ which is necessary to get started with our project and also imported it into our
 In the next article we'll take a look at how our tools work and how we can start writing
 our *actual* game.
 
-
- 
+> The code of this article can be found in commit #1.

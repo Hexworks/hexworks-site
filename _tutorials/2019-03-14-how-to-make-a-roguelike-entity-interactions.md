@@ -388,5 +388,4 @@ In the next article we'll add a new kind of entity: **monsters**!
 
 Until then go forth and *kode on*!
  
-> The code of this article can be found under the `6_ENTITY_INTERACTIONS` tag.
-
+> The code of this article can be found in commit #6.

@@ -400,4 +400,4 @@ In the next article we're going to create some stairs we can use to climb furthe
 
 Until then go forth and *kode on*!
  
-> The code of this article can be found under the `8_COMBAT_AND_DAMAGE` tag.
+> The code of this article can be found in commit #8.

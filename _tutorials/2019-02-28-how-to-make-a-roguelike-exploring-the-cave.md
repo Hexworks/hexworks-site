@@ -412,4 +412,4 @@ In the next article we'll take a look at how entities can interact with each oth
 
 Until then go forth and *kode on*!
  
-> The code of this article can be found under the `5_MOVING_AROUND` tag.
+> The code of this article can be found in commit #5.

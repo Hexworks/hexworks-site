@@ -189,4 +189,4 @@ Next we're going to take this to the next level by adding *items* and *inventory
 
 Until then go forth and *kode on*!
  
-> The code of this article can be found under the `11_WANDERING_MONSTERS` tag.
+> The code of this article can be found in commit #11.

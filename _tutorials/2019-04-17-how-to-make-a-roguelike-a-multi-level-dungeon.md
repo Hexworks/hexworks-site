@@ -428,4 +428,4 @@ The only problem is that it is very easy to find our way down if there is no fog
 
 Until then go forth and *kode on*!
  
-> The code of this article can be found under the `9_MULTI_LEVEL_DUNGEON` tag.
+> The code of this article can be found in commit #9.
