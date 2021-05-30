@@ -733,5 +733,5 @@ Now, that's nice. We've just made our roguelike great again!
 In this session we added a whole *inventory* system into our game complete with *items* and a nice inventory dialog. This is a great start, so next we're going to add more items, and some new mechanisms to our game: *food* and *hunger*!
 
 Until then go forth and *kode on*!
- 
-> The code of this article can be found under the `12_ITEMS_AND_INVENTORY` tag.
+
+> The code of this article can be found in commit #12.
