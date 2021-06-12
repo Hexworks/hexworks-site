@@ -283,16 +283,16 @@ object InputReceiver : BaseBehavior<GameContext>() {
         return true
     }
 
-    private fun GameEntity<Player>.moveTo(position: Position3D, context: GameContext) { // 2
-        executeCommand(MoveTo(context, this, position))
+    private suspend fun GameEntity<Player>.moveTo(position: Position3D, context: GameContext) { // 2
+        receiveMessage(MoveTo(context, this, position))
     }
 
-    private fun GameEntity<Player>.moveUp(context: GameContext) {   // 3
-        executeCommand(MoveUp(context, this))
+    private suspend fun GameEntity<Player>.moveUp(context: GameContext) {   // 3
+        receiveMessage(MoveUp(context, this))
     }
 
-    private fun GameEntity<Player>.moveDown(context: GameContext) {
-        executeCommand(MoveDown(context, this))
+    private suspend fun GameEntity<Player>.moveDown(context: GameContext) {
+        receiveMessage(MoveDown(context, this))
     }
 }
 ```
@@ -339,7 +339,6 @@ object StairClimber : BaseFacet<GameContext, MoveUp>(MoveUp::class) {
     private val GameBlock.hasStairsUp: Boolean                                  // 4
         get() = this.entities.any { it.type == StairsUp }
 }
-
 ```
 
 What we do here is:
