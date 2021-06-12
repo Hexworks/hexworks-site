@@ -1,4 +1,4 @@
----
+    ---
 excerpt: "Having stairs to lower levels is nice but it is no fun if everything is visible at once. Let's add a vision system!"
 title: "How To Make a Roguelike: #10 Vision and Fog of War"
 tags: [zircon, caves-of-zircon, roguelikes, kotlin]
@@ -18,21 +18,21 @@ Let's think about how a *vision system* is supposed to work. First of all each `
 The first thing to add is (you guessed right) an `Attribute` that we can use to hold the vision radius of our entities:
 
 ```kotlin
-package org.hexworks.cavesofzircon.attributes
+package com.example.cavesofzircon.attributes
 
-import org.hexworks.amethyst.api.Attribute
+import org.hexworks.amethyst.api.base.BaseAttribute
 
-data class Vision(val radius: Int): Attribute
+data class Vision(val radius: Int) : BaseAttribute()
 ```
 
 and a *flag* `Attribute` which determines whether an `Entity` *blocks vision* or not:
 
 ```kotlin
-package org.hexworks.cavesofzircon.attributes.flags
+package com.example.cavesofzircon.attributes
 
-import org.hexworks.amethyst.api.Attribute
+import org.hexworks.amethyst.api.base.BaseAttribute
 
-object VisionBlocker : Attribute
+object VisionBlocker : BaseAttribute()
 ```
 
 Seems straightforward, yes? Now if we think a bit about this, in our game `VisionBlocker` belongs to the walls only, and `Vision` is an attribute of the *player* since fungi don't have eyes (yet?). Let's augment `EntityFactory` with these:
@@ -149,16 +149,7 @@ Let's think about how *Fog of War* works. When we start the game everything is s
 
 > We could have a Field of View as well, but personally I've always found it annoying so we'll stick with Fog of War only for this tutorial.
 
-Fog of War is going to be an `Entity`, but it is special: it does not interact with anything else, it is also not part of the world it is just a passive shroud which gets revealed where the *player* moves. We call this a "world" `Entity`. It is omnipresent, and it has no locality, unlike the entities we worked on so far.
-
-Let's add a type for it for starters:
-
-```kotlin
-// add this to EntityTypes.kt
-object FogOfWarType : BaseEntityType()
-```
-
-and we're also going to need a `Tile` for displaying the shroud:
+We're going to implement it in a very simple way. By default we'll cover everything with a shroud. Then the world will have a *behavior* that'll reveal the shroud using the player's *vision* attribute! Let's start by adding the necessary *tile* and *color*:
 
 ```kotlin
 // add this to GameColors:
