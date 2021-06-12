@@ -6,7 +6,7 @@ author: addamsson
 short_title: "How To Make a Roguelike: #19 Win and Lose Conditions"
 series: coz
 comments: true
-updated_at: 2021-06-12
+updated_at: 2021-06-11
 ---
 
 > Our game has everything it needs: items, monsters, exploration, hunger and experience levels. To make it complete we need to add proper *win* and *lose* conditions as well. Let's make it happen now!
