@@ -490,7 +490,6 @@ class InventoryFragment(
                     row.dropButton.onActivated {    // 4
                         detach()                    // 5
                         onDrop(item)                // 6
-                        Processed
                     }
                 }
             }
