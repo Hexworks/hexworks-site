@@ -1,4 +1,4 @@
-    ---
+---
 excerpt: "Having stairs to lower levels is nice but it is no fun if everything is visible at once. Let's add a vision system!"
 title: "How To Make a Roguelike: #10 Vision and Fog of War"
 tags: [zircon, caves-of-zircon, roguelikes, kotlin]
