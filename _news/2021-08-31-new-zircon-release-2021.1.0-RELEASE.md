@@ -87,7 +87,7 @@ There is another improvement that helps with extensibility: now it is possible t
 
 There was some confusion previously on how *Zircon* objects should be created. Now this is made explicit by [this](https://github.com/Hexworks/zircon/issues/382) issue. From now on the appropriate *builders* should be used and all builders have their constructors locked down, so usage is like this for all the things: `Thing.newBuilder() ... .build()`.
 
-****Some notable `Fragment`s:****
+**Some notable `Fragment`s:**
 
 The [Table fragment](Table control for Zircon ) is now released, usage is very simple:
 
