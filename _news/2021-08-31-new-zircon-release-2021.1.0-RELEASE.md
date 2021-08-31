@@ -73,7 +73,9 @@ SwingApplications.startTileGrid().toScreen().apply {
 }
 ```
 
-![Example](/assets/img/dsl-example.png)
+And it looks like this:
+
+![Example](https://cdn.discordapp.com/attachments/603285896829206548/882268425475481700/unknown.png)
 
 One important change that was a blocker for some other things was the reliance on the global `Zircon` object that also held some state. With [#404](https://github.com/Hexworks/zircon/issues/404) completed now there is no global state, and it is also possible to have `TileGrid` and / or `Renderer` objects without having an `Application` that continuously renders content.
 
@@ -138,19 +140,19 @@ SwingApplications.startTileGrid().toScreen().apply {
 
 And it looks like this:
 
-![](/assets/img/table-example.png)
+![](https://cdn.discordapp.com/attachments/603285896829206548/882268624902033488/unknown.png)
 
 Now it is also possible to create *Dropdown Menus*:
 
-![](/assets/img/menu-example.png)
+![](https://cdn.discordapp.com/attachments/603285896829206548/882268518467391549/unknown.png)
 
 and Tab bars:
 
-![](/assets/img/htab-bar-example.png)
+![](https://cdn.discordapp.com/attachments/603285896829206548/882268475295412245/unknown.png)
 
 Vertical:
 
-![](/assets/img/vtab-bar-example.png)
+![](https://cdn.discordapp.com/attachments/603285896829206548/882271040980545566/unknown.png)
 
 You can now also set up listeners [right in the component builders](https://github.com/Hexworks/zircon/issues/393) and now the component builders are also more smart about sizing: they will calculate the size that's necessary to display the component, but you can now also set either the **peferred content size** or the **preferred size**. The same stands for containers! This means that you can create a `HBox` with all of its children, and the occupied space for the `HBox` will be calculated for you.
 
