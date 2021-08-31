@@ -51,7 +51,7 @@ screen.addComponent(Components.label()
 screen.addComponent(Components.panel()
         .withDecorations(box(BoxType.SINGLE, "Panel"))
         .withPosition(1, 3)
-        .withSize(10, 5)
+        .withPreferredSize(10, 5)
         .build());
 
 ColorTheme custom = ColorThemes.newBuilder()

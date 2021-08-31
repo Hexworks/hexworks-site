@@ -63,7 +63,6 @@ when you press `[Enter]` a new line starts. That's why we have [Position]:
 
 ```kotlin
 interface Position : Comparable<Position> {
-
     val x: Int
     val y: Int
 }
@@ -173,7 +172,7 @@ interface TileGrid
 Again, we have a very simple `interface` and a bunch of *behavior*s which make a [TileGrid] a [TileGrid]:
 
 - [AnimationRunner] adds the functionality to put [Animation]s on the grid. More about [Animation]s [here][animations].
-- [Clearable] lets you *clear* the graphic. This means setting all its tiles to an empty tile
+- [Clearable] lets you *clear* the graphics. This means setting all its tiles to an empty tile
 - [DrawSurface] is something you know by now
 - [Layerable] lets you put multiple layers on your screen. With this you can have overlays, effects, and that kind of
   stuff. Layering is explained in depth in its own chapter [here][how-layers-work].
@@ -181,7 +180,7 @@ Again, we have a very simple `interface` and a bunch of *behavior*s which make a
   abstracted away from the actual underlying system (like Swing or LibGDX).
 - [TypingSupport] adds `putCharacter` and `putTile` to the mix and acts as if you were typing on the screen (from left
   to right, and then top to bottom).
-- [UIEventSource] emits all the inputs which were received from the underlying GUI framework as Zircon [Input] events.
+- [UIEventSource] emits all the inputs which were received from the underlying GUI framework as Zircon input events.
   This means that you don't have to know how input handling works in Swing or LibGDX, Zircon takes care of this for you.
 - [ViewContainer] adds support for [View]s.
   
@@ -189,7 +188,7 @@ As you can see [TileGrid] is very similar to [TileGraphics] but there is a *very
 on a [TileGrid] is immediately visible on your screen. It is the end of the line, where all [TileComposite] go to
 become visible on your screen.
 
-It also comes with functionality which you can use to interact with the underlying GUI system. You needn't worry about
+It also comes with functionality that you can use to interact with the underlying GUI system. You don't need to worry about
 how the actual GUI system works, the [TileGrid]s job is to abstract all that away and give you a clean interface.  
 
 This seems like a lot of things to do at once so you might ask "How is this [SOLID](https://en.wikipedia.org/wiki/SOLID_(object-oriented_design))?".

@@ -38,7 +38,7 @@ Screen screen = Screen.create(tileGrid);
 
 Panel panel = Components.panel()
         .withDecorations(box(BoxType.SINGLE, "New Game"), shadow())
-        .withSize(20, 10)
+        .withPreferredSize(20, 10)
         .withAlignmentWithin(tileGrid, ComponentAlignment.CENTER)
         .build();
 

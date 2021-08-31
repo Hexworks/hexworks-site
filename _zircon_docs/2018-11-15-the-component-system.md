@@ -18,7 +18,8 @@ Apart from the ones above there are also [Container]s which can have other [Comp
 
 [Component]s work in a similar way as [Layer]s do. They have graphical content which is backed by a [TileGraphics] object and they can also be
 moved around like [Layer]s. The main difference between them is that their structure is hierarchical: they form a *tree*. [Component]s serve
-as *leaf objects* in this tree and [Container]s can have child [Component]s.
+as *leaf objects* in this tree and [Container]s can have child [Component]s. [Component]s are also **rendered**. They don't exist in-memory like
+[Layer]s, but they are rendered by the [Application] continuously.
 
 > To read more about [Layer]s you can go to the [relevant documentation page][how-layers-work].
 
@@ -45,8 +46,7 @@ interface Component : ComponentEventSource, ComponentProperties, Focusable, Mova
 
 This might look rather overwhelming at first but it will make sense soon. Let's take a look at what properties are there in a [Component].
 `absolutePosition` is the [Position] of a [Component] relative to the top left corner of the [Screen]. Conversely `relativePosition` is the [Position] of the [Component] relative to its parent [Container].
-`contentOffset` denotes the [Position] where the actual content of the [Component] starts relative to the top left corner of it. This will be explained later when we talk about component decorations.
-`contentSize` is the size of the area where the contents of the [Component] will be drawn.
+`contentOffset` denotes the [Position] where the actual content of the [Component] starts relative to the top left corner of it. This will be explained later when we talk about component decorations. `contentSize` is the size of the area where the contents of the [Component] will be drawn.
 `componentState` contains the possible states a [Component] can be in:
 
 ```kotlin
@@ -74,7 +74,7 @@ A [ComponentStyleSet] holds [StyleSet]s for every possible [ComponentState]. Whe
 > Apart from being disabled [Component]s can also be hidden, they can have their own tilesets for drawing them. 
 > Take a look at [TilesetOverride] to see how you can change tilesets.
 
-Each [Component] will decide on its own how it uses the [ComponentStyleSet] for drawing. This enables *Zircon* to have [Component]s which are visually consistent:
+Each [Component] will decide on its own how it uses the [ComponentStyleSet] for drawing. This enables *Zircon* to have [Component]s that are visually consistent:
 
 ![All Components](/assets/img/all_components.png)
 
@@ -154,7 +154,7 @@ Let's see what is happening here:
 1. Most [Component]s support adding text to them. The [Button] is no different.
 2. We can align [Component]s in multiple ways. In this example we align it within its parent, the `screen`.
 3. We don't need to set a [Size] for a [Component]. In this case Zircon will automatically figure out the right size.
-4. [Component]s support adding decorations to them. For this we can use the [ComponentDecorations] factory object. Here we create a `box`. More on decorations later.
+4. [Component]s support adding decorations to them. For this we can use the ComponentDecorations factory object. Here we create a `box`. More on decorations later.
 5. When we add a [Component] to a [Container] it gets *attached* and we get an `AttachedComponent` object back. This class adds functionality on top of [Component] which is only relevant for [Component]s which are attached to a parent.
 6. Here we `detach` our [Component] which means that it will no longer be the part of the [Component] tree (it is removed from the [Screen]).
 
