@@ -89,7 +89,7 @@ There was some confusion previously on how *Zircon* objects should be created. N
 
 **Some notable `Fragment`s:**
 
-The [Table fragment](Table control for Zircon ) is now released, usage is very simple:
+The `Table` fragment is now released, usage is very simple:
 
 ```kotlin
 data class Person(
