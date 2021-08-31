@@ -211,7 +211,6 @@ We've covered a lot of ground in this release, but there are still things to do:
 - [Component Themes](https://github.com/Hexworks/zircon/issues/29)
 - [Custom Component Support](https://github.com/Hexworks/zircon/issues/26)
 - [Tree Component](https://github.com/Hexworks/zircon/issues/184)
-- [Table Component](https://github.com/Hexworks/zircon/issues/185)
 - [Accordion Component](https://github.com/Hexworks/zircon/issues/27)
 - [Combo Box Component](https://github.com/Hexworks/zircon/issues/262)
 - [IntelliJ Plugin](https://github.com/Hexworks/zircon/issues/191)
